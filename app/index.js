@@ -1,5 +1,7 @@
 
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 
 app.listen(3000, () => console.log("app running at port 3000"));
@@ -9,6 +11,8 @@ app.use(function (req, res, next) {
 	res.setHeader('Content-Type', 'application/json'); 
 	next();	
 });
+
+app.use(bodyParser.json());
 
 //----------------------INFO----------------------//
 var Info = function(name, old){
@@ -76,6 +80,8 @@ app.get('/profile', (req, res) =>{
 
 app.post('/profile', (req, res) =>{
 
+
+	res.end(JSON.stringify(req.body, null, 2));
 	var newProfile = new Profile();
 	profiles.add(newProfile);
 })
