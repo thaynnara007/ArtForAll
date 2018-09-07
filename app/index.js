@@ -81,7 +81,7 @@ app.get('/profile', (req, res) =>{
 app.post('/profile', (req, res) =>{
 
 
-	res.end(JSON.stringify(req.body, null, 2));
+	res.send(JSON.stringify(req.body, null, 2));
 	var newProfile = new Profile();
 	profiles.add(newProfile);
 })
