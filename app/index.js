@@ -73,6 +73,11 @@ app.get('/signup', (req, res) =>{
 	res.json({name:"name", old:1, handle:"Johann Sebastian Bach", senha:"*****", email:"afsffs@sdf.dfd"});
 })
 
+app.get('/signin', (req, res) =>{
+
+	res.json({handle: "jonseba", senha:"*******"});
+})
+
 app.get('/profile', (req, res) =>{ 
 
 	res.json(profiles);
@@ -80,8 +85,8 @@ app.get('/profile', (req, res) =>{
 
 app.post('/profile', (req, res) =>{
 
-
-	res.send(JSON.stringify(req.body, null, 2));
+	var require = req.body;
+	res.send(JSON.stringify(require, null, 2));
 	var newProfile = new Profile();
 	profiles.add(newProfile);
 })
@@ -99,6 +104,8 @@ app.get('/profile/arts/:id', (req, res) =>{
 
 app.post('/profile/arts', (req, res) =>{
 
+	var require = req.body;
+	res.send(JSON.stringify(require, null, 2));
 	var newArt = new Art();
 	arts.add(newArt);
 });
@@ -116,6 +123,8 @@ app.get('/profile/favorite/:id', (req,res) =>{
 
 app.post('/profile/favorite', (req, res) =>{
 
+	var require = req.body;
+	res.send(JSON.stringify(require, null, 2));
 	var newFavorite = new Art();
 	this.favorites.add(newFavorite);
 });
@@ -130,4 +139,10 @@ app.get('/profile/following/:id', (req, res) =>{
 
 	var id = req.params.id;
 	res.json(profiles[id]);
+})
+
+app.post('/profile/following', (req, res) =>{
+
+	var require = req.body;
+	res.send(JSON.stringify(require, null, 2));
 })
