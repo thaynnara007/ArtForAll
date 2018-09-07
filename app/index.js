@@ -1,6 +1,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -13,6 +14,8 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json());
+
+app.use(morgan(":method :url :response-time"));
 
 //----------------------INFO----------------------//
 var Info = function(name, old){
@@ -89,6 +92,12 @@ app.post('/profile', (req, res) =>{
 	res.send(JSON.stringify(require, null, 2));
 	var newProfile = new Profile();
 	profiles.add(newProfile);
+})
+
+app.get('/profile/:id', (req, res) =>{
+
+	var id = req.params.id;
+	res.json(profiles[id]);
 })
 
 app.get('/profile/arts', (req, res) =>{
