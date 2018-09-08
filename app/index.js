@@ -1,6 +1,7 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const supertest = require('supertest');
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 
 app.use(morgan("tiny"));
+
+app.use(express.static('../static'));
 
 //----------------------INFO----------------------//
 var Info = function(name, old){
