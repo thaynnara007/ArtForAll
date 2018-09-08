@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const supertest = require('supertest');
+const request = require('supertest');
 
 const app = express();
 
@@ -75,12 +75,12 @@ app.get('/', (req, res) =>{
 
 app.get('/signup', (req, res) =>{
 
-	res.json({name:"name", old:1, handle:"Johann Sebastian Bach", senha:"*****", email:"afsffs@sdf.dfd"});
+	res.status(200).json({name:"name", old:1, handle:"Johann Sebastian Bach", senha:"*****", email:"afsffs@sdf.dfd"});
 })
 
 app.get('/signin', (req, res) =>{
 
-	res.json({handle: "jonseba", senha:"*******"});
+	res.status(200).json({handle: "jonseba", senha:"*******"});
 })
 
 app.get('/profile', (req, res) =>{ 
@@ -148,3 +148,5 @@ app.post('/profile/following', (req, res) =>{
 	var require = req.body;
 	res.send(JSON.stringify(require, null, 2));
 })
+
+module.exports = app;
