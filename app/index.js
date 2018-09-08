@@ -1,6 +1,5 @@
-
 const express = require('express');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
 const morgan = require('morgan');
 
 const app = express();
@@ -15,7 +14,7 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json());
 
-app.use(morgan(":method :url :response-time"));
+app.use(morgan("tiny"));
 
 //----------------------INFO----------------------//
 var Info = function(name, old){
@@ -88,16 +87,9 @@ app.get('/profile', (req, res) =>{
 
 app.post('/profile', (req, res) =>{
 
-	var require = req.body;
-	res.send(JSON.stringify(require, null, 2));
+	res.send(JSON.stringify(req.body, null, 2));
 	var newProfile = new Profile();
 	profiles.add(newProfile);
-})
-
-app.get('/profile/:id', (req, res) =>{
-
-	var id = req.params.id;
-	res.json(profiles[id]);
 })
 
 app.get('/profile/arts', (req, res) =>{
@@ -113,8 +105,7 @@ app.get('/profile/arts/:id', (req, res) =>{
 
 app.post('/profile/arts', (req, res) =>{
 
-	var require = req.body;
-	res.send(JSON.stringify(require, null, 2));
+	res.send(JSON.stringify(req.body, null, 2));
 	var newArt = new Art();
 	arts.add(newArt);
 });
@@ -132,8 +123,7 @@ app.get('/profile/favorite/:id', (req,res) =>{
 
 app.post('/profile/favorite', (req, res) =>{
 
-	var require = req.body;
-	res.send(JSON.stringify(require, null, 2));
+	res.send(JSON.stringify(req.body, null, 2));
 	var newFavorite = new Art();
 	this.favorites.add(newFavorite);
 });
@@ -148,7 +138,7 @@ app.get('/profile/following/:id', (req, res) =>{
 
 	var id = req.params.id;
 	res.json(profiles[id]);
-})
+});
 
 app.post('/profile/following', (req, res) =>{
 
