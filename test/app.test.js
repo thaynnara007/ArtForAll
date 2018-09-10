@@ -11,7 +11,6 @@ describe('GET/ signup', function(){
 		request(app)
 		
 			.get('/signup')
-			//.expect('Content-Type', /json/)
 			.set('Accept', 'appliaction/json')
 			.expect(200)
 			.end(function(err, res){
@@ -22,12 +21,64 @@ describe('GET/ signup', function(){
 	});	
 });
 
-request(app)
-	
-	.get('/signin')
-	.expect('Content-Type', /json/)
-	.expect(200)
-	.end(function(err, res){
+describe('GET/ signin', function(){
 
-		if (err) throw err;
-	});
+	it('responds with json', function(done){
+		
+		request(app)
+		
+			.get('/signin')
+			.set('Accept', 'application/json/')
+			.expect(200)
+			.end(function(err, res){
+
+				if (err) return done(err);
+				done();
+			});
+	})
+});
+
+describe('GET/profile', function(){
+
+	it('get profile should responds with json', function(done){
+
+		request(app)
+
+			.get('/profile')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.end(function(err, res){
+
+				if(err) return done(err);
+				done();
+			})
+	})
+
+	it('get profile/arts should responds with json', function(done){
+
+		request(app)
+
+			.get('/profile/arts')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.end(function(err, res){
+				
+				if(err) return done(err);
+				done();
+			})
+	})
+
+	it('get profile/arts/:id should responds with json', function(done){
+
+		request(app)
+
+			.get('/profile/arts/0')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.end(function(err, res){
+				
+				if(err) return done(err);
+				done();
+			})
+	})
+}) 
