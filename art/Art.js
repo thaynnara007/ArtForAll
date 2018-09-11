@@ -1,3 +1,10 @@
+/**
+Represents a Art
+@constructor
+@param {string} imgLink - The link of the imagem
+@param {(string|string[]} tags - an array of names of tags
+@param {int} id - The id of the art
+*/
 var Art = function(imgLink, tags, id){
 
 	this.imgLink = imgLink;

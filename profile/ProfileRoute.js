@@ -15,12 +15,16 @@ router.use(function (req, res, next) {
 
 router.use('/arts', artRouter);
 router.use('/favorite', favoriteRoute);
-
+/**
+get a profile from a user 
+*/
 router.get('/', (req, res) =>{ 
 
 	res.json(profile.profiles);
 });
-
+/**
+add a new profile
+*/
 router.post('/', (req, res) =>{
 
 	res.send(JSON.stringify(req.body, null, 2));

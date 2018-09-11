@@ -1,7 +1,13 @@
-var Info = function(name, old){
+/**
+Represents a Information
+@constructor
+@param {string} name - The name of the user
+@param {int} age - The user's age
+*/
+var Info = function(name, age){
 
 	this.name = name;
-	this.old = old;
+	this.age = age;
 }
 
 var info1 = new Info("Thaynnara", 21);
@@ -9,6 +15,14 @@ var info2 = new Info("Gabriel", 21);
 var info3 = new Info("Clara", 22);
 
 //---------------PROFILE-------------------------//
+
+/**
+Represents a Profile
+@constructor
+@param {Object} info- The information about that user
+@param {int}  fllowing - number of people taht user is following
+@param {int} id - The id of the profile
+*/
 var Profile = function(info, following, id){
 
 	this.info = info;
