@@ -1,8 +1,7 @@
-const app = require('../app/index.js');
+const app = require('../index.js');
 const request = require('supertest');
 const chai = require('chai');
 const mocha = require('mocha');
-
 
 describe('GET/ signup', function(){
 
