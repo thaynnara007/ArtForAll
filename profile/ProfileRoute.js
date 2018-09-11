@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const artRouter = require('../art/ArtRoute');
+const favoriteRoute = require('../art/FavoriteRoute');
 const profile = require('./Profile.js')
 
 router.use(bodyParser.json());
@@ -13,6 +14,7 @@ router.use(function (req, res, next) {
 });
 
 router.use('/arts', artRouter);
+router.use('/favorite', favoriteRoute);
 
 router.get('/', (req, res) =>{ 
 

@@ -11,17 +11,15 @@ router.use(function (req, res, next) {
 	next();	
 });
 
-
 router.get('/', (req, res) =>{
-	
-	res.json(art.arts());
-}); 
 
-router.get('/:id', (req, res) =>{ 
+	res.status(200).json(art.favorites());
+});
+
+router.get('/:id', (req,res) =>{
 
 	var id = req.params.id
-	res.json(art.arts()[id]);
-
+	res.json(art.favorites()[id]);
 });
 
 router.post('/', (req, res) =>{

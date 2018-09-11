@@ -80,4 +80,18 @@ describe('GET/profile', function(){
 				done();
 			})
 	})
+
+	it('get/profile/arts/favorite should response with json', function(done){
+
+		request(app)
+
+			.get('/profile/favorite')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.end(function(err, res){
+
+				if(err) return done(err);
+				done();
+			})
+	})
 }) 

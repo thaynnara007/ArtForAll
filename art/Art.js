@@ -17,5 +17,5 @@ art3 = new Art('http://montink.camisadimona.com.br/image/cache/data/camisas/cami
 art4 = new Art('http://www.nerdtrip.com.br/wp-content/uploads/2017/09/Shingeki-no-Kyojin-segunda-temporada-2017-2.jpg',
 		['shingeki no kyojin', 'attack on titan', 'erin', 'tita', 'wall'], 4);
 
-this.arts = () => [art1, art2],
+this.arts = () => [art1, art2];
 this.favorites = () => [art3, art4] ;
