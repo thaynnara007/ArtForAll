@@ -20,13 +20,13 @@ describe('GET/ signup', function(){
 	});	
 });
 
-describe('GET/ signin', function(){
+describe('GET/ login', function(){
 
 	it('responds with json', function(done){
 		
 		request(app)
 		
-			.get('/signin')
+			.get('/login')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.end(function(err, res){
