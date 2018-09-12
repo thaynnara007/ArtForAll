@@ -18,9 +18,10 @@ router.use('/favorite', favoriteRoute);
 /**
 get a profile from a user 
 */
-router.get('/', (req, res) =>{ 
+router.get('/:username', (req, res) =>{ 
 
-	res.json(profile.profiles);
+	var username = req.params.username;
+	res.json(profile.getOneProfile(username));
 });
 /**
 add a new profile

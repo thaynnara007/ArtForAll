@@ -43,7 +43,7 @@ describe('GET/profile', function(){
 
 		request(app)
 
-			.get('/profile')
+			.get('/profile/miuda06')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.end(function(err, res){
