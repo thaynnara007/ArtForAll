@@ -5,8 +5,6 @@ const profileRouter = require('./profile/ProfileRoute')
 
 const app = express();
 
-app.listen(3000, () => console.log("app running at port 3000"));
-
 app.use(morgan("tiny"));
 
 app.use(express.static('../static'));
