@@ -63,19 +63,10 @@ art4 = new Art('erin','http://www.nerdtrip.com.br/wp-content/uploads/2017/09/Shi
 
 exports.arts = () => [art1, art2];
 exports.favorites = () => [art3, art4] ; 
-exports.getOneFavoriteArt = function(artName){
 
-	var art = this.favorites().filter(function(art){
+exports.getOneArt = function(artName, list){
 
-		return art.name == artName;
-	})
-
-	return art;
-}
-
-exports.getOneArt = function(artName){
-
-	var art = this.arts().filter(function(art){
+	var art = list.filter(function(art){
 
 		return art.name == artName;
 	})

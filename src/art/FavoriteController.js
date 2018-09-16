@@ -2,12 +2,12 @@ const art = require('./Art');
 
 exports.getAll = function(req, res, next){
 
-    var arts = art.arts(); 
+    var favorites = art.favorites(); 
 
-    if(arts){
-        res.json(arts);
+    if(favorites){
+        res.json(favorites);
     }else{
-        res.status(400).json('you dont have any art');
+        res.status(400).json('you dont have any favorite art');
     }
 
 }
@@ -15,7 +15,7 @@ exports.getAll = function(req, res, next){
 exports.getOne = function(req, res){
 
     var artName = req.params.name;
-    var oneArt = art.getOneArt(artName, art.arts())[0];
+    var oneArt = art.getOneArt(artName, art.favorites())[0];
 
     if(oneArt){
         res.json(oneArt);
@@ -28,9 +28,3 @@ exports.post = function(req, res){
 
        res.status(200);
     }
-
-
-
-
-
-

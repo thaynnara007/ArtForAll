@@ -143,4 +143,13 @@ describe('POST /profile operations', () =>{
 			.expect(200) 
 			done();
 	})
+
+	it('Test: should add a new favorite art', (done) =>{
+
+		request(app)
+
+			.post('profile/favorite')
+			.expect(200)
+			done();
+	})
 })
