@@ -21,7 +21,8 @@ get a profile from a user
 router.get('/:username', (req, res) =>{ 
 
 	var username = req.params.username;
-	res.json(profile.getOneProfile(username));
+	var user = profile.getOneProfile(username)[0];
+	res.json(user);
 });
 /**
 add a new profile

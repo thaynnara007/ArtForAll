@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const art = require('./Art');
+const controller = require('./ArtController');
 
 
 router.use(bodyParser.json());
@@ -12,17 +13,9 @@ router.use(function (req, res, next) {
 	next();	
 });
 
-router.get('/', (req, res) =>{
-	
-	res.json(art.arts());
-}); 
+router.get('/', controller.getAll); 
 
-router.get('/:id', (req, res) =>{ 
-
-	var id = req.params.id
-	res.json(art.arts()[id]);
-
-});
+router.get('/:id', controller.getOne);
 
 router.post('/', (req, res) =>{
 

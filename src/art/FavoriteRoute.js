@@ -21,10 +21,10 @@ router.get('/', (req, res) =>{
 /**
 get a specific favorite art from a user
 */
-router.get('/:id', (req,res) =>{
+router.get('/:name', (req,res) =>{
 
-	var id = req.params.id
-	res.json(art.favorites()[id]);
+	var artName = req.params.name
+	res.json(art.getOneFavoriteArt(artName)[0]);
 });
 /**
 add one favorite art

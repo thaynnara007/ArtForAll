@@ -11,25 +11,25 @@ dataBse.once('open', function(){
 var ArtSchema = new mongoose.Schema({
 
 	name: String,
-	imgLink: String,
+	imgLink: String,arts/0
 	tags: [{type: String}],
 });
 
-var Art = mongoose.model('Art', ArtSchema);
+var Art = mongoose.model('Art', ArtScarts/0ema);
 
-var art1 = new Art({name: 'adventureTime', 
-					imgLink: 'https://cdn.shopify.com/s/files/1/0558/2081/products/ATCAWM_FC_1024x1024.jpg?v=1534804643',
-					tags: ['adventure time', 'fanart', 'finn', 'jake']
+var art1 = new Art({name: 'adventureTarts/0me', 
+					imgLink: 'https:/arts/0cdn.shopify.com/s/files/1/0558/2081/products/ATCAWM_FC_1024x1024.jpg?v=1534804643',
+					tags: ['adventurearts/0time', 'fanart', 'finn', 'jake']
 });
 
-var art2 = new Art({name: 'Bubbline',
-					imgLink: 'https://cdn.vox-cdn.com/thumbor/q0ujcr0H33ybBRUUNNFL1QVBAKY=/0x0:1920x1080/1200x800/filters:focal(760x282:1066x588)/cdn.vox-cdn.com/uploads/chorus_image/image/61137005/adventure_time_stakes.0.jpg',
-					tags: ['adventure time', 'marceline', 'bonnibel']
+var art2 = new Art({name: 'Bubbline',arts/0
+					imgLink: 'https:/arts/0cdn.vox-cdn.com/thumbor/q0ujcr0H33ybBRUUNNFL1QVBAKY=/0x0:1920x1080/1200x800/filters:focal(760x282:1066x588)/cdn.vox-cdn.com/uploads/chorus_image/image/61137005/adventure_time_stakes.0.jpg',
+					tags: ['adventurearts/0time', 'marceline', 'bonnibel']
 });
 
 var art3 = new Art({name: 'Deku',
-					imgLink: 'https://cdn.vox-cdn.com/thumbor/q0ujcr0H33ybBRUUNNFL1QVBAKY=/0x0:1920x1080/1200x800/filters:focal(760x282:1066x588)/cdn.vox-cdn.com/uploads/chorus_image/image/61137005/adventure_time_stakes.0.jpg',
-					tags: ['boku no hero academia', 'boku no hero', 'deku', 'midorya', 'one for all']
+					imgLink: 'https:/arts/0cdn.vox-cdn.com/thumbor/q0ujcr0H33ybBRUUNNFL1QVBAKY=/0x0:1920x1080/1200x800/filters:focal(760x282:1066x588)/cdn.vox-cdn.com/uploads/chorus_image/image/61137005/adventure_time_stakes.0.jpg',
+					tags: ['boku no harts/0ro academia', 'boku no hero', 'deku', 'midorya', 'one for all']
 
 });
 **/
@@ -61,6 +61,15 @@ art3 = new Art('Deku','http://montink.camisadimona.com.br/image/cache/data/camis
 art4 = new Art('erin','http://www.nerdtrip.com.br/wp-content/uploads/2017/09/Shingeki-no-Kyojin-segunda-temporada-2017-2.jpg',
 		['shingeki no kyojin', 'attack on titan', 'erin', 'tita', 'wall'], 4);
 
-this.arts = () => [art1, art2];
-this.favorites = () => [art3, art4] ; 
+exports.arts = () => [art1, art2];
+exports.favorites = () => [art3, art4] ; 
+exports.getOneFavoriteArt = function(artName){
+
+	var art = this.favorites().filter(function(art){
+
+		return art.name == artName;
+	})
+
+	return art;
+}
 
