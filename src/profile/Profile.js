@@ -1,18 +1,3 @@
-/**
-Represents a Information
-@constructor
-@param {string} name - The name of the user
-@param {int} age - The user's age
-*/
-var Info = function(name, age){
-
-	this.name = name;
-	this.age = age;
-}
-
-var info1 = new Info("Thaynnara", 21);
-var info2 = new Info("Gabriel", 21);
-var info3 = new Info("Clara", 22);
 
 //---------------PROFILE-------------------------//
 
@@ -24,17 +9,15 @@ Represents a Profile
 @param {int}  fllowing - number of people taht user is following
 @param {int} id - The id of the profile
 */
-var Profile = function(info, userName, following, id){
+exports.Profile = function( userName, following){
 
-	this.info = info;
 	this.username = userName;
 	this.following = following;
-	this.id = id;
 }
 
-var person = new Profile(info1, 'miuda06', 40, 1);
-var anotherPerson = new Profile(info2, 'onlok', 36, 2);
-var otherPerson =  new Profile(info3, 'berkana',45, 3);
+var person = new this.Profile('miuda06', 40);
+var anotherPerson = new this.Profile('onlok', 36);
+var otherPerson =  new this.Profile('berkana',45);
 
 
 this.profiles = () => [person, anotherPerson, otherPerson]
