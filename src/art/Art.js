@@ -73,4 +73,13 @@ exports.getOneFavoriteArt = function(artName){
 	return art;
 }
 
+exports.getOneArt = function(artName){
+
+	var art = this.arts().filter(function(art){
+
+		return art.name == artName;
+	})
+
+	return art;
+}
 

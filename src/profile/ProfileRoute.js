@@ -13,7 +13,7 @@ router.use(function (req, res, next) {
 	next();	
 });
 
-router.use('/arts', artRouter);
+router.use('/myarts', artRouter);
 router.use('/favorite', favoriteRoute);
 /**
 get a profile from a user 

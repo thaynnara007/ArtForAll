@@ -58,11 +58,11 @@ describe('GET/profile', function(){
 			.catch(done);
 	})
 
-	it('get profile/arts should returns all arts from a user', function(done){
+	it('get profile/myarts should returns all arts from a user', function(done){
 
 		request(app)
 
-			.get('/profile/arts')
+			.get('/profile/myarts')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -77,7 +77,7 @@ describe('GET/profile', function(){
 
 		request(app)
 
-			.get('/profile/arts/0')
+			.get('/profile/myarts/adventureTime')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -87,6 +87,17 @@ describe('GET/profile', function(){
 				expect(res.body).to.have.property('tags').to.be.an('array');
 				done();
 			})
+			.catch(done)
+	})
+
+	it('get profile/arts/:id should returns a art from a user', function(done){
+
+		request(app)
+
+			.get('/profile/myarts/3')
+			.set('Accept', 'application/json')
+			.expect(400)
+			done();
 	})
 
 	it('get/profile/favorite should returns all favorite arts from a user', function(done){
@@ -124,11 +135,12 @@ describe('GET/profile', function(){
 
 describe('POST /profile operations', () =>{
 
-	it('Test: should add a new art', () =>{
+	it('Test: should add a new art', (done) =>{
 
 		request(app)
 
 			.post('/profile/arts')
 			.expect(200) 
+			done();
 	})
 })

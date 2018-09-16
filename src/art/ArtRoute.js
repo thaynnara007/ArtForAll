@@ -15,7 +15,7 @@ router.use(function (req, res, next) {
 
 router.get('/', controller.getAll); 
 
-router.get('/:id', controller.getOne);
+router.get('/:name', controller.getOne);
 
 router.post('/', controller.post); 
 
