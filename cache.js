@@ -1,4 +1,7 @@
-var cache = require('memory-cache');
+const memoryCache = require('memory-cache');
+var cache = new memoryCache.Cache();
+
+
 
 cache.put('foo', 'bar');
 console.log(cache.get('foo'));

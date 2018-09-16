@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+/**var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/profile/arts');
 
 var dataBse = mongoose.connection;
@@ -32,15 +32,15 @@ var art3 = new Art({name: 'Deku',
 					tags: ['boku no hero academia', 'boku no hero', 'deku', 'midorya', 'one for all']
 
 });
-
-/**
+**/
+/** 
 Represents a Art
 @constructor
 @param {string} imgLink - The link of the imagem
 @param {(string|string[]} tags - an array of names of tags
 @param {int} id - The id of the art
 */
-/*
+
 var Art = function(name,imgLink, tags, id){
 
 	this.name = name;

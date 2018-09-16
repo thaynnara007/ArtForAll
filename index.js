@@ -9,7 +9,7 @@ app.use(morgan("tiny"));
 
 app.use(express.static('../static'));
 
-app.use('/profile', profileRouter);
+app.use('/profile/', profileRouter);
 
 //---------------------------------------------//
 
