@@ -1,4 +1,4 @@
-const app = require('../index.js');
+const app = require('../src/index.js');
 const request = require('supertest');
 const chai = require('chai');
 const mocha = require('mocha');

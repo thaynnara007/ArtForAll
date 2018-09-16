@@ -1,4 +1,4 @@
-const cache = require('../cache/Cache.js');
+const cache = require('../src/cache/Cache.js');
 const supertest = require('supertest');
 const mocha = require('mocha');
 const chai = require('chai');
