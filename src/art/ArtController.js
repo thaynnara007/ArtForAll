@@ -15,8 +15,13 @@ exports.getOne = function(req, res){
     res.json(oneArt);
 }
 
-//exports.put = funtion(req, res){}
+exports.post = function(req, res){
+
+       res.status(200);
+    }
 
 
-//}
+
+
+
 

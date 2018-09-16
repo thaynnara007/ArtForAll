@@ -17,9 +17,6 @@ router.get('/', controller.getAll);
 
 router.get('/:id', controller.getOne);
 
-router.post('/', (req, res) =>{
-
-	res.send(JSON.stringify(req.body, null, 2));
-}); 
+router.post('/', controller.post); 
 
 module.exports = router;

@@ -5,6 +5,7 @@ const mocha = require('mocha');
 
 const expect = chai.expect;
 
+
 describe('GET/ signup', function(){
 
 	it('responds with json', function(done){
@@ -118,6 +119,16 @@ describe('GET/profile', function(){
 				done();
 			})
 			.catch(done);
-
 	})
 }) 
+
+describe('POST /profile operations', () =>{
+
+	it('Test: should add a new art', () =>{
+
+		request(app)
+
+			.post('/profile/arts')
+			.expect(200) 
+	})
+})
