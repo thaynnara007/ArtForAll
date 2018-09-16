@@ -1,15 +1,16 @@
 const memoryCache = require('memory-cache');
 var cache = new memoryCache.Cache();
 
-exports.put = function(key, value, time){
+exports.put = function(key, value, time, callback){
 
-	cache.put(key, value, time, function(key, value){
+	var call = callback || function(key, value){
 
 		console.log(key + ': ' + value +' has dissaperar');
-	})
+	}
+	cache.put(key, value, time, call);
 }
 
-exports.get= function(key){
+exports.get = function(key){
 
 	return cache.get(key);
 }
@@ -24,7 +25,7 @@ exports.deleteAll = function(){
 	cache.clear();
 }
 
-exports.size = function(){
+exports.len = function(){
 
 	return cache.size();
 }
