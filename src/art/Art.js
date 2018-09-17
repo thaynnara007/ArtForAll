@@ -1,23 +1,57 @@
 var mongoose = require('mongoose');
 
-/*mongoose.connect('mongodb://localhost/myarts', { useNewUrlParser: true });
+var artSchema = new mongoose.Schema({
 
-
-var dataBase = mongoose.connection;
-dataBase.on('error', console.error.bind(console, 'connection error'));
-dataBase.once('open', function () {
-
-	console.log('we are connected');
-}); */
-
-var ArtSchema = new mongoose.Schema({
-
-	name: String,
+	name: {
+		type:String, 
+		required: [true, 'the name will helps other users to find your art, so choose a name for it']
+	},
 	imgLink: String,
-	tags: [{ type: String }]
+	tags: {
+		type: [{ type: String }], 
+		required: [true, 'tags will helps others users to find your art, so choose some tags']
+	},
+	date: {
+		type: Date, 
+		default: Date.now}
 });
 
-var Art = mongoose.model('Art', ArtSchema);
+artSchema.methods.editName = function(newName){
+
+	this.name = newName
+}
+
+artSchema.methods.addTag = function(newTag){
+
+	var index = this.tags.indexOf(newTag);
+
+	if(index > -1){
+
+		return false;
+	}else{
+
+		this.tags.push(newTag);
+
+		return true;
+	}
+}
+
+artSchema.methods.removeTag = function(tag){
+
+	var index = this.tags.indexOf(tag);
+
+	if(index > -1){
+
+		this.tags.splice(index,1);
+
+		return true;
+	}else{
+
+		return false;
+	}
+}
+
+var Art = mongoose.model('Art', artSchema);
 
 module.exports = Art;
 /*

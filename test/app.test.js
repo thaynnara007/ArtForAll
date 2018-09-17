@@ -2,6 +2,7 @@ const app = require('../src/index.js');
 const request = require('supertest');
 const chai = require('chai');
 const mocha = require('mocha');
+const Art = require('../src/art/Art');
 
 const expect = chai.expect;
 
@@ -66,7 +67,7 @@ describe('GET/user', function(){
 			.expect(400);
 	})
 
-	it("Test: shoul returns the user's information", (done) =>{
+	it("Test: should returns the user's information", (done) =>{
 
 		request(app)
 
@@ -101,7 +102,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('get profile/arts/:id should returns a art from a user', function(done){
+	it('get profile/arts/:name should returns a art from a user', function(done){
 
 		request(app)
 
@@ -117,16 +118,7 @@ describe('GET/user', function(){
 			})
 			.catch(done)
 	})
-
-	it('get profile/arts/:id should returns a art from a user', function(done){
-
-		request(app)
-
-			.get('/user/profile/myarts/3')
-			.set('Accept', 'application/json')
-			.expect(400)
-			done();
-	})
+	/*
 
 	it('get/profile/favorite should returns all favorite arts from a user', function(done){
 
@@ -158,7 +150,7 @@ describe('GET/user', function(){
 				done();
 			})
 			.catch(done);
-	})
+	}) */
 
 	it('Test: should returns the users following by one user ', (done) =>{
 
@@ -198,10 +190,10 @@ describe('POST /profile operations', () =>{
 
 		request(app)
 
-			.post('/user/profile/arts')
+			.post('/user/profile/myarts')
 			.expect(200) 
 			done();
-	})
+	})/*
 
 	it('Test: should add a new favorite art', (done) =>{
 
@@ -210,5 +202,5 @@ describe('POST /profile operations', () =>{
 			.post('/user/profile/favorite')
 			.expect(200)
 			done();
-	})
+	}) */
 })
