@@ -41,3 +41,10 @@ exports.getUser = function(userName){
 
     return user;
 }
+
+exports.getUserProfile = function(userName){
+
+    var user = this.getUser(userName)[0];
+
+    return user.profile;
+}
