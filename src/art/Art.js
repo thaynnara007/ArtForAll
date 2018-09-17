@@ -1,38 +1,45 @@
-/**var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/profile/arts');
+var mongoose = require('mongoose');
 
-var dataBse = mongoose.connection;
-dataBse.on('error', console.error.bind(console, 'connection error'));
-dataBse.once('open', function(){
+/*mongoose.connect('mongodb://localhost/myarts', { useNewUrlParser: true });
+
+
+var dataBase = mongoose.connection;
+dataBase.on('error', console.error.bind(console, 'connection error'));
+dataBase.once('open', function () {
 
 	console.log('we are connected');
-});
+}); */
 
 var ArtSchema = new mongoose.Schema({
 
 	name: String,
-	imgLink: String,arts/0
-	tags: [{type: String}],
+	imgLink: String,
+	tags: [{ type: String }]
 });
 
-var Art = mongoose.model('Art', ArtScarts/0ema);
+var Art = mongoose.model('Art', ArtSchema);
 
-var art1 = new Art({name: 'adventureTarts/0me', 
-					imgLink: 'https:/arts/0cdn.shopify.com/s/files/1/0558/2081/products/ATCAWM_FC_1024x1024.jpg?v=1534804643',
-					tags: ['adventurearts/0time', 'fanart', 'finn', 'jake']
+module.exports = Art;
+/*
+var art1 = new Art({
+	name: 'adventureTime',
+	imgLink: 'https:/arts/0cdn.shopify.com/s/files/1/0558/2081/products/ATCAWM_FC_1024x1024.jpg?v=1534804643',
+	tags: ['adventurearts/0time', 'fanart', 'finn', 'jake']
 });
 
-var art2 = new Art({name: 'Bubbline',arts/0
-					imgLink: 'https:/arts/0cdn.vox-cdn.com/thumbor/q0ujcr0H33ybBRUUNNFL1QVBAKY=/0x0:1920x1080/1200x800/filters:focal(760x282:1066x588)/cdn.vox-cdn.com/uploads/chorus_image/image/61137005/adventure_time_stakes.0.jpg',
-					tags: ['adventurearts/0time', 'marceline', 'bonnibel']
+var art2 = new Art({
+	name: 'Bubbline',
+	imgLink: 'https:/arts/0cdn.vox-cdn.com/thumbor/q0ujcr0H33ybBRUUNNFL1QVBAKY=/0x0:1920x1080/1200x800/filters:focal(760x282:1066x588)/cdn.vox-cdn.com/uploads/chorus_image/image/61137005/adventure_time_stakes.0.jpg',
+	tags: ['adventurearts/0time', 'marceline', 'bonnibel']
 });
 
-var art3 = new Art({name: 'Deku',
-					imgLink: 'https:/arts/0cdn.vox-cdn.com/thumbor/q0ujcr0H33ybBRUUNNFL1QVBAKY=/0x0:1920x1080/1200x800/filters:focal(760x282:1066x588)/cdn.vox-cdn.com/uploads/chorus_image/image/61137005/adventure_time_stakes.0.jpg',
-					tags: ['boku no harts/0ro academia', 'boku no hero', 'deku', 'midorya', 'one for all']
+var art3 = new Art({
+	name: 'Deku',
+	imgLink: 'https:/arts/0cdn.vox-cdn.com/thumbor/q0ujcr0H33ybBRUUNNFL1QVBAKY=/0x0:1920x1080/1200x800/filters:focal(760x282:1066x588)/cdn.vox-cdn.com/uploads/chorus_image/image/61137005/adventure_time_stakes.0.jpg',
+	tags: ['boku no harts/0ro academia', 'boku no hero', 'deku', 'midorya', 'one for all']
 
-});
-**/
+}); 
+
 /** 
 Represents a Art
 @constructor
@@ -40,7 +47,7 @@ Represents a Art
 @param {(string|string[]} tags - an array of names of tags
 @param {int} id - The id of the art
 */
-
+/*
 var Art = function(name,imgLink, tags, id){
 
 	this.name = name;
@@ -72,5 +79,5 @@ exports.getOneArt = function(artName, list){
 	})
 
 	return art;
-}
+} */
 
