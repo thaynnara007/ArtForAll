@@ -17,4 +17,6 @@ router.use('/profile', profileRouter);
 
 router.get('/:name', controller.getUserProfile);
 
+router.get('/:name/info', controller.getInfo);
+
 module.exports = router;

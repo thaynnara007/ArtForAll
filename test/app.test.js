@@ -5,7 +5,6 @@ const mocha = require('mocha');
 
 const expect = chai.expect;
 
-
 describe('GET/ signup', function(){
 
 	it('responds with json', function(done){
@@ -40,19 +39,48 @@ describe('GET/ login', function(){
 	})
 });
 
-describe('GET/profile', function(){
+describe('GET/user', function(){
 
 	it("should returns a user/'s profile", function(done){
 
 		request(app)
 
-			.get('/user/profile/miuda06')
+			.get('/user/miuda06')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
 
-			//	expect(res.body).to.have.property('info').to.be.an('object');
+				expect(res.body).to.have.property('following');
 				expect(res.body).to.have.property('username').to.equal('miuda06');
+				done();
+			})
+			.catch(done);
+	})
+
+	it('Test: should not find a user with a username that does not exist', () =>{
+
+		request(app)
+
+			.get('/user/bbbb')
+			.set('Accept', 'application/json')
+			.expect(400);
+	})
+
+	it("Test: shoul returns the user's information", (done) =>{
+
+		request(app)
+
+			.get('/user/miuda06/info')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.then((res) =>{
+
+				expect(res.body).to.have.property('name').to.equal('Thaynnara');
+				expect(res.body).to.have.property('age').to.equal(21);
+				expect(res.body).to.have.property('username').to.equal('miuda06');
+				expect(res.body).to.have.property('email').to.equal('tatamiuda06@gmail.com');
+				expect(res.body).to.have.property('password').to.equal('bubabua');
+				expect(res.body).to.have.property('date');
 				done();
 			})
 			.catch(done);
