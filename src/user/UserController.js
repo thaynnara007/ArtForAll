@@ -7,9 +7,9 @@ exports.getUserProfile = function(req, res){
     
     if(userProfile){
 
-        res.json(userName);
+        res.json(userProfile);
     }else{
 
-        res.status(400);
+        res.status(400).json('there is not a user with this username');
     }
 }

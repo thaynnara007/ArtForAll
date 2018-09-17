@@ -46,5 +46,9 @@ exports.getUserProfile = function(userName){
 
     var user = this.getUser(userName)[0];
 
-    return user.profile;
+    if (user){
+        return user.profile;
+    }else{
+        return user;
+    }
 }

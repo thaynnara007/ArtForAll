@@ -46,7 +46,7 @@ describe('GET/profile', function(){
 
 		request(app)
 
-			.get('/profile/miuda06')
+			.get('/user/profile/miuda06')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -62,7 +62,7 @@ describe('GET/profile', function(){
 
 		request(app)
 
-			.get('/profile/myarts')
+			.get('/user/profile/myarts')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -77,7 +77,7 @@ describe('GET/profile', function(){
 
 		request(app)
 
-			.get('/profile/myarts/adventureTime')
+			.get('/user/profile/myarts/adventureTime')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -94,7 +94,7 @@ describe('GET/profile', function(){
 
 		request(app)
 
-			.get('/profile/myarts/3')
+			.get('/user/profile/myarts/3')
 			.set('Accept', 'application/json')
 			.expect(400)
 			done();
@@ -104,7 +104,7 @@ describe('GET/profile', function(){
 
 		request(app)
 
-			.get('/profile/favorite')
+			.get('/user/profile/favorite')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -119,7 +119,7 @@ describe('GET/profile', function(){
 
 		request(app)
 
-			.get('/profile/favorite/erin')
+			.get('/user/profile/favorite/erin')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{
@@ -139,7 +139,7 @@ describe('POST /profile operations', () =>{
 
 		request(app)
 
-			.post('/profile/arts')
+			.post('/user/profile/arts')
 			.expect(200) 
 			done();
 	})
@@ -148,7 +148,7 @@ describe('POST /profile operations', () =>{
 
 		request(app)
 
-			.post('profile/favorite')
+			.post('/user/profile/favorite')
 			.expect(200)
 			done();
 	})

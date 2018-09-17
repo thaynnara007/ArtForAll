@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const profileRouter = require('./profile/ProfileRoute')
+const userRouter = require('./user/UserRouter');
 
 
 const app = express();
@@ -9,7 +9,7 @@ app.use(morgan("tiny"));
 
 app.use(express.static('../static'));
 
-app.use('/profile', profileRouter);
+app.use('/user', userRouter);
 
 //---------------------------------------------//
 
