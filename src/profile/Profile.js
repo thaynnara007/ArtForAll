@@ -20,14 +20,14 @@ var anotherPerson = new this.Profile('onlok', 36);
 var otherPerson =  new this.Profile('berkana',45);
 
 
-this.profiles = () => [person, anotherPerson, otherPerson]
+exports.profiles = () => [person, anotherPerson, otherPerson]
 
 /**
 Returns a profile that has a specific username
 @param {string} userName - username
 @returns {Object}
 */
-this.getOneProfile = function(userName){
+exports.getOneProfile = function(userName){
 
 	var profile = this.profiles().filter(function(profile){
 
