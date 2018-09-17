@@ -159,6 +159,37 @@ describe('GET/user', function(){
 			})
 			.catch(done);
 	})
+
+	it('Test: should returns the users following by one user ', (done) =>{
+
+		request(app)
+
+			.get('/user/profile/following')
+			.set('Accept', 'application/json/')
+			.expect(200)
+			.then((res) =>{
+
+				expect(res.body).to.be.an('array');
+				done();
+			})
+			.catch(done);
+	})
+
+	it('Test: should returns one favorite art from a user', (done) =>{
+
+		request(app)
+
+			.get('/user/profile/following/onlok')
+			.set('Accept', 'application/json/')
+			.expect(200)
+			.then((res) =>{
+
+				expect(res.body).to.have.property('username').to.equal('onlok');
+				expect(res.body).to.have.property('following');
+				done();
+			})
+			.catch(done);
+	})
 }) 
 
 describe('POST /profile operations', () =>{
