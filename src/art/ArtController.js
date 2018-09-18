@@ -1,4 +1,4 @@
-const Art = require('./Art');
+const art = require('./Art');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/myarts', { useNewUrlParser: true });
 
@@ -12,7 +12,7 @@ dataBase.once('open', function () {
 
 exports.getAll = function (req, res, next) {
 
-    Art.find( function(err, arts){
+    art.Art.find( function(err, arts){
 
         if (err){ 
             
@@ -28,7 +28,7 @@ exports.getOne = function (req, res) {
 
     var artName = req.params.name;
   
-    Art.find({'name': artName}, function(err,art){
+    art.Art.find({'name': artName}, function(err,art){
  
         if(err){
 

@@ -61,4 +61,5 @@ artSchema.methods.removeTag = function(tag){
 
 var Art = mongoose.model('Art', artSchema);
 
-module.exports = Art;
+module.exports = {Art, artSchema};
+

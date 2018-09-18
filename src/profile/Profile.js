@@ -1,3 +1,22 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var art = require('../art/Art');
+
+var profileSchema = new Schema({
+
+	userName:{
+		type: String,
+		required: true
+	},
+	following:{
+		type:Number
+	},
+	userArts:[art.artSchema],
+	userFavoritesArts:[art.artSchema]
+})
+
+var profile = mongoose.model('profile', profileSchema);
+
 
 //---------------PROFILE-------------------------//
 

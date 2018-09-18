@@ -1,21 +1,21 @@
-const Art = require('../src/art/Art');
+const art = require('../src/art/Art');
 const mocha = require('mocha');
 const chai = require('chai');
 const expect = chai.expect;
 
-var art1 = new Art({
+var art1 = new art.Art({
     name: 'adventureTime',
     imgLink: 'https://cdn.shopify.com/s/files/1/0558/2081/products/ATCAWM_FC_1024x1024.jpg?v=1534804643',
     tags: ['adventuretime', 'fanart', 'finn', 'jake']
 });
 
-var art2 = new Art({
+var art2 = new art.Art({
     name: 'Bubbline',
     imgLink: 'https://vignette.wikia.nocookie.net/shipping/images/5/51/Bubbline_stakes.png/revision/latest?cb=20170312231654',
     tags: ['adventuretime', 'marceline', 'bonnibel']
 });
 
-var art3 = new Art({
+var art3 = new art.Art({
     name: 'Deku',
     imgLink: 'https://i.pinimg.com/originals/a0/0d/cb/a00dcb7631dffe60efc0e2cd7f742eaa.jpg',
     tags: ['boku no hero academia', 'boku no hero', 'deku', 'midorya', 'one for all']
