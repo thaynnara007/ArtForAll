@@ -10,7 +10,7 @@ exports.getUserProfile = function(req, res){
         res.json(userProfile);
     }else{
 
-        res.status(400).json('there is not a user with this username');
+        res.status(404).json('there is not a user with this username');
     }
 }
 
@@ -25,6 +25,6 @@ exports.getInfo = function(req, res){
     }
     else{
 
-        res.status(400).json('This user does not exist');
+        res.status(404).json('This user does not exist');
     }
 }

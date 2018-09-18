@@ -16,7 +16,7 @@ exports.getAll = function (req, res, next) {
 
         if (err){ 
             
-            res.status(400).json('you dont have any art');
+            res.status(404).json('you dont have any art');
             return handleError(err);
         };
         
@@ -32,7 +32,7 @@ exports.getOne = function (req, res) {
  
         if(err){
 
-            res.status(400).json('there is not a art with such name');
+            res.status(404).json('there is not a art with such name');
             console.log(err);
         }
         else{

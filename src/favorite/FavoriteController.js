@@ -36,7 +36,7 @@ exports.getAll = function(req, res, next){
 
         if(err){
 
-            res.status(400).json('You do not have any favorite art');
+            res.status(404).json('You do not have any favorite art');
             console.log(err);
         }else{
 
@@ -54,7 +54,7 @@ exports.getOne = function(req, res){
 
         if(err){
 
-            res.status(400).json("there is not a favorite art with such name");
+            res.status(404).json("there is not a favorite art with such name");
             console.log(err);
         }else{
 

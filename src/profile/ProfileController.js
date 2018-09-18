@@ -17,7 +17,7 @@ exports.getFollowingUser = function(req, res){
     }
     else{
 
-        res.status(400).json('You are not following this user');
+        res.status(404).json('You are not following this user');
     }
 }
 

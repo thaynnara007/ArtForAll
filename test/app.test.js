@@ -64,7 +64,7 @@ describe('GET/user', function(){
 
 			.get('/user/bbbb')
 			.set('Accept', 'application/json')
-			.expect(400);
+			.expect(404);
 	})
 
 	it("Test: should returns the user's information", (done) =>{
