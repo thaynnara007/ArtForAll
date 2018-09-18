@@ -2,8 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const artRouter = require('../art/ArtRoute');
-const favoriteRoute = require('../art/FavoriteRoute');
-const profile = require('./Profile.js')
+const favoriteRoute = require('../favorite/FavoriteRoute');
 const controller = require('./ProfileController');
 
 router.use(bodyParser.json());

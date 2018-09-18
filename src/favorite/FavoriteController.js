@@ -1,4 +1,4 @@
-const Art = require('./Art');
+const Art = require('../art/Art');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/favorite', { useNewUrlParser: true });
 
