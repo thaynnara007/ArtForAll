@@ -19,6 +19,7 @@ exports.getAll = function (req, res, next) {
             res.status(400).json('you dont have any art');
             return handleError(err);
         };
+        
         res.json(arts);
     })
 }
@@ -26,15 +27,16 @@ exports.getAll = function (req, res, next) {
 exports.getOne = function (req, res) {
 
     var artName = req.params.name;
-
+  
     Art.find({'name': artName}, function(err,art){
-
+ 
         if(err){
 
             res.status(400).json('there is not a art with such name');
+            console.log(err);
         }
         else{
-
+            
             res.json(art[0]);
         }
     })

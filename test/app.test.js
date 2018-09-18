@@ -118,7 +118,7 @@ describe('GET/user', function(){
 			})
 			.catch(done)
 	})
-	/*
+	
 
 	it('get/profile/favorite should returns all favorite arts from a user', function(done){
 
@@ -150,7 +150,7 @@ describe('GET/user', function(){
 				done();
 			})
 			.catch(done);
-	}) */
+	}) 
 
 	it('Test: should returns the users following by one user ', (done) =>{
 
@@ -193,7 +193,7 @@ describe('POST /profile operations', () =>{
 			.post('/user/profile/myarts')
 			.expect(200) 
 			done();
-	})/*
+	})
 
 	it('Test: should add a new favorite art', (done) =>{
 
@@ -202,5 +202,5 @@ describe('POST /profile operations', () =>{
 			.post('/user/profile/favorite')
 			.expect(200)
 			done();
-	}) */
+	}) 
 })
