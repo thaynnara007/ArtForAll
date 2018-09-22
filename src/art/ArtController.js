@@ -1,6 +1,6 @@
 const art = require('./Art');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/myarts', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
 
 var dataBase = mongoose.connection;

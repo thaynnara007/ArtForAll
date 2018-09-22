@@ -2,26 +2,10 @@ const app = require('../src/index.js');
 const request = require('supertest');
 const chai = require('chai');
 const mocha = require('mocha');
-const Art = require('../src/art/Art');
-
+const assertArrays = require('chai-arrays');
 const expect = chai.expect;
 
-describe('GET/ signup', function(){
-
-	it('responds with json', function(done){
-		
-		request(app)
-		
-			.get('/signup')
-			.set('Accept', 'appliaction/json')
-			.expect(200)
-			.end(function(err, res){
-				
-				if (err) return done(err);
-				done();
-			});
-	});	
-});
+chai.use(assertArrays);
 
 describe('GET/ login', function(){
 
@@ -96,7 +80,7 @@ describe('GET/user', function(){
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.be.an('array');
+				expect(res.body).to.be.ofSize(4);
 				done();
 			})
 			.catch(done);

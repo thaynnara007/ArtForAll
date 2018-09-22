@@ -16,6 +16,11 @@ router.use(function (req, res, next) {
 router.use('/myarts', artRouter);
 router.use('/favorite', favoriteRoute);
 
+router.get('/', (req, res) =>{
+
+	res.json('Hello profile');
+} )
+
 router.get('/following', controller.getFollowing);
 
 router.get('/following/:name', controller.getFollowingUser);

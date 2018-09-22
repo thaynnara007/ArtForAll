@@ -1,6 +1,6 @@
 const art = require('../art/Art');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/favorite', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
 var dataBase = mongoose.connection;
 dataBase.on('error', console.error.bind(console, 'connection error'));
@@ -21,6 +21,7 @@ var art4 = new art.Art({
     tags: ['shingeki no kyojin', 'attack on titan', 'erin', 'tita', 'wall']
 });
         
+
 /*
 art.Art.find(function(err, fav){
 
