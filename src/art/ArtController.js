@@ -1,4 +1,4 @@
-const art = require('./Art');
+const art = require('./ArtModel');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
@@ -44,7 +44,7 @@ exports.getOne = function (req, res) {
 
 exports.post = function (req, res) {
 
-    //var art = req.body;
+    //var art = new art.Art(req.body);
     //dataBase.collection('arts').insert(art);    
     res.status(200);
 } 

@@ -1,4 +1,4 @@
-const user = require('./User');
+const user = require('./UserModel');
 
 exports.getUserProfile = function(req, res){
 

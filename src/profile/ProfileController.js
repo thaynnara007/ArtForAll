@@ -1,4 +1,4 @@
-const profile = require('./Profile');
+const profile = require('./ProfileModel');
 
 exports.getFollowing = function(req, res){
 

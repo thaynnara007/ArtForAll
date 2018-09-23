@@ -1,4 +1,4 @@
-const profile = require('../profile/Profile');
+const profile = require('../profile/ProfileModel');
 
 /**
 Represents a Information

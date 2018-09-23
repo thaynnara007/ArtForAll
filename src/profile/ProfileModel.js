@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var art = require('../art/Art');
+var art = require('../art/ArtModel');
 
 var profileSchema = new Schema({
 

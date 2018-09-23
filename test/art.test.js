@@ -1,4 +1,4 @@
-const art = require('../src/art/Art');
+const art = require('../src/art/ArtModel');
 const mocha = require('mocha');
 const chai = require('chai');
 const expect = chai.expect;
