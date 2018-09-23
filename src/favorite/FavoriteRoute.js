@@ -22,10 +22,6 @@ router.get('/:name', controller.getOne);
 /**
 add one favorite art
 */
-router.post('/', (req, res) =>{
-
-	res.send(JSON.stringify(req.body, null, 2));
-	res.status(200);
-});
+router.post('/', controller.post);
 
 module.exports = router;

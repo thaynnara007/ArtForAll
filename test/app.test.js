@@ -80,7 +80,7 @@ describe('GET/user', function(){
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.be.ofSize(4);
+				expect(res.body).to.be.ofSize(3);
 				done();
 			})
 			.catch(done);
