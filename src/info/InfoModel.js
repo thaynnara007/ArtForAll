@@ -14,7 +14,8 @@ var infoSchema = new Schema({
     },
     userName:{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
@@ -29,23 +30,30 @@ var infoSchema = new Schema({
 })
 
 infoSchema.methods.editUserName = function(newName){
-
+  
     var name = newName.trim();
-    
-    if(this.userName === name){
 
-        this.name = name;
+    if(this.userName != name){
+
+        this.userName = name;
+        return true;
     }
+
+    return false;
 }
 
 infoSchema.methods.editEmail = function(newEmail){
 
-    var exp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.?([a-z]+)?$/
+    var newEmail = newEmail.trim();
+    var exp = /^[a-zA-Z0-9.]+@[a-z]+\.[a-z]+(\.[a-z]+)*$/
 
     if( newEmail != this.email && exp.test(newEmail)){
 
         this.email = newEmail;
+        return true;
     }
+
+    return false;
 }
 
 infoSchema.methods.editPassword = function(newPassword){
@@ -55,5 +63,11 @@ infoSchema.methods.editPassword = function(newPassword){
     if(this.password != password){
 
         this.password = password;
+        return true;
     }
+    return false;
 }
+
+var Info = mongoose.model('Info', infoSchema);
+
+module.exports = {Info, infoSchema};

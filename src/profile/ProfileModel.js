@@ -35,39 +35,10 @@ exports.Profile = function( userName, following){
 	this.following = following;
 }
 
-var art1 = new art.Art({
-    name: 'adventureTime',
-    imgLink: 'https://cdn.shopify.com/s/files/1/0558/2081/products/ATCAWM_FC_1024x1024.jpg?v=1534804643',
-    tags: ['adventuretime', 'fanart', 'finn', 'jake']
-});
 
-var art2 = new art.Art({
-    name: 'Bubbline',
-    imgLink: 'https://vignette.wikia.nocookie.net/shipping/images/5/51/Bubbline_stakes.png/revision/latest?cb=20170312231654',
-    tags: ['adventuretime', 'marceline', 'bonnibel']
-});
-
-var art3 = new art.Art({
-    name: 'Deku',
-    imgLink: 'https://i.pinimg.com/originals/a0/0d/cb/a00dcb7631dffe60efc0e2cd7f742eaa.jpg',
-    tags: ['boku no hero academia', 'boku no hero', 'deku', 'midorya', 'one for all']
-});
-
-var art4 = new art.Art({
-    name:'erin',
-    imgLink:'http://www.nerdtrip.com.br/wp-content/uploads/2017/09/Shingeki-no-Kyojin-segunda-temporada-2017-2.jpg',
-    tags: ['shingeki no kyojin', 'attack on titan', 'erin', 'tita', 'wall']
-});
-
-
-var person = new profile({userName:'miuda06', following: 40, userArts:[art1,art2], userFavoritesArts:[art3, art4]});
+var person = new this.Profile('miuda06',40);
 var anotherPerson = new this.Profile('onlok', 36);
 var otherPerson =  new this.Profile('berkana',45);
-
-person.save(function(err){
-
-	if (err) return console.log(err);
-})
 
 
 exports.profiles = () => [person, anotherPerson, otherPerson]

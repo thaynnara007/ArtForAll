@@ -12,6 +12,7 @@ dataBase.once('open', function () {
 
 exports.getAll = function (req, res, next) {
 
+
     dataBase.collection('arts').find({}).toArray( function(err, arts){
 
         if (err){ 

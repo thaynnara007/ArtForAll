@@ -162,7 +162,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test: should returns one favorite art from a user', (done) =>{
+	it("Test: should returns one user's profile", (done) =>{
 
 		request(app)
 

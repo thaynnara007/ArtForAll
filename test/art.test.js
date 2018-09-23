@@ -27,7 +27,7 @@ describe('Testing Art schema operations', () =>{
 
         art1.editName('Hora de Aventura');
         expect(art1.name).to.equal('Hora de Aventura');
-
+        
         art1.editName(art2.name);
         expect(art1.name).to.equal(art2.name);
 
