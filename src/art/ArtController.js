@@ -12,7 +12,7 @@ dataBase.once('open', function () {
 
 exports.getAll = function (req, res, next) {
 
-    art.Art.find( function(err, arts){
+    dataBase.collection('arts').find({}).toArray( function(err, arts){
 
         if (err){ 
             
@@ -28,7 +28,7 @@ exports.getOne = function (req, res) {
 
     var artName = req.params.name;
   
-    art.Art.find({'name': artName}, function(err,art){
+    dataBase.collection('arts').findOne({'name': artName}, function(err,art){
  
         if(err){
 
@@ -37,13 +37,15 @@ exports.getOne = function (req, res) {
         }
         else{
             
-            res.json(art[0]);
+            res.json(art);
         }
     })
 } 
 
 exports.post = function (req, res) {
 
+    //var art = req.body;
+    //dataBase.collection('arts').insert(art);    
     res.status(200);
 } 
 

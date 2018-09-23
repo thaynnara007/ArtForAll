@@ -110,6 +110,7 @@ describe('GET/user', function(){
 			.get('/user/profile/myarts/time')
 			.set('Accept', 'application/json')
 			.expect(404)
+			done();
 
 	})
 	
