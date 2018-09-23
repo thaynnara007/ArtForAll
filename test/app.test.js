@@ -9,7 +9,7 @@ chai.use(assertArrays);
 
 describe('GET/ login', function(){
 
-	it('responds with json', function(done){
+	it('Test01: responds with json', function(done){
 		
 		request(app)
 		
@@ -26,7 +26,7 @@ describe('GET/ login', function(){
 
 describe('GET/user', function(){
 
-	it("should returns a user/'s profile", function(done){
+	it("Test01: should returns a user/'s profile", function(done){
 
 		request(app)
 
@@ -42,7 +42,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test: should not find a user with a username that does not exist', () =>{
+	it('Test02: should not find a user with a username that does not exist', () =>{
 
 		request(app)
 
@@ -51,7 +51,7 @@ describe('GET/user', function(){
 			.expect(404);
 	})
 
-	it("Test: should returns the user's information", (done) =>{
+	it("Test03: should returns the user's information", (done) =>{
 
 		request(app)
 
@@ -71,7 +71,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('get profile/myarts should returns all arts from a user', function(done){
+	it('Test04: get profile/myarts should returns all arts from a user', function(done){
 
 		request(app)
 
@@ -86,7 +86,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('get profile/arts/:name should returns a art from a user', function(done){
+	it('Test05: get profile/arts/:name should returns a art from a user', function(done){
 
 		request(app)
 
@@ -103,7 +103,7 @@ describe('GET/user', function(){
 			.catch(done)
 	})
 
-	it('get profile/arts/:name should not returns a art from a user', function(done){
+	it('Test06: get profile/arts/:name should not returns a art from a user', function(done){
 
 		request(app)
 
@@ -115,7 +115,7 @@ describe('GET/user', function(){
 	})
 	
 
-	it('get/profile/favorite should returns all favorite arts from a user', function(done){
+	it('Test07: get/profile/favorite should returns all favorite arts from a user', function(done){
 
 		request(app)
 
@@ -130,7 +130,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test: should returns one favorite art from a user', (done) =>{
+	it('Test08: should returns one favorite art from a user', (done) =>{
 
 		request(app)
 
@@ -147,7 +147,7 @@ describe('GET/user', function(){
 			.catch(done);
 	}) 
 
-	it('Test: should returns the users following by one user ', (done) =>{
+	it('Test09: should returns the users following by one user ', (done) =>{
 
 		request(app)
 
@@ -162,7 +162,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test: should returns one user's profile", (done) =>{
+	it("Test10: should returns one user's profile", (done) =>{
 
 		request(app)
 
@@ -181,7 +181,7 @@ describe('GET/user', function(){
 
 describe('POST /profile operations', () =>{
 
-	it('Test: should add a new art', (done) =>{
+	it('Test01: should add a new art', (done) =>{
 
 		request(app)
 
@@ -190,7 +190,7 @@ describe('POST /profile operations', () =>{
 			done();
 	})
 
-	it('Test: should add a new favorite art', (done) =>{
+	it('Test02: should add a new favorite art', (done) =>{
 
 		request(app)
 

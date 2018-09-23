@@ -86,6 +86,4 @@ describe('Testing infoSchema operations', function(){
 
         expect(info2.editPassword('jakeTheDog')).to.be.false;
     });
-
-
 })

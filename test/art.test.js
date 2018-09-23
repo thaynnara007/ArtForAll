@@ -23,7 +23,7 @@ var art3 = new art.Art({
 
 describe('Testing Art schema operations', () =>{
 
-    it("Test: should edits a art's name", () =>{
+    it("Test01: should edits a art's name", () =>{
 
         art1.editName('Hora de Aventura');
         expect(art1.name).to.equal('Hora de Aventura');
@@ -35,7 +35,7 @@ describe('Testing Art schema operations', () =>{
         expect(art1.name).to.equal('AdventureTime');
     })
 
-    it("Test: should not edits a art's name", () =>{
+    it("Test02: should not edits a art's name", () =>{
 
         art3.editName('');
         expect(art3.name).to.equal('Deku');
@@ -47,7 +47,7 @@ describe('Testing Art schema operations', () =>{
         expect(art3.name).to.equal('Deku');
     })
 
-    it('Test: should puts a new tag in a art', () =>{
+    it('Test03: should puts a new tag in a art', () =>{
 
         expect(art2.tags.length).to.equal(3);
         art2.addTag('Marcy');
@@ -60,7 +60,7 @@ describe('Testing Art schema operations', () =>{
         expect(art2.tags[4]).to.equal('Bubblegum');
     })
 
-    it("Test: should removes a art's tag", () =>{
+    it("Test04: should removes a art's tag", () =>{
 
         expect(art2.tags.length).to.equal(5);
 
