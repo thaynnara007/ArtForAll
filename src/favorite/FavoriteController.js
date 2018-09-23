@@ -19,7 +19,7 @@ exports.getAll = function(req, res, next){
             res.status(404).json('You do not have any favorite art');
             console.log(err);
         }else{
-        //    console.log(favorites);
+        
             res.json(favorites);
         }
     })
@@ -37,7 +37,7 @@ exports.getOne = function(req, res){
             res.status(404).json("there is not a favorite art with such name");
             console.log(err);
         }else{
-            console.log(favorite);
+          
             res.json(favorite);
         }
     })

@@ -102,6 +102,16 @@ describe('GET/user', function(){
 			})
 			.catch(done)
 	})
+
+	it('get profile/arts/:name should not returns a art from a user', function(done){
+
+		request(app)
+
+			.get('/user/profile/myarts/time')
+			.set('Accept', 'application/json')
+			.expect(404)
+
+	})
 	
 
 	it('get/profile/favorite should returns all favorite arts from a user', function(done){
