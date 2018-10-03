@@ -1,34 +1,25 @@
 const profile = require('../profile/ProfileModel');
+const info = require('../info/InfoModel');
+const art = require('../art/ArtModel');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-/**
-Represents a Information
-@constructor
-@param {string} name - The name of the user
-@param {int} age - The user's age
-@param {String} username - username
-*/
+var dataBase = mongoose.connection;
+dataBase.on('error', console.error.bind(console, 'connection error'));
+dataBase.once('open', function () {
 
-var Info = function(name, age, username, email, password, date){
+    console.log('we are connected');
+});
 
-	this.name = name;
-    this.age = age;
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.date = date;
-}
+var userSchema = new Schema({
 
-var User = function(info){
+    information:[info.infoSchema],
+    profile:[profile.profileSchema]
 
-    this.info = info;
-    this.profile = new profile.Profile(info.username, 0, 0)
-}
+})
 
-var info1 = new Info('Thaynnara', 21, 'miuda06', 'tatamiuda06@gmail.com', 'bubabua', new Date());
-var info2 = new Info('Gabriel', 21, 'onlok', 'gabirel@gmail.com', 'miaumiau', new Date());
+var User = mongoose.model('User', userSchema);
 
-var user1 = new User(info1);
-var user2 = new User(info2);
 
 exports.users = () => [user1, user2];
 

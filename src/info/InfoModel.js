@@ -5,7 +5,6 @@ var infoSchema = new Schema({
 
     name: {
         type:String,
-        unique: true,
         required: true  
     },
     age: {
@@ -26,6 +25,11 @@ var infoSchema = new Schema({
         type: String,
         required: true,
         unique: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+
     }
 })
 

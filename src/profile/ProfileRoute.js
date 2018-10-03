@@ -18,6 +18,7 @@ router.use('/favorite', favoriteRoute);
 
 router.get('/', (req, res) =>{
 
+	//console.log(req);
 	res.json('Hello profile');
 } )
 

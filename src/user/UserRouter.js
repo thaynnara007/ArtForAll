@@ -13,7 +13,7 @@ router.use(function(req, res, next){
     next();
 })
 
-router.use('/profile', profileRouter);
+router.use('/:name/profile', profileRouter);
 
 router.get('/:name', controller.getUserProfile);
 
