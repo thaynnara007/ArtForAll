@@ -1,26 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const artRouter = require('../art/ArtRoute');
 const favoriteRoute = require('../favorite/FavoriteRoute');
 const controller = require('./ProfileController');
 
 router.use(bodyParser.json());
 
-router.use(function (req, res, next) { 
+router.use(function (req, res, next) {
 
-	res.setHeader('Content-Type', 'application/json'); 
-	next();	
+	res.setHeader('Content-Type', 'application/json');
+	next();
 });
 
 router.use('/myarts', artRouter);
 router.use('/favorite', favoriteRoute);
 
-router.get('/', (req, res) =>{
+router.get('/', (req, res) => {
 
-	//console.log(req);
+	console.log(req.params.name);
 	res.json('Hello profile');
-} )
+})
 
 router.get('/following', controller.getFollowing);
 
