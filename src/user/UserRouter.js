@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const controller = require('./UserController');
+const controller = require('./UserService');
 const profileRouter = require('../profile/ProfileRoute');
 
 
 router.use(bodyParser.json());
 
-router.use(function(req, res, next){
+router.use(function (req, res, next) {
 
     res.setHeader('Content-Type', 'application/json');
     next();

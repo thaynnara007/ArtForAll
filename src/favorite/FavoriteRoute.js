@@ -1,14 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const controller = require('./FavoriteController');
+const controller = require('./FavoriteService');
 
 router.use(bodyParser.json());
 
-router.use(function (req, res, next) { 
+router.use(function (req, res, next) {
 
-	res.setHeader('Content-Type', 'application/json'); 
-	next();	
+	res.setHeader('Content-Type', 'application/json');
+	next();
 });
 
 /**

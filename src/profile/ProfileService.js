@@ -1,5 +1,6 @@
 const profile = require('./ProfileModel');
 const User = require('../user/UserModel');
+const cache = require('../cache/Cache');
 const mongoose = require('mongoose');
 
 var dataBase = mongoose.connection;
@@ -9,47 +10,48 @@ dataBase.once('open', function () {
     console.log('we are connected at ProfilleController');
 });
 
-exports.getProfile = function(req, res){
+exports.getProfile = function (req, res) {
 
     var userName = req.params.name;
 
-    User.User.findOne({ "userName":userName}, function(erro, user){
+    User.User.findOne({ "userName": userName }, function (erro, user) {
 
-        if(erro){
+        if (erro) {
             console.log(erro);
         }
-        else if(user){
+        else if (user) {
+
             res.json(user.profile[0]);
         }
-        else{
+        else {
             res.status(404).json('there is not a user with this username');
         }
     })
 }
 
-exports.getFollowing = function(req, res){
+exports.getFollowing = function (req, res) {
 
     names = ["clara", "gabriel", "igor", "sophia"];
-	res.json(names);
+    res.json(names);
 }
 
-exports.getFollowingUser = function(req, res){
+exports.getFollowingUser = function (req, res) {
 
     var name = req.params.name;
     var userProfile = profile.getOneProfile(name);
-    
-    if(userProfile){
+
+    if (userProfile) {
 
         res.json(userProfile[0]);
     }
-    else{
+    else {
 
         res.status(404).json('You are not following this user');
     }
 }
 
-exports.postFollowing = function(req, res){
+exports.postFollowing = function (req, res) {
 
     var require = req.body;
-	res.send(JSON.stringify(require, null, 2));
+    res.send(JSON.stringify(require, null, 2));
 }

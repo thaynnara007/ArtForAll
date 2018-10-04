@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const router = express.Router({ mergeParams: true });
 const artRouter = require('../art/ArtRoute');
 const favoriteRoute = require('../favorite/FavoriteRoute');
-const controller = require('./ProfileController');
+const controller = require('./ProfileService');
 
 router.use(bodyParser.json());
 
