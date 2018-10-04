@@ -37,9 +37,9 @@ describe('GET/user', function(){
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.have.property('profile');
-				expect(res.body).to.have.property('information');
-				expect( res.body).to.have.property('userName').to.equal('miuda06');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('profile');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('information');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('userName').to.equal('miuda06');
 				done();
 			})
 			.catch(done);
@@ -62,13 +62,13 @@ describe('GET/user', function(){
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
-
-				expect(res.body).to.have.property('name').to.equal('Thaynnara');
-				expect(res.body).to.have.property('age').to.equal(21);
-				expect(res.body).to.have.property('userName').to.equal('miuda06');
-				expect(res.body).to.have.property('email').to.equal('tatamiuda06@gmail.com');
-				expect(res.body).to.have.property('password').to.equal('bubabua');
-				expect(res.body).to.have.property('date');
+				
+				expect(Promise.resolve(res.body)).to.eventually.have.property('name').to.equal('Thaynnara');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('age').to.equal(21);
+				expect(Promise.resolve(res.body)).to.eventually.have.property('userName').to.equal('miuda06');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('email').to.equal('tatamiuda06@gmail.com');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('password').to.equal('bubabua');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('date');
 				done();
 			})
 			.catch(done);
@@ -92,11 +92,11 @@ describe('GET/user', function(){
 			
 	})
 
-	it('Test05: get profile/myarts should returns all arts from a user', function(done){
+	it('Test05: get user/profile/myarts should returns all arts from a user', function(done){
 
 		request(app)
 
-			.get('/user/profile/myarts')
+			.get('/user/miuda06/profile/myarts')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -111,7 +111,7 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/profile/myarts/adventureTime')
+			.get('/user/miuda06/profile/myarts/adventureTime')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -140,7 +140,7 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/profile/favorite')
+			.get('/user/onlok/profile/favorite')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -155,7 +155,7 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/profile/favorite/erin')
+			.get('/user/miuda06/profile/favorite/erin')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{
