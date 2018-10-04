@@ -1,4 +1,31 @@
 const profile = require('./ProfileModel');
+const User = require('../user/UserModel');
+const mongoose = require('mongoose');
+
+var dataBase = mongoose.connection;
+dataBase.on('error', console.error.bind(console, 'connection error'));
+dataBase.once('open', function () {
+
+    console.log('we are connected at ProfilleController');
+});
+
+exports.getProfile = function(req, res){
+
+    var userName = req.params.name;
+
+    User.User.findOne({ "userName":userName}, function(erro, user){
+
+        if(erro){
+            console.log(erro);
+        }
+        else if(user){
+            res.json(user.profile[0]);
+        }
+        else{
+            res.status(404).json('there is not a user with this username');
+        }
+    })
+}
 
 exports.getFollowing = function(req, res){
 

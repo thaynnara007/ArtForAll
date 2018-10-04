@@ -1,10 +1,12 @@
 const app = require('../src/index.js');
 const request = require('supertest');
 const chai = require('chai');
+const chaiAsPromised = require("chai-as-promised")
 const mocha = require('mocha');
 const assertArrays = require('chai-arrays');
 const expect = chai.expect;
 
+chai.use(chaiAsPromised)
 chai.use(assertArrays);
 
 describe('GET/ login', function(){
@@ -26,7 +28,7 @@ describe('GET/ login', function(){
 
 describe('GET/user', function(){
 
-	it("Test01: should returns a user/'s profile", function(done){
+	it("Test01: should returns a user", function(done){
 
 		request(app)
 
@@ -35,8 +37,9 @@ describe('GET/user', function(){
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.have.property('following');
-				expect(res.body).to.have.property('username').to.equal('miuda06');
+				expect(res.body).to.have.property('profile');
+				expect(res.body).to.have.property('information');
+				expect( res.body).to.have.property('userName').to.equal('miuda06');
 				done();
 			})
 			.catch(done);
@@ -62,7 +65,7 @@ describe('GET/user', function(){
 
 				expect(res.body).to.have.property('name').to.equal('Thaynnara');
 				expect(res.body).to.have.property('age').to.equal(21);
-				expect(res.body).to.have.property('username').to.equal('miuda06');
+				expect(res.body).to.have.property('userName').to.equal('miuda06');
 				expect(res.body).to.have.property('email').to.equal('tatamiuda06@gmail.com');
 				expect(res.body).to.have.property('password').to.equal('bubabua');
 				expect(res.body).to.have.property('date');
@@ -70,8 +73,26 @@ describe('GET/user', function(){
 			})
 			.catch(done);
 	})
+	it("Test04: should returns a user's profile", (done) =>{
 
-	it('Test04: get profile/myarts should returns all arts from a user', function(done){
+		request(app)
+
+			.get('/user/onlok/profile')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.then((res) =>{
+
+				 expect(Promise.resolve(res.body)).to.eventually.have.property("userName").to.equal("onlok");
+				 expect(Promise.resolve(res.body)).to.eventually.have.property("following").to.equal(36);
+				 expect(Promise.resolve(res.body)).to.eventually.have.property("userArts");
+				 expect(Promise.resolve(res.body)).to.eventually.have.property("userFavoritesArts");
+				 done();
+			})
+			.catch(done);
+			
+	})
+
+	it('Test05: get profile/myarts should returns all arts from a user', function(done){
 
 		request(app)
 
@@ -86,7 +107,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test05: get profile/arts/:name should returns a art from a user', function(done){
+	it('Test06: get profile/arts/:name should returns a art from a user', function(done){
 
 		request(app)
 
@@ -103,7 +124,7 @@ describe('GET/user', function(){
 			.catch(done)
 	})
 
-	it('Test06: get profile/arts/:name should not returns a art from a user', function(done){
+	it('Test07: get profile/arts/:name should not returns a art from a user', function(done){
 
 		request(app)
 
@@ -115,7 +136,7 @@ describe('GET/user', function(){
 	})
 	
 
-	it('Test07: get/profile/favorite should returns all favorite arts from a user', function(done){
+	it('Test08: get/profile/favorite should returns all favorite arts from a user', function(done){
 
 		request(app)
 
@@ -130,7 +151,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test08: should returns one favorite art from a user', (done) =>{
+	it('Test09: should returns one favorite art from a user', (done) =>{
 
 		request(app)
 
@@ -147,7 +168,7 @@ describe('GET/user', function(){
 			.catch(done);
 	}) 
 
-	it('Test09: should returns the users following by one user ', (done) =>{
+	it('Test10: should returns the users following by one user ', (done) =>{
 
 		request(app)
 
@@ -162,7 +183,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test10: should returns one user's profile", (done) =>{
+	it("Test11: should returns one user's profile", (done) =>{
 
 		request(app)
 

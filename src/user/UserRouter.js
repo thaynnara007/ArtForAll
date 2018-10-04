@@ -15,7 +15,7 @@ router.use(function(req, res, next){
 
 router.use('/:name/profile', profileRouter);
 
-router.get('/:name', controller.getUserProfile);
+router.get('/:name', controller.getUser);
 
 router.get('/:name/info', controller.getInfo);
 
