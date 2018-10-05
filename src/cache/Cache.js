@@ -5,7 +5,7 @@ exports.put = function(key, value, time, callback){
 
 	var call = callback || function(key, value){
 
-		console.log(key + ': ' + value +' has dissaperar');
+		console.log(key + ': ' + value +' has dissaper');
 	}
 	cache.put(key, value, time, call);
 }

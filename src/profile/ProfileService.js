@@ -1,36 +1,31 @@
 const profile = require('./ProfileModel');
-const User = require('../user/UserModel');
-const cache = require('../cache/Cache');
-const mongoose = require('mongoose');
+//const User = require('../user/UserModel');
+//const cache = require('../cache/Cache');
+//const mongoose = require('mongoose');
 const userUtil = require('../util/user');
 
-var dataBase = mongoose.connection;
+/*var dataBase = mongoose.connection;
 dataBase.on('error', console.error.bind(console, 'connection error'));
 dataBase.once('open', function () {
 
     console.log('we are connected at ProfilleController');
-});
+});*/
 
 exports.getProfile = function (req, res) {
 
-    var userName = req.params.name;
+    var userName = req.params.userName;
 
-    User.User.findOne({ "userName": userName }, function (erro, user) {
+    userUtil.getUserProfile(userName, function(erro, userProfile){
 
-        if (erro) {
-            console.log(erro);
+        if(erro){
+            return console.log(erro);
         }
-        else if (user) {
+        else if(userProfile){
 
-            cache.put("visitedProfile", user.profile[0], 600000, function(erro){
-                if (erro){
-                    return console.log(erro);
-                }
-            })
-            res.json(user.profile[0]);
+            res.json(userProfile);
         }
-        else {
-            res.status(404).json('there is not a user with this username');
+        else{
+            res.status(400).json("There is not a user with this username");
         }
     })
 }

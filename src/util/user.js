@@ -7,32 +7,21 @@ var dataBase = mongoose.connection;
 dataBase.on('error', console.error.bind(console, 'connection error'));
 dataBase.once('open', function () {
 
-    console.log('we are connected at ProfilleController');
+    console.log('we are connected at util/user');
 });
 
-exports.getUser = function(userName){
+exports.getUserProfile = function(userName, callback){
 
-    var profile = cache.get('visitedProfile');
-
-    if(profile && profile.userName === userName){
-        
-        return profile;
-    }
-    else{
-
-        var userName = req.params.userName;
-
-        User.User.findOne({ "userName":userName }, function(erro, user){
+     User.User.findOne({ "userName":userName }, function(erro, user){
             
-            if(erro){
-                return console.log(erro);
-            }
-            else if(user){
+        if(erro){
+             callback(erro, null)
+        }
+        else if(user){
 
-                profile = user.profile[0];
-                cache.put('visitedProfile', profile, tenMin);
-            }
-        })
-        return profile;
-    }
+            profile = user.profile[0];
+            callback(null, profile);
+            }        
+    })
+
 }
