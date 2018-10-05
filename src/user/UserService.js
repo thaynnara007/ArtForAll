@@ -10,7 +10,7 @@ dataBase.once('open', function () {
 
 exports.getUser = function(req, res){
 
-    var userName = req.params.name;
+    var userName = req.params.userName;
 
     User.User.findOne({ "userName":userName }, function(erro, user){
 

@@ -2,6 +2,7 @@ const profile = require('./ProfileModel');
 const User = require('../user/UserModel');
 const cache = require('../cache/Cache');
 const mongoose = require('mongoose');
+const userUtil = require('../util/user');
 
 var dataBase = mongoose.connection;
 dataBase.on('error', console.error.bind(console, 'connection error'));
@@ -21,6 +22,11 @@ exports.getProfile = function (req, res) {
         }
         else if (user) {
 
+            cache.put("visitedProfile", user.profile[0], 600000, function(erro){
+                if (erro){
+                    return console.log(erro);
+                }
+            })
             res.json(user.profile[0]);
         }
         else {

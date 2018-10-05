@@ -13,10 +13,10 @@ router.use(function (req, res, next) {
     next();
 })
 
-router.use('/:name/profile', profileRouter);
+router.use('/:userName/profile', profileRouter);
 
-router.get('/:name', controller.getUser);
+router.get('/:userName', controller.getUser);
 
-router.get('/:name/info', controller.getInfo);
+router.get('/:userName/info', controller.getInfo);
 
 module.exports = router;

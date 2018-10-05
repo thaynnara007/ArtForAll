@@ -13,6 +13,9 @@ dataBase.once('open', function () {
 
 exports.getAll = function (req, res, next) {
 
+    res.json(cache.get("visitedProfile").userArts);
+
+    /*
     dataBase.collection('arts').find({}).toArray(function (err, arts) {
 
         if (err) {
@@ -22,7 +25,8 @@ exports.getAll = function (req, res, next) {
         };
 
         res.json(arts);
-    })
+    }) 
+    */
 }
 
 exports.getOne = function (req, res) {

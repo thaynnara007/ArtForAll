@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const controller = require('./ArtController');
+const controller = require('./ArtService');
 
 
 router.use(bodyParser.json());

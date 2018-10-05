@@ -4,6 +4,7 @@ const router = express.Router({ mergeParams: true });
 const artRouter = require('../art/ArtRoute');
 const favoriteRoute = require('../favorite/FavoriteRoute');
 const controller = require('./ProfileService');
+const cache = require('../cache/Cache');
 
 router.use(bodyParser.json());
 
@@ -13,6 +14,10 @@ router.use(function (req, res, next) {
 	next();
 });
 
+router.use(function(req, res, next){
+
+
+});
 router.use('/myarts', artRouter);
 router.use('/favorite', favoriteRoute);
 
