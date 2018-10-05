@@ -101,7 +101,7 @@ describe('GET/user', function(){
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.be.ofSize(3);
+				expect(res.body).to.be.ofSize(2);
 				done();
 			})
 			.catch(done);
@@ -116,9 +116,10 @@ describe('GET/user', function(){
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.have.property('name').to.equal("adventureTime");
-				expect(res.body).to.have.property('imgLink');
-				expect(res.body).to.have.property('tags').to.be.an('array');
+				expect(res.body).to.be.an('array').to.be.ofSize(1);
+				expect(res.body[0]).to.have.property('name').to.equal("adventureTime");
+				expect(res.body[0]).to.have.property('imgLink');
+				expect(res.body[0]).to.have.property('tags').to.be.an('array').to.be.ofSize(4);
 				done();
 			})
 			.catch(done)
@@ -132,10 +133,8 @@ describe('GET/user', function(){
 			.set('Accept', 'application/json')
 			.expect(404)
 			done();
-
 	})
 	
-
 	it('Test08: get/profile/favorite should returns all favorite arts from a user', function(done){
 
 		request(app)
@@ -183,7 +182,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test11: should returns one user's profile", (done) =>{
+	it("Test11: should returns one user's profile that is followed by another user", (done) =>{
 
 		request(app)
 

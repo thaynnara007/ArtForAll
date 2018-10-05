@@ -29,7 +29,7 @@ exports.getUser = function(req, res){
 
 exports.getInfo = function(req, res){
 
-    var userName = req.params.name;
+    var userName = req.params.userName;
     console.log(userName);
 
     User.User.findOne({ "userName": userName}, function(erro, user){
