@@ -2,15 +2,6 @@
 const mongoose = require('mongoose');
 //const cache = require('../cache/Cache');
 const userUtil = require('../util/user');
-mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
-
-/*
-var dataBase = mongoose.connection;
-dataBase.on('error', console.error.bind(console, 'connection error'));
-dataBase.once('open', function () {
-
-    console.log('we are connected');
-}); */
 
 exports.getAll = function (req, res, next) {
 
@@ -54,22 +45,6 @@ exports.getOne = function (req, res) {
             res.status(404).json('there is not a art with such name');
         }
     })
-
-    /*
-    var artName = req.params.name;
-
-    dataBase.collection('arts').findOne({ 'name': artName }, function (err, art) {
-
-        if (err) {
-
-            res.status(404).json('there is not a art with such name');
-            console.log(err);
-        }
-        else {
-
-            res.json(art);
-        }
-    }) */
 }
 
 exports.post = function (req, res) {

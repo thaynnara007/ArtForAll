@@ -1,15 +1,7 @@
 const profile = require('./ProfileModel');
-//const User = require('../user/UserModel');
 //const cache = require('../cache/Cache');
-//const mongoose = require('mongoose');
 const userUtil = require('../util/user');
 
-/*var dataBase = mongoose.connection;
-dataBase.on('error', console.error.bind(console, 'connection error'));
-dataBase.once('open', function () {
-
-    console.log('we are connected at ProfilleController');
-});*/
 
 exports.getProfile = function (req, res) {
 
