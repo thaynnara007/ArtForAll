@@ -1,7 +1,5 @@
 const User = require('../user/UserModel');
-const cache = require('../cache/Cache');
 const mongoose = require('mongoose');
-const tenMin = 600000;
 
 var dataBase = mongoose.connection;
 dataBase.on('error', console.error.bind(console, 'connection error'));

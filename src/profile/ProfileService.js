@@ -1,25 +1,36 @@
 const profile = require('./ProfileModel');
-//const cache = require('../cache/Cache');
+const cache = require('../cache/Cache');
 const userUtil = require('../util/user');
+const time = require('../util/Constants').tenMinutes;
 
 
 exports.getProfile = function (req, res) {
 
     var userName = req.params.userName;
 
-    userUtil.getUserProfile(userName, function(erro, userProfile){
+    var user_profile = cache.get(userName);
 
-        if(erro){
-            return console.log(erro);
-        }
-        else if(userProfile){
+    if (user_profile){
 
-            res.json(userProfile);
-        }
-        else{
-            res.status(400).json("There is not a user with this username");
-        }
-    })
+        res.json(user_profile);
+    }
+    else{
+
+        userUtil.getUserProfile(userName, function(erro, userProfile){
+
+            if(erro){
+                return console.log(erro);
+            }
+            else if(userProfile){
+
+                cache.put('userName', userProfile, time);
+                res.json(userProfile);
+            }
+            else{
+                res.status(400).json("There is not a user with this username");
+            }
+        })
+    }
 }
 
 exports.getFollowing = function (req, res) {
