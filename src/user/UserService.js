@@ -38,7 +38,7 @@ exports.getInfo = function(req, res){
             console.log(erro);
         }
         else if(user){
-            res.json(user.information);
+            res.json(user.information[0]);
         }
         else{
             res.status(404).json('there is not a user with this username');

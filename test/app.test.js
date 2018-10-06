@@ -129,7 +129,7 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/profile/myarts/time')
+			.get('/user/onlok/profile/myarts/time')
 			.set('Accept', 'application/json')
 			.expect(404)
 			done();
@@ -154,14 +154,15 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/miuda06/profile/favorite/erin')
+			.get('/user/miuda06/profile/favorite/Deku')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.have.property('name').to.equal('erin');
-				expect(res.body).to.have.property('imgLink');
-				expect(res.body).to.have.property('tags').to.be.an('array');
+				expect(res.body).to.be.an('array').to.be.ofSize(1);
+				expect(res.body[0]).to.have.property('name').to.equal('Deku');
+				expect(res.body[0]).to.have.property('imgLink');
+				expect(res.body[0]).to.have.property('tags').to.be.an('array').to.be.ofSize(5);
 				done();
 			})
 			.catch(done);

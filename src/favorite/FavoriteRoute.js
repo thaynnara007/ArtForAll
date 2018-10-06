@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const router = express.Router();
+const router = express.Router({ mergeParams:true });
 const controller = require('./FavoriteService');
 
 router.use(bodyParser.json());
@@ -18,7 +18,7 @@ router.get('/', controller.getAll);
 /**
 get a specific favorite art from a user
 */
-router.get('/:name', controller.getOne);
+router.get('/:artName', controller.getOne);
 /**
 add one favorite art
 */

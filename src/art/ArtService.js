@@ -1,4 +1,3 @@
-//const art = require('./ArtModel');
 const mongoose = require('mongoose');
 //const cache = require('../cache/Cache');
 const userUtil = require('../util/user');
@@ -39,10 +38,16 @@ exports.getOne = function (req, res) {
 
                 return art.name === artName;
             })
-            res.json(arts);
+        
+            if (arts != false){
+                res.json(arts);
+            }
+            else{
+                res.status(404).json("There is not a art with such name");
+            }
         }
         else{
-            res.status(404).json('there is not a art with such name');
+            res.status(404).json('there is not a user with this username');
         }
     })
 }

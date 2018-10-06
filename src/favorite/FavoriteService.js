@@ -1,44 +1,50 @@
-const art = require('../art/ArtModel');
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
-
-var dataBase = mongoose.connection;
-dataBase.on('error', console.error.bind(console, 'connection error'));
-dataBase.once('open', function () {
-
-    console.log('we are connected');
-});
+const userUtil = require("../util/user");
 
 exports.getAll = function (req, res, next) {
 
+    var userName = req.params.userName;
+    
+    userUtil.getUserProfile(userName, function(erro, userProfile){
 
-    dataBase.collection('favorite').find({}).toArray(function (err, favorites) {
+        if(erro){
+            return console.log(erro);
+        }
+        else if(userProfile){
 
-        if (err) {
-
-            res.status(404).json('You do not have any favorite art');
-            console.log(err);
-        } else {
-
+            var favorites = userProfile.userFavoritesArts
             res.json(favorites);
         }
+        else{
+            res.status(404).json('This user do not have any favorite art');
+        }
     })
-
 }
 
 exports.getOne = function (req, res) {
 
-    var artName = req.params.name;
+    var userName = req.params.userName;
+    var artName = req.params.artName;
 
-    dataBase.collection('favorite').findOne({ name: artName }, function (err, favorite) {
+    userUtil.getUserProfile(userName, function(erro, userProfile){
 
-        if (err) {
+        if(erro){
+            return console.log(erro);
+        }
+        else if(userProfile){
 
-            res.status(404).json("there is not a favorite art with such name");
-            console.log(err);
-        } else {
+            var favorites = userProfile.userFavoritesArts.filter(function(art){
 
-            res.json(favorite);
+                return art.name == artName;
+            })
+            if (favorites != false){
+                res.json(favorites);
+            }
+            else{
+                res.status(404).json("there is not a favorite art with such name");
+            }
+        }
+        else{
+            res.status(404).json("there is not a user with such name");
         }
     })
 }
