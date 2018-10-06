@@ -1,5 +1,7 @@
 const User = require('./UserModel');
 const mongoose = require('mongoose');
+const cache = require('../cache/Cache');
+const time = require('../util/Constants').tenMinutes;
 
 var dataBase = mongoose.connection;
 dataBase.on('error', console.error.bind(console, 'connection error'));
@@ -30,18 +32,28 @@ exports.getUser = function(req, res){
 exports.getInfo = function(req, res){
 
     var userName = req.params.userName;
-    console.log(userName);
+    var userInfo = cache.get(userName + "Info");
 
-    User.User.findOne({ "userName": userName}, function(erro, user){
+    if (userInfo){
+        res.json(userInfo);
+    }
+    else{
 
-        if(erro){
-            console.log(erro);
-        }
-        else if(user){
-            res.json(user.information[0]);
-        }
-        else{
-            res.status(404).json('there is not a user with this username');
-        }
-    })
+        User.User.findOne({ "userName": userName}, function(erro, user){
+
+            if(erro){
+                console.log(erro);
+            }
+            else if(user){
+
+                var info = user.information[0];
+                
+                cache.put(userName + "Info", info, time);
+                res.json(info);
+            }
+            else{
+                res.status(404).json('there is not a user with this username');
+            }
+        })
+    }
 }
