@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router({mergeParams : true});
-const controller = require('./ArtService');
+const service = require('./ArtService');
 
 router.use(bodyParser.json());
 
@@ -11,10 +11,10 @@ router.use(function (req, res, next) {
 	next();	
 });
 
-router.get('/', controller.getAll); 
+router.get('/', service.getAll); 
 
-router.get('/:artName', controller.getOne);
+router.get('/:artName', service.getOne);
 
-router.post('/', controller.post); 
+router.post('/', service.post); 
 
 module.exports = router;

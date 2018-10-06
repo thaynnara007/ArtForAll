@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const router = express.Router({ mergeParams: true });
 const artRouter = require('../art/ArtRoute');
 const favoriteRoute = require('../favorite/FavoriteRoute');
-const controller = require('./ProfileService');
+const service = require('./ProfileService');
 
 router.use(bodyParser.json());
 
@@ -16,12 +16,12 @@ router.use(function (req, res, next) {
 router.use('/myarts', artRouter);
 router.use('/favorite', favoriteRoute);
 
-router.get('/', controller.getProfile);
+router.get('/', service.getProfile);
 
-router.get('/following', controller.getFollowing);
+router.get('/following', service.getFollowing);
 
-router.get('/following/:name', controller.getFollowingUser);
+router.get('/following/:name', service.getFollowingUser);
 
-router.post('/following', controller.postFollowing);
+router.post('/following', service.postFollowing);
 
 module.exports = router;
