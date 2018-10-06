@@ -11,7 +11,6 @@ exports.getAll = function (req, res, next) {
     if(user_profile){
        
         var arts = user_profile.userArts;
-        console.log(arts);
         res.json(arts);
     }
     else{

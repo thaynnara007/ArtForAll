@@ -1,52 +1,82 @@
 const userUtil = require("../util/user");
+const time = require('../util/Constants').tenMinutes;
+const cache = require('../cache/Cache');
 
 exports.getAll = function (req, res, next) {
 
     var userName = req.params.userName;
-    
-    userUtil.getUserProfile(userName, function(erro, userProfile){
+    var user_profile = cache.get(userName);
 
-        if(erro){
-            return console.log(erro);
-        }
-        else if(userProfile){
+    if(user_profile){
 
-            var favorites = userProfile.userFavoritesArts
-            res.json(favorites);
-        }
-        else{
-            res.status(404).json('This user do not have any favorite art');
-        }
-    })
+        var favorites = user_profile.userFavoritesArts
+        res.json(favorites);
+    }
+    else{
+        
+        userUtil.getUserProfile(userName, function(erro, userProfile){
+
+            if(erro){
+                return console.log(erro);
+            }
+            else if(userProfile){
+
+                cache.put(userName, userProfile, time);
+                var favorites = userProfile.userFavoritesArts
+                res.json(favorites);
+            }
+            else{
+                res.status(404).json('This user do not have any favorite art');
+            }
+        })
+    }
 }
 
 exports.getOne = function (req, res) {
 
     var userName = req.params.userName;
     var artName = req.params.artName;
+    var user_profile = cache.get(userName);
 
-    userUtil.getUserProfile(userName, function(erro, userProfile){
+    if (user_profile){
 
-        if(erro){
-            return console.log(erro);
-        }
-        else if(userProfile){
+        var favorites = user_profile.userFavoritesArts.filter(function(art){
 
-            var favorites = userProfile.userFavoritesArts.filter(function(art){
-
-                return art.name == artName;
-            })
-            if (favorites != false){
-                res.json(favorites);
-            }
-            else{
-                res.status(404).json("there is not a favorite art with such name");
-            }
+            return art.name == artName;
+        })
+        if (favorites != false){
+            res.json(favorites);
         }
         else{
-            res.status(404).json("there is not a user with such name");
+            res.status(404).json("there is not a favorite art with such name");
         }
-    })
+    }
+    else{
+
+        userUtil.getUserProfile(userName, function(erro, userProfile){
+
+            if(erro){
+                return console.log(erro);
+            }
+            else if(userProfile){
+
+                cache.put(userName, userProfile, time);
+                var favorites = userProfile.userFavoritesArts.filter(function(art){
+
+                    return art.name == artName;
+                })
+                if (favorites != false){
+                    res.json(favorites);
+                }
+                else{
+                    res.status(404).json("there is not a favorite art with such name");
+                }
+            }
+            else{
+                res.status(404).json("there is not a user with such name");
+            }
+        })
+    }
 }
 
 exports.post = function (req, res) {
