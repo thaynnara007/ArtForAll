@@ -3,9 +3,14 @@ const mocha = require('mocha');
 const chai = require('chai');
 
 var expect = chai.expect;
-var should = chai.should();
 
 describe('Testing cache operations', () => {
+
+    it('Test00: should delete all keys from cache', () =>{
+
+        cache.deleteAll();
+        expect(cache.len()).to.equal(0);
+    })
 
     it('Test01: should returns the current number of entries in the cache', () =>{
 
