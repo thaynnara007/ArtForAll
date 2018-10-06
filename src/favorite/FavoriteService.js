@@ -1,6 +1,8 @@
 const userUtil = require("../util/user");
 const time = require('../util/Constants').tenMinutes;
 const cache = require('../cache/Cache');
+const OK = require('../util/Constants').OK_STATUS;
+const notFound = require('../util/Constants').NOT_FOUND_STATUS;
 
 exports.getAll = function (req, res, next) {
 
@@ -26,7 +28,7 @@ exports.getAll = function (req, res, next) {
                 res.json(favorites);
             }
             else{
-                res.status(404).json('This user do not have any favorite art');
+                res.status(notFound).json('This user do not have any favorite art');
             }
         })
     }
@@ -41,7 +43,6 @@ exports.getOne = function (req, res) {
     if (user_profile){
 
         var favorites = user_profile.userFavoritesArts.filter(function(art){
-
             return art.name == artName;
         })
         if (favorites != false){
@@ -62,18 +63,17 @@ exports.getOne = function (req, res) {
 
                 cache.put(userName, userProfile, time);
                 var favorites = userProfile.userFavoritesArts.filter(function(art){
-
                     return art.name == artName;
                 })
                 if (favorites != false){
                     res.json(favorites);
                 }
                 else{
-                    res.status(404).json("there is not a favorite art with such name");
+                    res.status(notFound).json("there is not a favorite art with such name");
                 }
             }
             else{
-                res.status(404).json("there is not a user with such name");
+                res.status(notFound).json("there is not a user with such name");
             }
         })
     }
@@ -83,5 +83,5 @@ exports.post = function (req, res) {
 
     // var favorite = new art.Art(req.body);
     // dataBase.collection('favorite').insert(favorite)
-    res.json(200);
+    res.json(OK);
 }

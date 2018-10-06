@@ -2,16 +2,16 @@ const profile = require('./ProfileModel');
 const cache = require('../cache/Cache');
 const userUtil = require('../util/user');
 const time = require('../util/Constants').tenMinutes;
+const OK = require('../util/Constants').OK_STATUS;
+const notFound = require('../util/Constants').NOT_FOUND_STATUS;
 
 
 exports.getProfile = function (req, res) {
 
     var userName = req.params.userName;
-
     var user_profile = cache.get(userName);
 
     if (user_profile){
-
         res.json(user_profile);
     }
     else{
@@ -27,7 +27,7 @@ exports.getProfile = function (req, res) {
                 res.json(userProfile);
             }
             else{
-                res.status(400).json("There is not a user with this username");
+                res.status(notFound).json("There is not a user with this username");
             }
         })
     }

@@ -1,11 +1,12 @@
 const cache = require('../cache/Cache');
 const userUtil = require('../util/user');
 const time = require('../util/Constants').tenMinutes;
+const OK = require('../util/Constants').OK_STATUS;
+const notFound = require('../util/Constants').NOT_FOUND_STATUS;
 
 exports.getAll = function (req, res, next) {
 
     var userName = req.params.userName;
-
     var user_profile = cache.get(userName);
 
     if(user_profile){
@@ -27,7 +28,7 @@ exports.getAll = function (req, res, next) {
                 res.json(arts);
             }
             else{
-                res.status(404).json('This user dont have any art');
+                res.status(notFound).json('This user dont have any art');
             }
        })
     }    
@@ -42,14 +43,13 @@ exports.getOne = function (req, res) {
     if(user_profile){
         
         var arts = user_profile.userArts.filter(function(art){
-
             return art.name == artName;
         })
         if(arts != false){
             res.json(arts);
         }
         else{
-            res.status(404).json("There is not a art with such name");
+            res.status(notFound).json("There is not a art with such name");
         }
     }
     else{
@@ -63,19 +63,17 @@ exports.getOne = function (req, res) {
 
                 cache.put(userName, userProfile, time);
                 arts = userProfile.userArts.filter(function(art){
-
                     return art.name === artName;
                 })
-            
                 if (arts != false){
                     res.json(arts);
                 }
                 else{
-                    res.status(404).json("There is not a art with such name");
+                    res.status(notFound).json("There is not a art with such name");
                 }
             }
             else{
-                res.status(404).json('there is not a user with this username');
+                res.status(notFound).json('there is not a user with this username');
             }
         })
     }
@@ -85,7 +83,7 @@ exports.post = function (req, res) {
 
     //var art = new art.Art(req.body);
     //dataBase.collection('arts').insert(art);    
-    res.status(200);
+    res.status(OK);
 }
 
 
