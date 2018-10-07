@@ -4,6 +4,7 @@ const cache = require('../cache/Cache');
 const time = require('../util/Constants').tenMinutes;
 const OK = require('../util/Constants').OK_STATUS;
 const notFound = require('../util/Constants').NOT_FOUND_STATUS;
+mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
 var dataBase = mongoose.connection;
 dataBase.on('error', console.error.bind(console, 'connection error'));
