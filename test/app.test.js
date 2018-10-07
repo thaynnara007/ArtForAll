@@ -83,7 +83,7 @@ describe('GET/user', function(){
 			.then((res) =>{
 
 				 expect(Promise.resolve(res.body)).to.eventually.have.property("userName").to.equal("onlok");
-				 expect(Promise.resolve(res.body)).to.eventually.have.property("following").to.equal(36);
+				 expect(Promise.resolve(res.body)).to.eventually.have.property("following").to.be.an('array');
 				 expect(Promise.resolve(res.body)).to.eventually.have.property("userArts");
 				 expect(Promise.resolve(res.body)).to.eventually.have.property("userFavoritesArts");
 				 done();

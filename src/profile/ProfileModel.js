@@ -30,15 +30,15 @@ profileSchema.methods.incrementFollowers = function(){
 }
 
 profileSchema.methods.decrementFollowers = function(){
-	this.followersNumber = this.followersNumber - 1;
+	if(this.followersNumber > 0) this.followersNumber = this.followersNumber - 1;
 }
 
-profileSchema.method.incrementFollowing = function(){
+profileSchema.methods.incrementFollowing = function(){
 	this.followingNumber = this.followingNumber + 1;
 }
 
 profileSchema.methods.decrementFollowing = function(){
-	this.followingNumber = this.followingNumber - 1;
+	if(this.followingNumber > 0) this.followingNumber = this.followingNumber - 1;
 }
 
 profileSchema.methods.addFollowers = function(userName, _id){
@@ -56,11 +56,21 @@ profileSchema.methods.addFollowers = function(userName, _id){
 
 profileSchema.methods.removeFollowers = function(userP_id){
 
-	this.followers.remove({"userP_id" : userP_id}, function(err0, item){
+	var newFollowers = [];
+	var found = false;
+	
+	this.followers.forEach(abstract => {
+		
+		if (abstract.userP_id !=userP_id ){
+			newFollowers.push(abstract);
+		}
+		else found = true;
 
-		if (erro) return console.log(erro);
+		if(found){ 
 
-		console.log(item + " removido como sucesso");
+			console.log("removido.")
+			this.followers = newFollowers;
+		}
 	})
 
 	this.decrementFollowers();
@@ -69,18 +79,27 @@ profileSchema.methods.removeFollowers = function(userP_id){
 profileSchema.methods.removeFollowing = function(userProfile){
 
 	userProfile.removeFollowers(this._id);
+	var newFollowings = [];
+	var found = false;
 
-	this.following.remove({"userP_id": userProfile._id}, function(erro){
+	this.following.forEach(abstract => {
+		
+		if (abstract.userP_id != userProfile._id){
+			newFollowings.push(abstract);
+		}
+		else found = true;
 
-		if (erro) return console.log(erro);
+		if(found){ 
 
-		console.log(item + " removido como sucesso");
+			console.log("removido.")
+			this.following = newFollowings;
+		}
 	})
 
 	this.decrementFollowing();
 }
 
-profileSchema.methods.addFolloweing = function(userProfile){
+profileSchema.methods.addFollowing = function(userProfile){
 
 	var abstract = new userAbstract.Abstract({
 
