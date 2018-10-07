@@ -2,7 +2,6 @@ const User = require('./UserModel');
 const mongoose = require('mongoose');
 const cache = require('../cache/Cache');
 const time = require('../util/Constants').tenMinutes;
-const OK = require('../util/Constants').OK_STATUS;
 const notFound = require('../util/Constants').NOT_FOUND_STATUS;
 mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
@@ -19,15 +18,9 @@ exports.getUser = function(req, res){
 
     User.User.findOne({ "userName":userName }, function(erro, user){
 
-        if(erro){
-             console.log(err);
-        }
-        else if (user){
-            res.json(user);
-        }
-        else{
-            res.status(notFound).json('there is not a user with this username');
-        }
+        if(erro)   console.log(err);
+        else if (user) res.json(user);
+        else res.status(notFound).json('there is not a user with this username');
     })
 }
 
@@ -36,25 +29,21 @@ exports.getInfo = function(req, res){
     var userName = req.params.userName;
     var userInfo = cache.get(userName + "Info");
 
-    if (userInfo){
-        res.json(userInfo);
-    }
+    if (userInfo)  res.json(userInfo);
+    
     else{
 
         User.User.findOne({ "userName": userName}, function(erro, user){
 
-            if(erro){
-                console.log(erro);
-            }
+            if(erro)  console.log(erro);
+            
             else if(user){
 
                 var info = user.information[0];
                 cache.put(userName + "Info", info, time);
                 res.json(info);
             }
-            else{
-                res.status(notFound).json('there is not a user with this username');
-            }
+            else  res.status(notFound).json('there is not a user with this username');
         })
     }
 }

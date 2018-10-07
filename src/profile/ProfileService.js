@@ -11,24 +11,20 @@ exports.getProfile = function (req, res) {
     var userName = req.params.userName;
     var user_profile = cache.get(userName);
 
-    if (user_profile){
-        res.json(user_profile);
-    }
+    if (user_profile)  res.json(user_profile);
+    
     else{
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro){
-                return console.log(erro);
-            }
+            if(erro)  return console.log(erro);
+            
             else if(userProfile){
 
                 cache.put(userName, userProfile, time);
                 res.json(userProfile);
             }
-            else{
-                res.status(notFound).json("There is not a user with this username");
-            }
+            else  res.status(notFound).json("There is not a user with this username");
         })
     }
 }
@@ -49,9 +45,8 @@ exports.getFollowing = function (req, res) {
 
             userUtil.getUserProfile(userName, function(erro, userProfile){
 
-                if(erro){
-                    return console.log(erro);
-                }
+                if(erro) return console.log(erro);
+                
                 else if(userProfile){
     
                     cache.put(userName, userProfile, time);
@@ -61,9 +56,7 @@ exports.getFollowing = function (req, res) {
                     })
                     res.json(names);
                 }
-                else{
-                    res.status(notFound).json("There is not a user with this username");
-                }
+                else  res.status(notFound).json("There is not a user with this username");
             })
         }
 }
@@ -79,7 +72,6 @@ exports.getFollowingUser = function (req, res) {
         var user = user_profile.following.filter(function(abstract){
             return abstract.profileName == name;
         })
-        
         if(user) res.json(user[0]);
         else res.status(notFound).json("There is not a user with this username");
     }

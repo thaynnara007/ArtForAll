@@ -221,4 +221,13 @@ describe('POST /profile operations', () =>{
 			.expect(200)
 			done();
 	}) 
+
+	it('Test02: should add a new user at another user following list', (done) =>{
+
+		request(app)
+
+			.post('/user/onlok/profile/following')
+			.expect(200)
+			done();
+	}) 
 })

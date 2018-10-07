@@ -18,18 +18,15 @@ exports.getAll = function (req, res, next) {
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro){
-                return console.log(erro);
-            }
+            if(erro) return console.log(erro);
+
             else if(userProfile){
 
                 var arts = userProfile.userArts;
                 cache.put(userName, userProfile, time);
                 res.json(arts);
             }
-            else{
-                res.status(notFound).json('This user dont have any art');
-            }
+            else res.status(notFound).json('This user dont have any art');
        })
     }    
 }
@@ -45,36 +42,25 @@ exports.getOne = function (req, res) {
         var arts = user_profile.userArts.filter(function(art){
             return art.name == artName;
         })
-        if(arts != false){
-            res.json(arts);
-        }
-        else{
-            res.status(notFound).json("There is not a art with such name");
-        }
+        if(arts != false) res.json(arts);
+        else res.status(notFound).json("There is not a art with such name");
     }
     else{
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro){
-                return console.log(erro);
-            }
+            if(erro) return console.log(erro);
+
             else if(userProfile){
 
                 cache.put(userName, userProfile, time);
                 arts = userProfile.userArts.filter(function(art){
                     return art.name === artName;
                 })
-                if (arts != false){
-                    res.json(arts);
-                }
-                else{
-                    res.status(notFound).json("There is not a art with such name");
-                }
+                if (arts != false) res.json(arts);
+                else  res.status(notFound).json("There is not a art with such name");
             }
-            else{
-                res.status(notFound).json('there is not a user with this username');
-            }
+            else  res.status(notFound).json('there is not a user with this username');
         })
     }
 }
