@@ -70,21 +70,40 @@ exports.getFollowing = function (req, res) {
 
 exports.getFollowingUser = function (req, res) {
 
+    var userName = req.params.userName;
     var name = req.params.name;
-    var userProfile = profile.getOneProfile(name);
+    var user_profile = cache.get(userName);
 
-    if (userProfile) {
-
-        res.json(userProfile[0]);
+    if(user_profile){
+    
+        var user = user_profile.following.filter(function(abstract){
+            return abstract.profileName == name;
+        })
+        
+        if(user) res.json(user[0]);
+        else res.status(notFound).json("There is not a user with this username");
     }
-    else {
+    else{
+       
+        userUtil.getUserProfile(userName, function(erro, userProfile){
 
-        res.status(404).json('You are not following this user');
+            if(erro) return console.log(erro);
+
+            else if(userProfile){
+
+                cache.put(userName, userProfile, time);
+                var user = userProfile.following.filter(function(abstract){
+                    return abstract.profileName == name;
+                })
+                res.json(user[0]);
+            }
+            else res.status(notFound).json("There is not a user with this username");
+        })
     }
 }
 
 exports.postFollowing = function (req, res) {
 
     var require = req.body;
-    res.send(JSON.stringify(require, null, 2));
+    res.status(OK).json(require);
 }

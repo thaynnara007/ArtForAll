@@ -189,13 +189,13 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/miud06/profile/following/onlok')
+			.get('/user/miuda06/profile/following/onlok')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.have.property('username').to.equal('onlok');
-				expect(res.body).to.have.property('following');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('profileName');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('userP_id');
 				done();
 			})
 			.catch(done);
