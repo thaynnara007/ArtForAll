@@ -1,14 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const userRouter = require('./user/UserRouter');
-
-
+const cors = require('cors');
 const app = express();
 
+app.use(cors());
 app.use(morgan("tiny"));
-
 app.use(express.static('../static'));
-
 app.use('/user', userRouter);
 
 //---------------------------------------------//
