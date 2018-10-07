@@ -172,12 +172,14 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/profile/following')
+			.get('/user/miuda06/profile/following')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{
 
-				expect(res.body).to.be.an('array');
+				expect(res.body).to.be.an('array').to.be.ofSize(2);
+				expect(res.body[0]).to.equals('onlok');
+				expect(res.body[1]).to.equals('Berkana');
 				done();
 			})
 			.catch(done);
@@ -187,7 +189,7 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/profile/following/onlok')
+			.get('/user/miud06/profile/following/onlok')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{
