@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router({ mergeParams:true });
 const service = require('./FavoriteService');
+const cors = require('cors');
 
 router.use(bodyParser.json());
 
@@ -14,14 +15,14 @@ router.use(function (req, res, next) {
 /**
 get all favorite arts from a user
 */
-router.get('/', service.getAll);
+router.get('/', cors(),service.getAll);
 /**
 get a specific favorite art from a user
 */
-router.get('/:artName', service.getOne);
+router.get('/:artName',cors(), service.getOne);
 /**
 add one favorite art
 */
-router.post('/', service.post);
+router.post('/',cors(), service.post);
 
 module.exports = router;
