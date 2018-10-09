@@ -9,7 +9,7 @@ var dataBase = mongoose.connection;
 dataBase.on('error', console.error.bind(console, 'connection error'));
 dataBase.once('open', function () {
 
-    console.log('we are connected at UserController');
+    console.log('we are connected at UserService');
 });
 
 exports.getUser = function(req, res){
