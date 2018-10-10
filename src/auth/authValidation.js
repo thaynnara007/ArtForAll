@@ -12,6 +12,16 @@ function validate(req, res, nex){
 
     var sections = authHeader.split(' ');
     if(sections.length != 2){
-        
+        return res.status(authorizationRequired).send({erro: "Token error"});
     }
+
+    jwt.verify(token, authS.secret, (err, decoded) =>{
+
+        if(err){
+            return res.status(authorizationRequired).send({erro: 'Token invalid'});
+        }
+        return next();
+    })
+
+     return null;
 }
