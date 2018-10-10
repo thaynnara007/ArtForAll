@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const passport = require('./passaport');
+const uuid = require('uuid')
+const passport = require('./passport');
 const BadRequest = require('../util/Constants').BAD_REQUEST;
 
 router.post('/login', function(req, res, next){
@@ -19,6 +20,11 @@ router.post('/login', function(req, res, next){
         req.login(user, {session: false}, (err) =>{
 
             if(err) res.send(err);
+
+            var secretKey = uuid.v4();
+            const token = jwt.sign(user, secretKey);
+
+            return res.json({user, token})
         })
-    })    
+    })(req,res);    
 })
