@@ -4,6 +4,8 @@ const router = express.Router();
 const service = require('./UserService');
 const profileRouter = require('../profile/ProfileRoute');
 const cors = require('cors');
+const passport = require('passport');
+const profileUserRouter = require('./profileUserRouter');
 
 router.use(bodyParser.json());
 
@@ -14,6 +16,7 @@ router.use(function (req, res, next) {
 })
 
 router.use('/:userName/profile', profileRouter);
+router.use('/profile', passport.authenticate('jwt',{session: false}), profileUserRouter);
 
 router.get('/:userName', cors(), service.getUser);
 
