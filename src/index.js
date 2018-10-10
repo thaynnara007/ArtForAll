@@ -4,13 +4,13 @@ const userRouter = require('./user/UserRouter');
 const cors = require('cors');
 const passport = require('./auth/passport');
 const app = express();
-const auth = require('./auth/Auth');
+const auth = require('./auth/AuthRoute');
 
 app.use(cors());
-app.use('/auth', auth);
 app.use(morgan("tiny"));
 app.use(express.static('../static'));
-app.use('/user', userRouter);
+app.use('/auth', auth);
+app.use('/user',passport.authenticate('jwt',{session: false}), userRouter);
 
 //---------------------------------------------//
 
