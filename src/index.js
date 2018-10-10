@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const userRouter = require('./user/UserRouter');
 const cors = require('cors');
+const passport = require('./auth/passaport');
 const app = express();
 
 app.use(cors());
