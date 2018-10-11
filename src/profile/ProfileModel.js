@@ -10,16 +10,17 @@ profileSchema.add({
 	_id: Schema.Types.ObjectId,
 	userName:{
 		type: String,
-		required: true,
-//		unique:true
+		required: true
 	},
 	following:[userAbstract.abstractSchema],
 	followingNumber:{
-		type:Number
+		type:Number,
+		default: 0
 	},
 	followers:[userAbstract.abstractSchema],
 	followersNumber:{
-		type:Number
+		type:Number,
+		default: 0
 	},
 	userArts:[art.artSchema],
 	userFavoritesArts:[art.artSchema]

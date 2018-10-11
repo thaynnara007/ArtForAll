@@ -24,9 +24,6 @@ app.post('/login', function(req, res) {
   res.json(req.body);
 })
 
-app.get('/login', (req, res) =>{
-
-	res.status(200).json({handle: "jonseba", senha:"*******"});
-})
+app.post('/singup',);
 
 module.exports = app;
