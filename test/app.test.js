@@ -231,3 +231,55 @@ describe('POST /profile operations', () =>{
 			done();
 	}) 
 })
+describe('Testing POST /singup operations', () =>{
+
+	it("Test01: it should respond with 201 created", (done) =>{
+
+		let data = {
+
+			'name': 'Jack',
+			'age': 17,
+			'userName': 'JackFromTest',
+			'email': 'jackFromTest@ccc.ufch.edu.br',
+			'password': 'jackFrost'
+		}
+
+		request(app)
+
+			.post('/singup')
+			.send(data)
+			.set('Acceptd', 'application/json')
+			.expect('Content-Type', /json/)
+			.expect(201)
+			.expect('"User registered"')
+			.end((err) =>{
+				if(err) return done(err);
+				done();
+			})
+	})
+
+	it("Test02: it should respond with 400 bad request", (done) =>{
+
+		let data = {
+
+			'name': 'Jack',
+			'age': 17,
+			'userName': 'JackFrommTest',
+			'password': 'jackFrostt'
+		}
+
+		request(app)
+
+			.post('/singup')
+			.send(data)
+			.set('Acceptd', 'application/json')
+			.expect('Content-Type', /json/)
+			.expect(400)
+			.expect('"User not created"')
+			.end((err) =>{
+				if(err) return done(err);
+				done();
+			})
+	})
+
+})
