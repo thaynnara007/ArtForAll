@@ -42,7 +42,7 @@ var profile3 = new profile.Profile({
     userFavoritesArts: []
 })
 
-describe('ProdileModel methods Test', function(){
+describe('ProfileModel methods Test', function(){
 
     it("Test01: it should increase user's followers in one ", function(){
 

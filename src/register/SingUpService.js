@@ -1,6 +1,3 @@
-const express = require('express');
-//const router = express.Router();
-//const bodyParser = require('body-parser');
 const Info = require('../info/InfoModel');
 const Profile = require('../profile/ProfileModel');
 const mongoose = require('mongoose');
@@ -9,16 +6,13 @@ const constants = require('../util/Constants');
 const CREATED = constants.CREATED;
 const BAD_REQUEST = constants.BAD_REQUEST; 
 
-//router.use(bodyParser.json());
-
-
 exports.singUp = function(req, res){
 
-	var name = req.name;
-	var age = req.age;
-	var userName = req.userName;
-	var email = req.email;
-	var password = req.password;
+	var name = req.body.name;
+	var age = req.body.age;
+	var userName = req.body.userName;
+	var email = req.body.email;
+	var password = req.body.password;
 
 	var info = new Info.Info({
         
@@ -47,13 +41,12 @@ exports.singUp = function(req, res){
         timeLine: []
     })
 
-    if( newUser ){
-
-        newUser.save(function(err){
-            if(err) return console.log(err);
-        })
-
-        res.status(CREATED).json('User registered');
-    }
-    else res.status(BAD_REQUEST).json('User not created');
+    newUser.save(function(err){
+        if(err){ 
+                
+            console.log(err);
+            res.status(BAD_REQUEST).json('User not created');
+        }
+        else res.status(CREATED).json('User registered');
+    })
 }
