@@ -13,19 +13,9 @@ app.use('/auth', auth);
 app.use('/user', userRouter);
 app.use('/singup', singUpRoute );
 
-//---------------------------------------------//
-
-
 app.get('/', (req, res) =>{
 
 	res.json('Welcome to ArtForAll');
 })
-
-app.post('/login', function(req, res) {
-  
-  res.json(req.body);
-})
-
-app.post('/singup',);
 
 module.exports = app;
