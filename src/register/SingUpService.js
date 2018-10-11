@@ -1,15 +1,18 @@
 const express = require('express');
-const router = express.Router();
-const bodyParser = require('body-parser');
+//const router = express.Router();
+//const bodyParser = require('body-parser');
 const Info = require('../info/InfoModel');
 const Profile = require('../profile/ProfileModel');
 const mongoose = require('mongoose');
 const User = require('../user/UserModel');
-const OK = require('../util/Constants').OK_STATUS;
+const constants = require('../util/Constants');
+const CREATED = constants.CREATED;
+const BAD_REQUEST = constants.BAD_REQUEST; 
 
-router.use(bodyParser.json());
+//router.use(bodyParser.json());
 
-router.post('/singup', (req, res) =>{
+
+exports.singUp = function(req, res){
 
 	var name = req.name;
 	var age = req.age;
@@ -44,9 +47,13 @@ router.post('/singup', (req, res) =>{
         timeLine: []
     })
 
-    newUser.save(function(err){
-        if(err) return console.log(err);
-    })
+    if( newUser ){
 
-    res.status(OK).json('User registered');
-})
+        newUser.save(function(err){
+            if(err) return console.log(err);
+        })
+
+        res.status(CREATED).json('User registered');
+    }
+    else res.status(BAD_REQUEST).json('User not created');
+}
