@@ -53,4 +53,4 @@ exports.login =  function(req, res){
     })(req,res);    
 })
  */
-module.exports = router;
+//module.exports = router;
