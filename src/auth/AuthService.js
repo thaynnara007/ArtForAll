@@ -26,7 +26,7 @@ exports.login =  function(req, res){
 
         else {
 
-            console.log(user.information[0].email);
+          //  console.log(user.information.email);
             res.status(200).send({
 
             user,

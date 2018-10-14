@@ -9,13 +9,13 @@ const profileUserRouter = require('./profileUserRouter');
 const authValidation = require('../auth/authValidation');
 
 router.use(bodyParser.json());
-//router.use(authValidation);
-
+router.use(authValidation);
+/*
 router.use(function (req, res, next) {
 
     res.setHeader('Content-Type', 'application/json');
     next();
-})
+})*/
 
 router.use('/:userName/profile', profileRouter);
 //router.use('/profile', passport.authenticate('jwt',{session: false}), profileUserRouter);
