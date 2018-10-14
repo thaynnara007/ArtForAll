@@ -36,9 +36,13 @@ exports.singUp = function(req, res){
     var newUser = new User.User({
 
         userName: userName,
-        information: [info],
-        profile: [profile],
+        information: info,
+        profile: profile,
         timeLine: []
+    })
+
+    profile.save(function(err){
+        if(err) return console.log(err)
     })
 
     newUser.save(function(err){

@@ -31,3 +31,5 @@ function validate(req, res, nex){
 
     return null;
 }
+
+module.exports = validate;

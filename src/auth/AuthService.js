@@ -14,17 +14,25 @@ exports.login =  function(req, res){
     var email = req.body.email;
     var password = req.body.password;
 
-    User.User.findOne({'information.email': email, 'informatioin.password': password}, function(err, user){
+    //console.log(email);
+    //console.log(password);
+    //'information[0].email': email, 'information[0].password': password
+
+    User.User.findOne({'information.email': 'tatamiuda06@gmail.com'}, function(err, user){
 
         if(err) return console.log(err);
 
         else if(!user) res.status(NOT_FOUND).json("email or password invalid");
 
-        else res.send({
+        else {
+
+            console.log(user.information[0].email);
+            res.status(200).send({
 
             user,
             token: jwtToken.generateToken({id: user.id})
         })
+    }
     })
 
 }

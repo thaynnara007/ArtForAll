@@ -39,7 +39,7 @@ exports.getInfo = function(req, res){
             
             else if(user){
 
-                var info = user.information[0];
+                var info = user.information;
                 cache.put(userName + "Info", info, time);
                 res.json(info);
             }
@@ -47,3 +47,6 @@ exports.getInfo = function(req, res){
         })
     }
 }
+
+
+

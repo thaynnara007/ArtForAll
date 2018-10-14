@@ -9,13 +9,20 @@ const expect = chai.expect;
 chai.use(chaiAsPromised)
 chai.use(assertArrays);
 
-describe('GET/ login', function(){
+describe('/ login', function(){
 
-	it('Test01: responds with json', function(done){
+	let data = {
+
+		'email': 'tatamiuda06@gmail.com',
+		'password': 'bubabua'
+	}
+
+	it('Test01: it should made login in the system', function(done){
 		
 		request(app)
 		
-			.get('/login')
+			.post('/login')
+			.send(data)
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.end(function(err, res){
