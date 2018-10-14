@@ -6,3 +6,5 @@ var service = require('./AuthService');
 router.use(bodyParser.json());
 
 router.post('/', service.login);
+
+module.exports = router;
