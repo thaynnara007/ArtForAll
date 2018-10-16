@@ -9,8 +9,8 @@ var userSchema = new Schema({
     userName:{
         type: String
     },
-    information:[info.infoSchema],
-    profile:[profile.profileSchema],
+    information:info.infoSchema,
+    profile: profile.profileSchema,
     timeLine:[art.artSchema]
 })
 

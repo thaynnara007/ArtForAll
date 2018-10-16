@@ -17,7 +17,7 @@ exports.getUserProfile = function(userName, callback){
         }
         else if(user){
 
-            profile = user.profile[0];
+            profile = user.profile;
             callback(null, profile);
             }        
     })

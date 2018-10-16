@@ -9,7 +9,7 @@ const singUpRoute = require('./register/SingUpRoute');
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.static('../static'));
-app.use('/auth', auth);
+app.use('/login', auth);
 app.use('/user', userRouter);
 app.use('/singup', singUpRoute );
 

@@ -1,32 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const jwt = require("jsonwebtoken");
-const passport = require('./passport');
-const BadRequest = require('../util/Constants').BAD_REQUEST;
-const authS = require('./authSecret.json');
-const utilToken = require('../util/jwtToken');
+var express = require('express');
+var router = express.Router();
+var bodyParser = require('body-parser');
+var service = require('./AuthService');
 
-router.post('/login', function(req, res, next){
+router.use(bodyParser.json());
 
-    passport.authenticate('local', { session: false }, (err, user, info) =>{
-
-        if(err || !user){
-
-            return res.status(BadRequest).json({
-                message: 'Something got wrong',
-                user: user
-            });
-        }
-
-        req.login(user, {session: false}, (err) =>{
-
-            if(err) res.send(err);
-
-            const token = utilToken.generateToken(user, authS.secret);
-
-            return res.json({user, token})
-        })
-    })(req,res);    
-})
+router.post('/', service.login);
 
 module.exports = router;
