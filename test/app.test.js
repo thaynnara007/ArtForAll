@@ -289,4 +289,27 @@ describe('Testing POST /singup operations', () =>{
 			})
 	})
 
+	it("Test03: it should deletes one user", function(done){
+
+		let data = {
+
+			email: 'jackFromTest@ccc.ufch.edu.br',
+			password: 'jackFrost'
+		}
+
+		request(app)
+
+			.delete('/user')
+			.send(data)
+			.set('Acceptd', 'application/json')
+			.expect('Content-Type', /json/)
+			.expect(200)
+			.expect('"User was deleted"')
+			.end((err) =>{
+
+				if(err) return done(err)
+				done();
+			})	
+	})
+
 })

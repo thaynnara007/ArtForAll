@@ -1,7 +1,9 @@
 const User = require('./UserModel');
 const mongoose = require('mongoose');
 const cache = require('../cache/Cache');
-const time = require('../util/Constants').tenMinutes;
+const constants = require('../util/Constants');
+const time = constants.tenMinutes;
+const OK = constants.OK_STATUS;
 const notFound = require('../util/Constants').NOT_FOUND_STATUS;
 mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
@@ -46,6 +48,24 @@ exports.getInfo = function(req, res){
             else  res.status(notFound).json('there is not a user with this username');
         })
     }
+}
+
+exports.deleteUser = function(req, res){
+
+    var email = req.body.email;
+    var password = req.body.password;
+
+    console.log(email);
+    console.log(password);
+
+    User.User.deleteOne({'information.email': email, 'information.password': password }, function(err){
+
+        if (err) return console.log(err);
+
+        res.status(OK).json('User was deleted');
+    })
+
+
 }
 
 

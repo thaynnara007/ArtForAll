@@ -15,9 +15,8 @@ router.use(function (req, res, next) {
 })
 
 router.use('/:userName/profile', profileRouter);
-
 router.get('/:userName', cors(), service.getUser);
-
 router.get('/:userName/info', cors(), service.getInfo);
+router.delete('/', service.deleteUser);
 
 module.exports = router;

@@ -8,25 +8,25 @@ const BAD_REQUEST = constants.BAD_REQUEST;
 
 exports.singUp = function(req, res){
 
-	var name = req.body.name;
-	var age = req.body.age;
-	var userName = req.body.userName;
-	var email = req.body.email;
-	var password = req.body.password;
+	var newName = req.body.name;
+	var newAge = req.body.age;
+	var newUserName = req.body.userName;
+	var newEmail = req.body.email;
+	var newPassword = req.body.password;
 
 	var info = new Info.Info({
         
-        name: name,
-        age: age,
-        userName: userName,
-        email: email,
-        password: password
+        name: newName,
+        age: newAge,
+        userName: newUserName,
+        email: newEmail,
+        password: newPassword
     })
 
     var profile = new Profile.Profile({
 
         _id: mongoose.Types.ObjectId(),
-        userName: userName,
+        userName: newUserName,
         following: [],
         followers: [],
         userArts: [],
@@ -35,7 +35,7 @@ exports.singUp = function(req, res){
 
     var newUser = new User.User({
 
-        userName: userName,
+        userName: newUserName,
         information: info,
         profile: profile,
         timeLine: []
