@@ -14,11 +14,7 @@ exports.login =  function(req, res){
     var email = req.body.email;
     var password = req.body.password;
 
-    //console.log(email);
-    //console.log(password);
-    //'information[0].email': email, 'information[0].password': password
-
-    User.User.findOne({'information.email': 'tatamiuda06@gmail.com'}, function(err, user){
+    User.User.findOne({'information.email': email, 'information.password': password}, function(err, user){
 
         if(err) return console.log(err);
 
@@ -26,7 +22,6 @@ exports.login =  function(req, res){
 
         else {
 
-          //  console.log(user.information.email);
             res.status(200).send({
 
             user,
@@ -36,29 +31,3 @@ exports.login =  function(req, res){
     })
 
 }
-
-
-/*
-
-    passport.authenticate('local', { session: false }, (err, user, info) =>{
-
-        if(err || !user){
-
-            return res.status(BadRequest).json({
-                message: 'Something got wrong',
-                user: user
-            });
-        }
-
-        req.login(user, {session: false}, (err) =>{
-
-            if(err) res.send(err);
-
-            const token = jwt.sign(user, authS.secret);
-
-            return res.json({user, token})
-        })
-    })(req,res);    
-})
- */
-//module.exports = router;

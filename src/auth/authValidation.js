@@ -8,19 +8,19 @@ function validate(req, res, nex){
     console.log(req.headers);
 
     if(!authHeader){
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        
         return res.status(AuthorizationRequired).send({error: 'No token provider'});
     }
 
-    var sections = authHeader.split(' ');
+    var sections = authHeader.split('.');
     if(sections.length != 2){
-        console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+        
         return res.status(AuthorizationRequired).send({error: 'Token error'});
     }
 
     const [scheme, token] = sections;
     if(!/^Bearer$/i.test(scheme)){
-        console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+        
         return res.status(AuthorizationRequired).send({error: 'Token malformatted'});
     }
 
