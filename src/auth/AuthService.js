@@ -1,11 +1,5 @@
-//const express = require('express');
-//const router = express.Router();
-//const jwt = require("jsonwebtoken");
-//const passport = require('./passport');
 const Constants = require('../util/Constants')
-//const BAD_REQUEST = Constants.BAD_REQUEST;
 const NOT_FOUND = Constants.NOT_FOUND_STATUS;
-//const authS = require('./authSecret.json');
 const User = require('../user/UserModel');
 const jwtToken = require('../util/jwtToken');
 
