@@ -65,7 +65,7 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/miuda06/info')
+			.get('/user/me/info')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -80,6 +80,17 @@ describe('GET/user', function(){
 			})
 			.catch(done);
 	})
+	it("Test04: should return 401 Unauthorized", (done) =>{
+
+		request(app)
+
+			.get('/user/miuda06/info')
+			.set('Accept', 'application/json')
+			.expect(401)
+			.expect("'You do not have permission for it'")
+			done();
+	})
+
 	it("Test04: should returns a user's profile", (done) =>{
 
 		request(app)

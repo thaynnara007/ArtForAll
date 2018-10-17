@@ -23,3 +23,12 @@ exports.getUserProfile = function(userName, callback){
     })
 
 }
+
+exports.getUserProfileById = function (id, callback) {
+
+    User.User.findById(id, function (err, user) {
+
+        if (err) callback(err, null)
+        else callback(null, user.profile)
+    })
+}

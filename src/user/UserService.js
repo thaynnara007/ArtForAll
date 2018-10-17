@@ -4,6 +4,7 @@ const cache = require('../cache/Cache');
 const constants = require('../util/Constants');
 const time = constants.tenMinutes;
 const OK = constants.OK_STATUS;
+const notAuthorized = constants.Authorization_Required;
 const notFound = require('../util/Constants').NOT_FOUND_STATUS;
 mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
@@ -29,34 +30,38 @@ exports.getUser = function(req, res){
 exports.getInfo = function(req, res){
 
     var userName = req.params.userName;
-    var userInfo = cache.get(userName + "Info");
 
-    if (userInfo)  res.json(userInfo);
-    
-    else{
+    if( userName === "me"){
 
-        User.User.findOne({ "userName": userName}, function(erro, user){
+        var userInfo = cache.get(userName + "Info");
+        var userId = req.userId;
+      //  var userId = mongoose.Types.ObjectId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
-            if(erro)  console.log(erro);
-            
-            else if(user){
+        if (userInfo)  res.json(userInfo);
+        
+        else{
 
-                var info = user.information;
-                cache.put(userName + "Info", info, time);
-                res.json(info);
-            }
-            else  res.status(notFound).json('there is not a user with this username');
-        })
+            User.User.findById(userId, function(erro, user){
+
+                if(erro)  console.log(erro);
+                
+                else if(user){
+
+                    var info = user.information;
+                    cache.put(userName + "Info", info, time);
+                    res.json(info);
+                }
+                else  res.status(notAuthorized).json('You do not have permission for it');
+            })
+        }
     }
+    else  res.status(notAuthorized).json('You do not have permission for it');
 }
 
 exports.deleteUser = function(req, res){
 
     var email = req.body.email;
     var password = req.body.password;
-
-    console.log(email);
-    console.log(password);
 
     User.User.deleteOne({'information.email': email, 'information.password': password }, function(err){
 
