@@ -32,3 +32,7 @@ exports.getUserProfileById = function (id, callback) {
         else callback(null, user.profile)
     })
 }
+
+exports.generateId = function(id){
+    return mongoose.Types.ObjectId(id);
+}

@@ -41,16 +41,18 @@ exports.singUp = function(req, res){
         timeLine: []
     })
 
-    profile.save(function(err){
-        if(err) return console.log(err)
-    })
-
     newUser.save(function(err){
         if(err){ 
                 
             console.log(err);
             res.status(BAD_REQUEST).json('User not created');
         }
-        else res.status(CREATED).json('User registered');
+        else {
+
+            profile.save(function(err){
+                if(err) return console.log(err)
+            }) 
+            res.status(CREATED).json('User registered');
+        }
     })
 }

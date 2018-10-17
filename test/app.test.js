@@ -91,7 +91,7 @@ describe('GET/user', function(){
 			done();
 	})
 
-	it("Test04: should returns a user's profile", (done) =>{
+	it("Test05: should returns a user's profile", (done) =>{
 
 		request(app)
 
@@ -104,13 +104,32 @@ describe('GET/user', function(){
 				 expect(Promise.resolve(res.body)).to.eventually.have.property("following").to.be.an('array');
 				 expect(Promise.resolve(res.body)).to.eventually.have.property("userArts");
 				 expect(Promise.resolve(res.body)).to.eventually.have.property("userFavoritesArts");
+				 expect(Promise.resolve(res.body)).to.eventually.have.property('followers').to.be.an('array');
 				 done();
 			})
-			.catch(done);
-			
+			.catch(done);	
 	})
 
-	it('Test05: get user/profile/myarts should returns all arts from a user', function(done){
+	it("Test06: should return the logged user profile", (done) =>{
+
+		request(app)
+
+			.get('/user/me/profile')
+			.set('Accept', 'application/json/')
+			.expect(200)
+			.then((res) =>{
+
+				expect(Promise.resolve(res.body)).to.eventually.have.property("userName").to.equal("miuda06");
+				expect(Promise.resolve(res.body)).to.eventually.have.property("following").to.be.an('array');
+				expect(Promise.resolve(res.body)).to.eventually.have.property("userArts");
+				expect(Promise.resolve(res.body)).to.eventually.have.property("userFavoritesArts");
+				expect(Promise.resolve(res.body)).to.eventually.have.property('followers').to.be.an('array');
+				done();
+			})
+			.catch(done)
+	})
+
+	it('Test07: get user/profile/myarts should returns all arts from a user', function(done){
 
 		request(app)
 
@@ -125,7 +144,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test06: get profile/arts/:name should returns a art from a user', function(done){
+	it('Test08: get profile/arts/:name should returns a art from a user', function(done){
 
 		request(app)
 
@@ -143,7 +162,7 @@ describe('GET/user', function(){
 			.catch(done)
 	})
 
-	it('Test07: get profile/arts/:name should not returns a art from a user', function(done){
+	it('Test09: get profile/arts/:name should not returns a art from a user', function(done){
 
 		request(app)
 
@@ -153,7 +172,7 @@ describe('GET/user', function(){
 			done();
 	})
 	
-	it('Test08: get/profile/favorite should returns all favorite arts from a user', function(done){
+	it('Test010: get/profile/favorite should returns all favorite arts from a user', function(done){
 
 		request(app)
 
@@ -321,6 +340,6 @@ describe('Testing POST /singup operations', () =>{
 				if(err) return done(err)
 				done();
 			})	
-	})
+	}) 
 
 })

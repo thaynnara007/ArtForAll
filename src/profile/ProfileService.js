@@ -13,7 +13,7 @@ exports.getProfile = function (req, res) {
 
     if (user_profile)  res.json(user_profile);
     
-    else{
+    else if( userName != "me"){
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
@@ -25,6 +25,21 @@ exports.getProfile = function (req, res) {
                 res.json(userProfile);
             }
             else  res.status(notFound).json("There is not a user with this username");
+        })
+    }
+    else{
+        
+    //   var userId = req.userId;
+        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+
+        userUtil.getUserProfileById(userId, function(err, profile){
+
+            if(err) console.log(err)
+            else{
+
+                cache.put(userName, profile, time);
+                res.json(profile);
+            }
         })
     }
 }
@@ -41,7 +56,7 @@ exports.getFollowing = function (req, res) {
             })
             res.json(names);
         }
-        else{
+        else if(userName != "me"){
 
             userUtil.getUserProfile(userName, function(erro, userProfile){
 
@@ -57,6 +72,26 @@ exports.getFollowing = function (req, res) {
                     res.json(names);
                 }
                 else  res.status(notFound).json("There is not a user with this username");
+            })
+        }
+        else{
+            
+           // var userId = req.userId;
+            var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+            
+            userUtil.getUserProfileById(userId, function(err, profile){
+
+                if(err) console.log(err)
+                else{
+
+                    cache.put(userName, profile, time);
+
+                    var names = profile.following.map(function(abstract){
+                        return abstract.profileName;
+                    })
+
+                    res.json(names);
+                }
             })
         }
 }

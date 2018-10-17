@@ -1,4 +1,5 @@
 const User = require('./UserModel');
+const Profile = require('../profile/ProfileModel');
 const mongoose = require('mongoose');
 const cache = require('../cache/Cache');
 const constants = require('../util/Constants');
@@ -34,8 +35,8 @@ exports.getInfo = function(req, res){
     if( userName === "me"){
 
         var userInfo = cache.get(userName + "Info");
-        var userId = req.userId;
-      //  var userId = mongoose.Types.ObjectId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+      //  var userId = req.userId;
+        var userId = mongoose.Types.ObjectId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
         if (userInfo)  res.json(userInfo);
         
@@ -62,6 +63,19 @@ exports.deleteUser = function(req, res){
 
     var email = req.body.email;
     var password = req.body.password;
+
+    User.User.findOne({'information.email': email, 'information.password': password }, function(err, user){
+
+        if(err) return console.log(err)
+        else {
+            
+            var profileId = user.profile._id;
+
+            Profile.Profile.deleteOne({_id: profileId}, function(err){
+                if (err) return console.log(err);
+            })
+        }
+    })
 
     User.User.deleteOne({'information.email': email, 'information.password': password }, function(err){
 
