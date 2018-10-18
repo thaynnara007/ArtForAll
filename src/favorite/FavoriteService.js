@@ -14,7 +14,7 @@ exports.getAll = function (req, res, next) {
         var favorites = user_profile.userFavoritesArts
         res.json(favorites);
     }
-    else{
+    else if(userName != "me"){
         
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
@@ -27,6 +27,21 @@ exports.getAll = function (req, res, next) {
                 res.json(favorites);
             }
             else  res.status(notFound).json('This user do not have any favorite art');
+        })
+    }
+    else{
+
+    //  var userId = req.userId;
+        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+
+        userUtil.getUserProfileById(userId, function(err, profile){
+
+            if(err) console.log(err)
+            else{
+
+                cache.put(userName, profile, time);
+                res.json(profile.userFavoritesArts);
+            }
         })
     }
 }
@@ -43,11 +58,10 @@ exports.getOne = function (req, res) {
             return art.name == artName;
         })
         if (favorites != false)  res.json(favorites);
-        
         else res.status(404).json("there is not a favorite art with such name");
         
     }
-    else{
+    else if(userName != "me"){
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
@@ -60,10 +74,28 @@ exports.getOne = function (req, res) {
                     return art.name == artName;
                 })
                 if (favorites != false)  res.json(favorites);
-                
                 else  res.status(notFound).json("there is not a favorite art with such name");  
             }
             else res.status(notFound).json("there is not a user with such name");
+        })
+    }
+    else{
+
+    //  var userId = req.userId;
+        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+
+        userUtil.getUserProfileById(userId, function(err, profile){
+
+            if(err) console.log(err);
+            else{
+
+                cache.put(userName, profile, time);
+                var favorites = profile.userFavoritesArts.filter(function(art){
+                    return art.name === artName;
+                })
+                if (favorites != false)  res.json(favorites);
+                else  res.status(notFound).json("there is not a favorite art with such name");
+            }
         })
     }
 }

@@ -209,7 +209,22 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/onlok/profile/favorite')
+			.get('/user/me/profile/favorite')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.then((res) =>{
+
+				expect(res.body).to.be.an('array').to.be.ofSize(2);
+				done();
+			})
+			.catch(done);
+	})
+
+	it('Test013: get/profile/favorite should returns all favorite arts from the logged user', function(done){
+
+		request(app)
+
+			.get('/user/me/profile/favorite')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -220,11 +235,29 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test13: should returns one favorite art from a user', (done) =>{
+	it('Test14: should returns one favorite art from a user', (done) =>{
 
 		request(app)
 
-			.get('/user/miuda06/profile/favorite/Deku')
+			.get('/user/Berkana/profile/favorite/Bubbline')
+			.set('Accept', 'application/json/')
+			.expect(200)
+			.then((res) =>{
+
+				expect(res.body).to.be.an('array').to.be.ofSize(1);
+				expect(res.body[0]).to.have.property('name').to.equal('Bubbline');
+				expect(res.body[0]).to.have.property('imgLink');
+				expect(res.body[0]).to.have.property('tags').to.be.an('array').to.be.ofSize(3);
+				done();
+			})
+			.catch(done);
+	}) 
+
+	it('Test15: should returns one favorite art from the logged user', (done) =>{
+
+		request(app)
+
+			.get('/user/me/profile/favorite/Deku')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{
@@ -238,7 +271,7 @@ describe('GET/user', function(){
 			.catch(done);
 	}) 
 
-	it('Test14: should returns the users following by one user ', (done) =>{
+	it('Test16: should returns the users following by one user ', (done) =>{
 
 		request(app)
 
@@ -255,7 +288,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test15: should returns one user's profile that is followed by another user", (done) =>{
+	it("Test17: should returns one user's profile that is followed by another user", (done) =>{
 
 		request(app)
 
@@ -271,7 +304,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test16: should returns the users following by the logged user ', (done) =>{
+	it('Test18: should returns the users following by the logged user ', (done) =>{
 
 		request(app)
 
@@ -288,7 +321,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test17: should returns one user's profile that is followed by the logged user", (done) =>{
+	it("Test19: should returns one user's profile that is followed by the logged user", (done) =>{
 
 		request(app)
 
