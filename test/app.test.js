@@ -133,7 +133,22 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/miuda06/profile/myarts')
+			.get('/user/onlok/profile/myarts')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.then((res) =>{
+
+				expect(res.body).to.be.ofSize(1);
+				done();
+			})
+			.catch(done);
+	})
+
+	it('Test08: get user/profile/myarts should returns all arts from the logged user', function(done){
+
+		request(app)
+
+			.get('/user/me/profile/myarts')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -144,11 +159,29 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test08: get profile/arts/:name should returns a art from a user', function(done){
+	it('Test09: get profile/arts/:name should returns a art from a user', function(done){
 
 		request(app)
 
-			.get('/user/miuda06/profile/myarts/adventureTime')
+			.get('/user/Berkana/profile/myarts/erin')
+			.set('Accept', 'application/json')
+			.expect(200)
+			.then((res) =>{
+
+				expect(res.body).to.be.an('array').to.be.ofSize(1);
+				expect(res.body[0]).to.have.property('name').to.equal("erin");
+				expect(res.body[0]).to.have.property('imgLink');
+				expect(res.body[0]).to.have.property('tags').to.be.an('array').to.be.ofSize(5);
+				done();
+			})
+			.catch(done)
+	})
+
+	it('Test10: get profile/arts/:name should returns a art from the logged user', function(done){
+
+		request(app)
+
+			.get('/user/me/profile/myarts/adventureTime')
 			.set('Accept', 'application/json')
 			.expect(200)
 			.then((res) =>{
@@ -162,7 +195,7 @@ describe('GET/user', function(){
 			.catch(done)
 	})
 
-	it('Test09: get profile/arts/:name should not returns a art from a user', function(done){
+	it('Test11: get profile/arts/:name should not returns a art from a user', function(done){
 
 		request(app)
 
@@ -172,7 +205,7 @@ describe('GET/user', function(){
 			done();
 	})
 	
-	it('Test010: get/profile/favorite should returns all favorite arts from a user', function(done){
+	it('Test012: get/profile/favorite should returns all favorite arts from a user', function(done){
 
 		request(app)
 
@@ -187,7 +220,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test09: should returns one favorite art from a user', (done) =>{
+	it('Test13: should returns one favorite art from a user', (done) =>{
 
 		request(app)
 
@@ -205,7 +238,7 @@ describe('GET/user', function(){
 			.catch(done);
 	}) 
 
-	it('Test10: should returns the users following by one user ', (done) =>{
+	it('Test14: should returns the users following by one user ', (done) =>{
 
 		request(app)
 
@@ -222,7 +255,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test11: should returns one user's profile that is followed by another user", (done) =>{
+	it("Test15: should returns one user's profile that is followed by another user", (done) =>{
 
 		request(app)
 
@@ -238,7 +271,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test12: should returns the users following by one user ', (done) =>{
+	it('Test16: should returns the users following by the logged user ', (done) =>{
 
 		request(app)
 
@@ -255,7 +288,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test13: should returns one user's profile that is followed by another user", (done) =>{
+	it("Test17: should returns one user's profile that is followed by the logged user", (done) =>{
 
 		request(app)
 

@@ -87,7 +87,6 @@ exports.getFollowing = function (req, res) {
                     var names = profile.following.map(function(abstract){
                         return abstract.profileName;
                     })
-
                     res.json(names);
                 }
             })
@@ -136,9 +135,9 @@ exports.getFollowingUser = function (req, res) {
             if(err) console.log(err);
             else{
 
-                cache.put(userName, userProfile, time);
+                cache.put(userName, profile, time);
                 var user = profile.following.filter(function(abstract){
-                    return abstract.profileName == name;
+                    return abstract.profileName === name;
                 })
                 
                 res.json(user[0]);
