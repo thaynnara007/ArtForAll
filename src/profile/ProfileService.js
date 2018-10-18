@@ -1,10 +1,8 @@
-const profile = require('./ProfileModel');
 const cache = require('../cache/Cache');
 const userUtil = require('../util/user');
 const time = require('../util/Constants').tenMinutes;
 const OK = require('../util/Constants').OK_STATUS;
 const notFound = require('../util/Constants').NOT_FOUND_STATUS;
-
 
 exports.getProfile = function (req, res) {
 
@@ -110,7 +108,7 @@ exports.getFollowingUser = function (req, res) {
         if(user) res.json(user[0]);
         else res.status(notFound).json("There is not a user with this username");
     }
-    else{
+    else if(userName != "me"){
        
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
@@ -122,9 +120,29 @@ exports.getFollowingUser = function (req, res) {
                 var user = userProfile.following.filter(function(abstract){
                     return abstract.profileName == name;
                 })
+             
                 res.json(user[0]);
             }
             else res.status(notFound).json("There is not a user with this username");
+        })
+    }
+    else{
+
+        // var userId = req.userId;
+        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)        
+
+        userUtil.getUserProfileById(userId, function(err, profile){
+
+            if(err) console.log(err);
+            else{
+
+                cache.put(userName, userProfile, time);
+                var user = profile.following.filter(function(abstract){
+                    return abstract.profileName == name;
+                })
+                
+                res.json(user[0]);
+            }
         })
     }
 }

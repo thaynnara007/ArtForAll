@@ -209,7 +209,40 @@ describe('GET/user', function(){
 
 		request(app)
 
-			.get('/user/miuda06/profile/following')
+			.get('/user/onlok/profile/following')
+			.set('Accept', 'application/json/')
+			.expect(200)
+			.then((res) =>{
+
+				expect(res.body).to.be.an('array').to.be.ofSize(2);
+				expect(res.body[0]).to.equals('Berkana');
+				expect(res.body[1]).to.equals('miuda06');
+				done();
+			})
+			.catch(done);
+	})
+
+	it("Test11: should returns one user's profile that is followed by another user", (done) =>{
+
+		request(app)
+
+			.get('/user/onlok/profile/following/miuda06')
+			.set('Accept', 'application/json/')
+			.expect(200)
+			.then((res) =>{
+
+				expect(Promise.resolve(res.body)).to.eventually.have.property('profileName');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('userP_id');
+				done();
+			})
+			.catch(done);
+	})
+
+	it('Test12: should returns the users following by one user ', (done) =>{
+
+		request(app)
+
+			.get('/user/me/profile/following')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{
@@ -222,11 +255,11 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test11: should returns one user's profile that is followed by another user", (done) =>{
+	it("Test13: should returns one user's profile that is followed by another user", (done) =>{
 
 		request(app)
 
-			.get('/user/miuda06/profile/following/onlok')
+			.get('/user/me/profile/following/onlok')
 			.set('Accept', 'application/json/')
 			.expect(200)
 			.then((res) =>{

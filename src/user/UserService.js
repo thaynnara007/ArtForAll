@@ -32,7 +32,7 @@ exports.getInfo = function(req, res){
 
     var userName = req.params.userName;
 
-    if( userName === "me"){
+    if( userName == "me"){
 
         var userInfo = cache.get(userName + "Info");
       //  var userId = req.userId;
