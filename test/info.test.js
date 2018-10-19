@@ -86,4 +86,15 @@ describe('Testing infoSchema operations', function(){
 
         expect(info2.editPassword('jakeTheDog')).to.be.false;
     });
+
+    it("Test07: should creates a new info", function(){
+
+       var newInfo = info.create('John', 34, 'john wick', 'john.wick@hotmaol.com','myDogsName');
+
+       expect(newInfo).to.have.property('name').to.equals('John');
+       expect(newInfo).to.have.property('age').to.equals(34);
+       expect(newInfo).to.have.property('userName').to.equals('john wick');
+       expect(newInfo).to.have.property('email').to.equals('john.wick@hotmaol.com');
+       expect(newInfo).to.have.property('password').to.equals('myDogsName');
+    })
 })

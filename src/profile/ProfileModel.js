@@ -26,6 +26,22 @@ profileSchema.add({
 	userFavoritesArts:[art.artSchema]
 })
 
+var create = function(userName,following, followingNumber, followers, followersNumber, userArts, userFavoritesArts){
+
+	var newProfile = new Profile({
+
+		userName: userName,
+		following: following,
+		followingNumber: followingNumber,
+		followers: followers,
+		followersNumber: followersNumber,
+		userArts: userArts,
+		userFavoritesArts: userFavoritesArts
+	})
+
+	return newProfile
+}
+
 profileSchema.methods.incrementFollowers = function(){
 	this.followersNumber = this.followersNumber + 1;
 }
@@ -116,4 +132,4 @@ profileSchema.methods.addFollowing = function(userProfile){
 
 var Profile = mongoose.model('Profile', profileSchema);
 
-module.exports = {Profile, profileSchema}
+module.exports = {Profile, profileSchema, create}

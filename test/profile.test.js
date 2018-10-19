@@ -133,4 +133,18 @@ describe('ProfileModel methods Test', function(){
         expect(profile1.followers).to.be.ofSize(1);
         expect(profile1.followersNumber).to.equals(1);
     })
+
+    it('Test11: it should create a new profile', () =>{
+
+        var newProfile = profile.create("ReginaGeorge", [], 8765,[], 4000,[], []);
+
+        expect(newProfile).to.have.property('_id');
+        expect(newProfile).to.have.property('userName').to.equals('ReginaGeorge');
+        expect(newProfile).to.have.property('following').to.be.an('array').to.be.ofSize(0);
+        expect(newProfile).to.have.property('followingNumber').to.equals(8765);
+        expect(newProfile).to.have.property('followers').to.be.an('array').to.be.ofSize(0);
+        expect(newProfile).to.have.property('followersNumber').to.equals(4000);
+        expect(newProfile).to.have.property('userArts').to.be.an('array').to.be.ofSize(0);
+        expect(newProfile).to.have.property('userFavoritesArts').to.be.an('array').to.be.ofSize(0);
+    })
 })

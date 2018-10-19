@@ -33,6 +33,20 @@ var infoSchema = new Schema({
     }
 })
 
+var create = function(name, age, userName, email, password){
+
+    var newInfo = new Info({
+
+        name: name,
+        age: age,
+        userName: userName,
+        email: email,
+        password: password,
+    })
+
+    return newInfo;
+}
+
 infoSchema.methods.editUserName = function(newName){
   
     var name = newName.trim();
@@ -74,4 +88,4 @@ infoSchema.methods.editPassword = function(newPassword){
 
 var Info = mongoose.model('Info', infoSchema);
 
-module.exports = {Info, infoSchema};
+module.exports = {Info, infoSchema, create};
