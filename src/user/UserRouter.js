@@ -18,5 +18,6 @@ router.use('/:userName/profile', profileRouter);
 router.get('/:userName', cors(), service.getUser);
 router.get('/:userName/info', cors(), service.getInfo);
 router.delete('/', service.deleteUser);
+router.post('/', service.singUp )
 
 module.exports = router;

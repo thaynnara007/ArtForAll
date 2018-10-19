@@ -26,10 +26,11 @@ profileSchema.add({
 	userFavoritesArts:[art.artSchema]
 })
 
-var create = function(userName,following, followingNumber, followers, followersNumber, userArts, userFavoritesArts){
+var create = function(id, userName,following, followingNumber, followers, followersNumber, userArts, userFavoritesArts){
 
 	var newProfile = new Profile({
 
+		_id: id,
 		userName: userName,
 		following: following,
 		followingNumber: followingNumber,

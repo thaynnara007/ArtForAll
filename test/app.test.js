@@ -382,7 +382,7 @@ describe('Testing POST /singup operations', () =>{
 
 		request(app)
 
-			.post('/singup')
+			.post('/user')
 			.send(data)
 			.set('Acceptd', 'application/json')
 			.expect('Content-Type', /json/)
@@ -406,7 +406,7 @@ describe('Testing POST /singup operations', () =>{
 
 		request(app)
 
-			.post('/singup')
+			.post('/user')
 			.send(data)
 			.set('Acceptd', 'application/json')
 			.expect('Content-Type', /json/)

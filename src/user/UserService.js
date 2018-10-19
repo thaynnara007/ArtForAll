@@ -1,5 +1,6 @@
 const User = require('./UserModel');
 const Profile = require('../profile/ProfileModel');
+const Info = require('../info/InfoModel');
 const mongoose = require('mongoose');
 const cache = require('../cache/Cache');
 const constants = require('../util/Constants');
@@ -7,6 +8,8 @@ const time = constants.tenMinutes;
 const OK = constants.OK_STATUS;
 const notAuthorized = constants.Authorization_Required;
 const notFound = require('../util/Constants').NOT_FOUND_STATUS;
+const CREATED = constants.CREATED;
+const BAD_REQUEST = constants.BAD_REQUEST; 
 mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
 var dataBase = mongoose.connection;
@@ -67,10 +70,11 @@ exports.deleteUser = function(req, res){
     User.User.findOne({'information.email': email, 'information.password': password }, function(err, user){
 
         if(err) return console.log(err)
+        if(!user) return res.status(notFound);
         else {
             
             var profileId = user.profile._id;
-
+        
             Profile.Profile.deleteOne({_id: profileId}, function(err){
                 if (err) return console.log(err);
             })
@@ -84,7 +88,36 @@ exports.deleteUser = function(req, res){
         res.status(OK).json('User was deleted');
     })
 
+}
 
+exports.singUp = function(req, res){
+
+	var newName = req.body.name;
+	var newAge = req.body.age;
+	var newUserName = req.body.userName;
+	var newEmail = req.body.email;
+	var newPassword = req.body.password;
+
+	var info = Info.create(newName, newAge, newUserName, newEmail, newPassword);
+
+    var profile = Profile.create( new mongoose.Types.ObjectId(), newUserName, [],0, [],0, [], []);
+
+    var newUser = User.create( newUserName, info, profile, []);
+
+    newUser.save(function(err){
+        if(err){ 
+                
+            console.log(err);
+            res.status(BAD_REQUEST).json('User not created');
+        }
+        else {
+
+            profile.save(function(err){
+                if(err) return console.log(err)
+            }) 
+            res.status(CREATED).json('User registered');
+        }
+    })
 }
 
 

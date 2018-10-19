@@ -2,6 +2,7 @@ const profile = require('../src/profile/ProfileModel');
 const mocha = require('mocha');
 const chai = require('chai');
 const assertArrays = require('chai-arrays');
+const mongoose = require('mongoose');
 const expect = chai.expect;
 
 chai.use(assertArrays);
@@ -136,7 +137,7 @@ describe('ProfileModel methods Test', function(){
 
     it('Test11: it should create a new profile', () =>{
 
-        var newProfile = profile.create("ReginaGeorge", [], 8765,[], 4000,[], []);
+        var newProfile = profile.create( new mongoose.Types.ObjectId(),"ReginaGeorge", [], 8765,[], 4000,[], []);
 
         expect(newProfile).to.have.property('_id');
         expect(newProfile).to.have.property('userName').to.equals('ReginaGeorge');
