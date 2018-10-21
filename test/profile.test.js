@@ -1,4 +1,5 @@
 const profile = require('../src/profile/ProfileModel');
+const Art = require('../src/art/ArtModel');
 const mocha = require('mocha');
 const chai = require('chai');
 const assertArrays = require('chai-arrays');
@@ -42,6 +43,8 @@ var profile3 = new profile.Profile({
     userArts: [],
     userFavoritesArts: []
 })
+
+var art = Art.create('uzumaki', 'www.naruto/art/narutoHokage', ['naruto', 'hokage'], 'd1234567890');
 
 describe('ProfileModel methods Test', function(){
 
@@ -87,7 +90,7 @@ describe('ProfileModel methods Test', function(){
         expect(profile1.followingNumber).to.equals(0);
     })
 
-    it("Test07: it should add a follower into a user", function(){
+    it("Test07: it should adds a follower into a user", function(){
 
         expect(profile1.followers).to.be.an('array').to.be.ofSize(0);
         profile1.addFollowers(profile2.userName, profile2._id);
@@ -103,14 +106,14 @@ describe('ProfileModel methods Test', function(){
         expect(profile1.followersNumber).to.equals(2)
     })
 
-    it("Test08: it should remove one user's follower", function(){
+    it("Test08: it should removes one user's follower", function(){
 
         profile1.removeFollowers(profile3._id);
         expect(profile1.followers).to.be.ofSize(1);
         expect(profile1.followersNumber).to.equals(1);
     })
 
-    it("Test09: it should a user in to the flollowing list from a user", () =>{
+    it("Test09: it should adds user in to the flollowing list from a user", () =>{
 
         expect(profile3.following).to.be.an('array').to.be.ofSize(0);
         profile3.addFollowing(profile1);
@@ -125,7 +128,7 @@ describe('ProfileModel methods Test', function(){
         expect(profile1.followers[1]).to.have.property('userP_id'); 
     })
 
-    it("Test10: it should remove a user from the following list from another user", () =>{
+    it("Test10: it should removes a user from the following list from another user", () =>{
 
         profile3.removeFollowing(profile1);
         expect(profile3.following).to.be.ofSize(0);
@@ -135,7 +138,7 @@ describe('ProfileModel methods Test', function(){
         expect(profile1.followersNumber).to.equals(1);
     })
 
-    it('Test11: it should create a new profile', () =>{
+    it('Test11: it should creates a new profile', () =>{
 
         var newProfile = profile.create( new mongoose.Types.ObjectId(),"ReginaGeorge", [], 8765,[], 4000,[], []);
 
@@ -147,5 +150,23 @@ describe('ProfileModel methods Test', function(){
         expect(newProfile).to.have.property('followersNumber').to.equals(4000);
         expect(newProfile).to.have.property('userArts').to.be.an('array').to.be.ofSize(0);
         expect(newProfile).to.have.property('userFavoritesArts').to.be.an('array').to.be.ofSize(0);
+    })
+
+    it('Test12: it should adds a new art in to a userArts', () =>{
+
+        profile1.addArt(art);
+
+        expect(profile1.userArts).to.be.ofSize(1);
+        expect(profile1.userArts[0]).to.have.property('name').to.equals('uzumaki');
+        expect(profile1.userArts[0]).to.have.property('imgLink').to.equals('www.naruto/art/narutoHokage');
+        expect(profile1.userArts[0]).to.have.property('tags').to.be.ofSize(2);
+        expect(profile1.userArts[0]).to.have.property('date');
+    })
+
+    it('Test13: it should removes a art from a userArts', () =>{
+
+        profile1.removeArt('d1234567890')
+
+        expect(profile1.userArts).to.be.ofSize(0);
     })
 })

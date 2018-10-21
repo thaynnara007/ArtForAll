@@ -136,6 +136,15 @@ profileSchema.methods.addArt = function(newArt){
 	this.userArts.push(newArt);
 }
 
+profileSchema.methods.removeArt = function(id){
+
+	var arts = this.userArts.filter(function(art){
+		art._id != id;
+	})
+	
+	this.userArts = arts;
+}
+
 var Profile = mongoose.model('Profile', profileSchema);
 
 module.exports = {Profile, profileSchema, create}

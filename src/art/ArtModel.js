@@ -16,15 +16,15 @@ var artSchema = new mongoose.Schema({
 		default: Date.now}
 });
 
-var create = function(name, imgLink, tags, callback){
+var create = function(name, imgLink, tags, id){
 
 	var newArt = new Art({
 
 		name: name,
 		imgLink: imgLink,
-		tags: tags
+		tags: tags,
+		_id: id
 	})
-
 	return newArt;
 }
 
