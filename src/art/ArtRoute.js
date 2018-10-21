@@ -15,5 +15,6 @@ router.use(function (req, res, next) {
 router.get('/',cors(), service.getAll); 
 router.get('/:artName',cors(), service.getOne);
 router.post('/', service.post); 
+router.delete('/', service.deleteOne)
 
 module.exports = router;

@@ -111,5 +111,28 @@ describe('-------------------|POST /myarts|----------------------------', functi
 				if(err) return done(err);
 				done();
 			})
+	})
+	
+	it("TEST02: it should create a new art in the logged user's arts", (done) =>{
+
+        let date = {
+
+            'name': "JoJos",
+            'imgLink': 'https://i2.wp.com/jerimumgeek.oportaln10.com.br/wp-content/uploads/2017/03/nw4zOlM.jpg?resize=649%2C400&ssl=1',
+            'tags': ['Jojos bizarre adventure', 'seasson4', 'jojos']
+        }
+
+        request(app)
+
+            .post('/user/onlok/profile/myarts')
+            .send(date)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+			.expect(401)
+			.expect('"You do not have permission for it"')
+			.end((err) =>{
+				if(err) return done(err);
+				done();
+			})
     })
 }) 

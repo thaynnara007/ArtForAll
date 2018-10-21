@@ -149,6 +149,7 @@ exports.post = function (req, res) {
     }else res.status(notAuthorized).json('You do not have permission for it')
 }
 
+exports.deleteOne = function(req, res){}
 
 
 
