@@ -131,6 +131,11 @@ profileSchema.methods.addFollowing = function(userProfile){
 	this.incrementFollowing();
 }
 
+profileSchema.methods.addArt = function(newArt){
+
+	this.userArts.push(newArt);
+}
+
 var Profile = mongoose.model('Profile', profileSchema);
 
 module.exports = {Profile, profileSchema, create}

@@ -12,14 +12,13 @@ exports.getUserProfile = function(userName, callback){
 
      User.User.findOne({ "userName":userName }, function(erro, user){
             
-        if(erro){
-             callback(erro, null)
-        }
+        if(erro) callback(erro, null)
         else if(user){
 
             profile = user.profile;
             callback(null, profile);
-            }        
+            }
+        else callback(null, null);        
     })
 
 }

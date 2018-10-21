@@ -16,6 +16,18 @@ var artSchema = new mongoose.Schema({
 		default: Date.now}
 });
 
+var create = function(name, imgLink, tags, callback){
+
+	var newArt = new Art({
+
+		name: name,
+		imgLink: imgLink,
+		tags: tags
+	})
+
+	return newArt;
+}
+
 artSchema.methods.editName = function(newName){
 
 	var exp = /^\w.*\w$/;
@@ -61,5 +73,5 @@ artSchema.methods.removeTag = function(tag){
 
 var Art = mongoose.model('Art', artSchema);
 
-module.exports = {Art, artSchema};
+module.exports = {Art, artSchema, create};
 

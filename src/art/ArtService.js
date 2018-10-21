@@ -1,8 +1,13 @@
 const cache = require('../cache/Cache');
 const userUtil = require('../util/user');
-const time = require('../util/Constants').tenMinutes;
-const OK = require('../util/Constants').OK_STATUS;
-const notFound = require('../util/Constants').NOT_FOUND_STATUS;
+const Art = require('./ArtModel');
+const User = require('../user/UserModel');
+const Profile = require('../profile/ProfileModel');
+const constants = require('../util/Constants');
+const time = constants.tenMinutes;
+const CREATED = constants.CREATED;
+const notFound = constants.NOT_FOUND_STATUS;
+const notAuthorized = constants.Authorization_Required;
 
 exports.getAll = function (req, res, next) {
 
@@ -102,9 +107,46 @@ exports.getOne = function (req, res) {
 
 exports.post = function (req, res) {
 
-    //var art = new art.Art(req.body);
-    //dataBase.collection('arts').insert(art);    
-    res.status(OK);
+    var userName = req.params.userName;
+
+    if( userName === "me"){
+
+        var artName = req.body.name;
+        var imgLink = req.body.imgLink;
+        var tags = req.body.tags;
+        var newArt = Art.create(artName, imgLink, tags);
+        //  var userId = req.userId;
+        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+
+        User.User.findById(userId, function(err, user){
+
+            if(err) console.log(err);
+            else if(user){
+
+                let profileId = user.profile._id;
+                user.profile.addArt(newArt);
+                user.save(function(err){
+
+                    if (err) console.log(err);
+                    else {
+                        
+                        Profile.Profile.findById(profileId, function(err, profile){
+
+                            if(err) console.log(err)
+                            else if(profile){
+
+                                profile.addArt(newArt);
+                                profile.save(function(err){
+                                    if (err) console.log(err)
+                                    else res.status(CREATED).json('New art created');
+                                })
+                            }else res.status(notFound).json('profile not founded')
+                        })
+                    }
+                })
+            }else res.status(notFound).json('User not founded');
+        })
+    }else res.status(notAuthorized).json('You do not have permission for it')
 }
 
 
