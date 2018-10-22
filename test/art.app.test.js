@@ -90,7 +90,7 @@ describe('-------------------|GET /myarts|----------------------------', functio
 })
 
 describe('-------------------|POST /myarts|----------------------------', function(){
-
+/*
     it("TEST01: it should create a new art in the logged user's arts", (done) =>{
 
         let date = {
@@ -112,9 +112,9 @@ describe('-------------------|POST /myarts|----------------------------', functi
 				if(err) return done(err);
 				done();
 			})
-	})
+	})*/
 	
-	it("TEST02: it should create a new art in the logged user's arts", (done) =>{
+	it("TEST02: it should not create a new art in the logged user's arts", (done) =>{
 
         let date = {
 
@@ -150,13 +150,15 @@ describe('-------------------|DELETE /myarts|----------------------------', func
 			.delete('/user/me/profile/myarts')
 			.send(date)
 			.set('Accept', 'application/json')
-	//		.expect('Content-Type', /json/)
+		//	.expect('Content-Type', 'application/json')
 			.expect(204)
-			.expect('"Deleted Successful"')
-			.end((err) =>{
-				if(err) return done(err);
+			.expect('"a"')
+			.then((res) =>{
+				console.log(res.json);
+				//if(err) return done(err);
 				done();
 			})
+			.catch(done)
 
 	})
 });

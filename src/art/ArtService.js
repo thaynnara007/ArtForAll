@@ -183,17 +183,16 @@ exports.deleteArt = function(req, res){
                                     if(err) console.log(err)
                                     else {
                                         console.log('Here');
-                                        res.status(204).json('etdty');}
+                                        res.status(204).json("a");
+                                    }
                                 })
                             }else res.status(notFound).json('Profile not founded');
                         })
                     }
                 })
-            }else res.status(notFound).json('User ot founded');
+            }else res.status(notFound).json('User not founded');
         })
     }else res.status(notAuthorized).json('You do not have permission for it');
-    
-
 }
 
 

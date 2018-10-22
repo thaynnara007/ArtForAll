@@ -149,8 +149,12 @@ profileSchema.methods.removeArt = function(artId){
 		}
 		index = index + 1;
 	})
-
-	if(find) this.userArts.splice(index,1);
+	console.log(find)
+	if(find) {
+	//	console.log('AQUI')
+	//	console.log("@@@@@@@@@@@@@@@@@@@@@@@22")
+	//	console.log(find)
+		this.userArts.splice(index,1)};
 }
 
 var Profile = mongoose.model('Profile', profileSchema);
