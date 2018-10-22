@@ -324,6 +324,7 @@ describe('Testing POST /singup operations', () =>{
 
 			'name': 'Jack',
 			'age': 17,
+			'email' : 'jackFromTest@ccc.ufch.edu.br',
 			'userName': 'JackFrommTest',
 			'password': 'jackFrostt'
 		}

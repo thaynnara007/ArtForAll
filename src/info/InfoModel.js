@@ -18,7 +18,7 @@ var infoSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: [true, 'your email is needed please put one'],
         unique: true
     },
     password: {

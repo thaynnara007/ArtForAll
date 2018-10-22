@@ -98,7 +98,8 @@ exports.singUp = function(req, res){
 	var newEmail = req.body.email;
 	var newPassword = req.body.password;
 
-	var info = Info.create(newName, newAge, newUserName, newEmail, newPassword);
+    var info = Info.create(newName, newAge, newUserName, newEmail, newPassword);
+    console.log(info);
     var profile = Profile.create( new mongoose.Types.ObjectId(), newUserName, [], 0, [], 0, [], []);
     var newUser = User.create( newUserName, info, profile, []);
 
