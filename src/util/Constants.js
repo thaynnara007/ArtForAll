@@ -4,6 +4,7 @@ const CREATED = 201;
 const NOT_FOUND_STATUS = 404;
 const BAD_REQUEST = 400;
 const Authorization_Required = 401;
+const DELETED_WITH_NO_CONTENT = 204;
 
 module.exports = {
 
@@ -11,5 +12,6 @@ module.exports = {
     OK_STATUS, NOT_FOUND_STATUS, 
     BAD_REQUEST, 
     Authorization_Required,
-    CREATED
+    CREATED,
+    DELETED_WITH_NO_CONTENT
 };

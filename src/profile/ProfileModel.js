@@ -136,13 +136,21 @@ profileSchema.methods.addArt = function(newArt){
 	this.userArts.push(newArt);
 }
 
-profileSchema.methods.removeArt = function(id){
+profileSchema.methods.removeArt = function(artId){
 
-	var arts = this.userArts.filter(function(art){
-		art._id != id;
+	var index = 0;
+	var find = false;
+	this.userArts.forEach(function(art){
+
+		if (art._id == artId) {
+
+			find = find || true;
+			return;
+		}
+		index = index + 1;
 	})
-	
-	this.userArts = arts;
+
+	if(find) this.userArts.splice(index,1);
 }
 
 var Profile = mongoose.model('Profile', profileSchema);

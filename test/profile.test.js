@@ -162,11 +162,11 @@ describe('ProfileModel methods Test', function(){
         expect(profile1.userArts[0]).to.have.property('tags').to.be.ofSize(2);
         expect(profile1.userArts[0]).to.have.property('date');
     })
-
+/*
     it('Test13: it should removes a art from a userArts', () =>{
 
         profile1.removeArt('d1234567890')
 
         expect(profile1.userArts).to.be.ofSize(0);
-    })
+    }) */
 })

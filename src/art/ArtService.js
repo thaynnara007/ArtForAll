@@ -8,6 +8,7 @@ const time = constants.tenMinutes;
 const CREATED = constants.CREATED;
 const notFound = constants.NOT_FOUND_STATUS;
 const notAuthorized = constants.Authorization_Required;
+const RemoveSuccessful = constants.DELETED_WITH_NO_CONTENT;
 
 exports.getAll = function (req, res, next) {
 
@@ -151,8 +152,46 @@ exports.post = function (req, res) {
 
 exports.deleteArt = function(req, res){
 
-    var artId = req.body.artId;
+    var artId = req.body.id;
+    console.log('ARTID:', artId);
+    var userName = req.params.userName;
+   // var userId = req.userId;
+   var id = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
+    if(userName == "me"){
+
+        User.User.findById(id, function(err, user){
+
+            if(err) console.log(err);
+            else if(user){
+
+                var profileId = user.profile._id;
+                user.profile.removeArt(artId);
+                user.save(function(err){
+                    
+                    if (err) console.log(err)
+                    else{
+
+                        Profile.Profile.findById(profileId, function(err, profile){
+
+                            if(err) console.log(err);
+                            else if(profile){ 
+
+                                profile.removeArt(artId);
+                                profile.save(function(err){
+
+                                    if(err) console.log(err)
+                                    else {
+                                        console.log('Here');
+                                        res.status(204).json('etdty');}
+                                })
+                            }else res.status(notFound).json('Profile not founded');
+                        })
+                    }
+                })
+            }else res.status(notFound).json('User ot founded');
+        })
+    }else res.status(notAuthorized).json('You do not have permission for it');
     
 
 }

@@ -1,4 +1,5 @@
 const app = require('../src/index.js');
+const util = require('../src/util/user');
 const request = require('supertest');
 const chai = require('chai');
 const chaiAsPromised = require("chai-as-promised")
@@ -136,3 +137,26 @@ describe('-------------------|POST /myarts|----------------------------', functi
 			})
     })
 }) 
+
+describe('-------------------|DELETE /myarts|----------------------------', function(){
+
+	it("TEST01: it should deletes a art from the logged user's arts", (done) =>{
+
+		let date ={
+			id: util.generateId("5bcdc210aa81ec1781c910a4")
+		}
+		request(app)
+
+			.delete('/user/me/profile/myarts')
+			.send(date)
+			.set('Accept', 'application/json')
+	//		.expect('Content-Type', /json/)
+			.expect(204)
+			.expect('"Deleted Successful"')
+			.end((err) =>{
+				if(err) return done(err);
+				done();
+			})
+
+	})
+});
