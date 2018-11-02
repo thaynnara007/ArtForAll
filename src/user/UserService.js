@@ -7,7 +7,6 @@ const constants = require('../util/Constants');
 const time = constants.tenMinutes;
 const OK = constants.OK_STATUS;
 const notAuthorized = constants.Authorization_Required;
-const notFound = require('../util/Constants').NOT_FOUND_STATUS;
 const CREATED = constants.CREATED;
 const BAD_REQUEST = constants.BAD_REQUEST; 
 mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });

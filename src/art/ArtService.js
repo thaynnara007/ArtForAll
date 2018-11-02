@@ -8,6 +8,7 @@ const time = constants.tenMinutes;
 const CREATED = constants.CREATED;
 const notFound = constants.NOT_FOUND_STATUS;
 const notAuthorized = constants.Authorization_Required;
+const DeletedSuccessful = constants.DELETED_WITH_NO_CONTENT;
 
 exports.getAll = function (req, res, next) {
 
@@ -114,7 +115,8 @@ exports.post = function (req, res) {
         var artName = req.body.name;
         var imgLink = req.body.imgLink;
         var tags = req.body.tags;
-        var newArt = Art.create(artName, imgLink, tags);
+        var _id = req.body._id;
+        var newArt = Art.create(artName, imgLink, tags, _id);
         //  var userId = req.userId;
         var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
@@ -124,6 +126,7 @@ exports.post = function (req, res) {
             else if(user){
 
                 let profileId = user.profile._id;
+                console.log(newArt)
                 user.profile.addArt(newArt);
                 user.save(function(err){
 
@@ -152,8 +155,44 @@ exports.post = function (req, res) {
 exports.deleteArt = function(req, res){
 
     var artId = req.body.artId;
+    var userName = req.params.userName;
 
-    
+    if (userName === "me"){
+
+        //  var userId = req.userId;
+        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+
+        User.User.findById(userId, function(err, user){
+
+            if (err) console.log(err)
+            else if (user){
+
+                user.profile.removeArt(artId);
+                let profileId = user.profile._id;
+
+                user.save(function(err){
+                    if (err) console.log(err);
+                    else{
+
+                        Profile.Profile.findById(profileId, function(err, profile){
+
+                            if(err) console.log(err);
+                            else if(profile){
+
+                                profile.removeArt(artId);
+                                profile.save(function(err){
+
+                                    if(err) console.log(err);
+                                    else res.status(DeletedSuccessful).json('Art deleted');
+                                })
+                            }else res.status(notFound).json('Profile not founded');
+                        })
+                    }
+                })
+            }else res.status(notFound).json('User not founded')
+        })
+    }else res.status(notAuthorized).json('You do not have permission for it');
+
 
 }
 

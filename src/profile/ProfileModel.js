@@ -138,10 +138,14 @@ profileSchema.methods.addArt = function(newArt){
 
 profileSchema.methods.removeArt = function(id){
 
+	console.log("id:",id);
 	var arts = this.userArts.filter(function(art){
-		art._id != id;
+		console.log("!!!!!!!!!!!!!!!!!!!!!!!!COMPARANDO!!!!!!!!!!!!!!!!!!!!!!!!!!")
+		console.log(art);
+		console.log(art._id);
+		return art._id != id;
 	})
-	
+	console.log(arts);
 	this.userArts = arts;
 }
 

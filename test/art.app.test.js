@@ -3,6 +3,7 @@ const request = require('supertest');
 const chai = require('chai');
 const chaiAsPromised = require("chai-as-promised")
 const mocha = require('mocha');
+const util = require('../src/util/user');
 const assertArrays = require('chai-arrays');
 const expect = chai.expect;
 
@@ -96,7 +97,8 @@ describe('-------------------|POST /myarts|----------------------------', functi
 
             'name': "jojos",
             'imgLink': 'https://i2.wp.com/jerimumgeek.oportaln10.com.br/wp-content/uploads/2017/03/nw4zOlM.jpg?resize=649%2C400&ssl=1',
-            'tags': ['Jojos bizarre adventure', 'seasson4', 'jojos']
+			'tags': ['Jojos bizarre adventure', 'seasson4', 'jojos'],
+			'_id': util.generateId('5bccc9d9b0e17a2e57f0e607')
         }
 
         request(app)
@@ -113,7 +115,7 @@ describe('-------------------|POST /myarts|----------------------------', functi
 			})
 	})
 	
-	it("TEST02: it should create a new art in the logged user's arts", (done) =>{
+	it("TEST02: it should not create a new art in the logged user's arts", (done) =>{
 
         let date = {
 
@@ -136,3 +138,28 @@ describe('-------------------|POST /myarts|----------------------------', functi
 			})
     })
 }) 
+
+describe('-------------------|DELETE /myarts|----------------------------', function(){
+
+	it("TEST01: it should deletes a art from the logged user's arts", (done) =>{
+
+        let date = {
+
+            artId: util.generateId('5bccc9d9b0e17a2e57f0e607')
+        }
+
+        request(app)
+
+            .delete('/user/me/profile/myarts')
+            .send(date)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+			.expect(204)
+			.expect('"Art deleted"')
+			.end((err) =>{
+				if(err) return done(err);
+				done();
+			})
+    })
+})  
+
