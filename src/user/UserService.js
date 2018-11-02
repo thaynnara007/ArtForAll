@@ -9,6 +9,7 @@ const OK = constants.OK_STATUS;
 const notAuthorized = constants.Authorization_Required;
 const CREATED = constants.CREATED;
 const BAD_REQUEST = constants.BAD_REQUEST; 
+const notFound = constants.NOT_FOUND_STATUS;
 mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
 var dataBase = mongoose.connection;

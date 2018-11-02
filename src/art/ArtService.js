@@ -183,7 +183,7 @@ exports.deleteArt = function(req, res){
                                 profile.save(function(err){
 
                                     if(err) console.log(err);
-                                    else res.status(DeletedSuccessful).json('Art deleted');
+                                    else  res.status(DeletedSuccessful).json();
                                 })
                             }else res.status(notFound).json('Profile not founded');
                         })
