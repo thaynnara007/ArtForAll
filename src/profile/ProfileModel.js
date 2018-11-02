@@ -136,16 +136,16 @@ profileSchema.methods.addArt = function(newArt){
 	this.userArts.push(newArt);
 }
 
-profileSchema.methods.removeArt = function(id){
+profileSchema.methods.removeArt = function(artId){
 
-	console.log("id:",id);
+	//console.log("id:",id);
 	var arts = this.userArts.filter(function(art){
-		console.log("!!!!!!!!!!!!!!!!!!!!!!!!COMPARANDO!!!!!!!!!!!!!!!!!!!!!!!!!!")
-		console.log(art);
-		console.log(art._id);
-		return art._id != id;
+	//	console.log("!!!!!!!!!!!!!!!!!!!!!!!!COMPARANDO!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	//	console.log(art);
+	//	console.log(art._id);
+		return art._id != artId;
 	})
-	console.log(arts);
+//	console.log(arts);
 	this.userArts = arts;
 }
 

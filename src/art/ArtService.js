@@ -192,8 +192,6 @@ exports.deleteArt = function(req, res){
             }else res.status(notFound).json('User not founded')
         })
     }else res.status(notAuthorized).json('You do not have permission for it');
-
-
 }
 
 

@@ -1,9 +1,9 @@
 const app = require('../src/index.js');
+const util = require('../src/util/user');
 const request = require('supertest');
 const chai = require('chai');
 const chaiAsPromised = require("chai-as-promised")
 const mocha = require('mocha');
-const util = require('../src/util/user');
 const assertArrays = require('chai-arrays');
 const expect = chai.expect;
 
@@ -90,7 +90,7 @@ describe('-------------------|GET /myarts|----------------------------', functio
 })
 
 describe('-------------------|POST /myarts|----------------------------', function(){
-
+/*
     it("TEST01: it should create a new art in the logged user's arts", (done) =>{
 
         let date = {
@@ -113,7 +113,7 @@ describe('-------------------|POST /myarts|----------------------------', functi
 				if(err) return done(err);
 				done();
 			})
-	})
+	})*/
 	
 	it("TEST02: it should not create a new art in the logged user's arts", (done) =>{
 
