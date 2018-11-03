@@ -8,6 +8,7 @@ const OK = constants.OK_STATUS;
 const time = constants.tenMinutes;
 const CREATED = constants.CREATED;
 const notFound = constants.NOT_FOUND_STATUS;
+const BAD_REQUEST = constants.BAD_REQUEST;
 const notAuthorized = constants.Authorization_Required;
 const DeletedSuccessful = constants.DELETED_WITH_NO_CONTENT;
 
@@ -25,8 +26,10 @@ exports.getAll = function (req, res, next) {
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro) return console.log(erro);
-
+            if(erro){
+                console.log(erro);
+                res.status(InternalServerError);
+            }
             else if(userProfile){
 
                 var arts = userProfile.userArts;
@@ -43,9 +46,11 @@ exports.getAll = function (req, res, next) {
 
         userUtil.getUserProfileById(userId, function(err, profile){
 
-            if(err) console.log(err)
+            if(err){
+                console.log(err)
+                res.status(InternalServerError);
+            }
             else{
-
                 cache.put(userName, profile, time);
                 res.json(profile.userArts);
             }
@@ -71,8 +76,10 @@ exports.getOne = function (req, res) {
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro) return console.log(erro);
-
+            if(erro){
+                console.log(erro);
+                res.status(InternalServerError);
+            }
             else if(userProfile){
 
                 cache.put(userName, userProfile, time);
@@ -92,7 +99,10 @@ exports.getOne = function (req, res) {
 
         userUtil.getUserProfileById(userId, function(err, profile){
 
-            if(err) console.log(err)
+            if(err){
+                console.log(err)
+                res.status(InternalServerError);
+            }
             else{
 
                 cache.put(userName, profile, time);
@@ -103,7 +113,6 @@ exports.getOne = function (req, res) {
                 else  res.status(notFound).json("There is not a art with such name");
             }
         })
-
     }
 }
 
@@ -123,24 +132,35 @@ exports.post = function (req, res) {
 
         User.User.findById(userId, function(err, user){
 
-            if(err) console.log(err);
+            if(err){
+                console.log(err);
+                res.status(InternalServerError);
+            }
             else if(user){
 
                 let profileId = user.profile._id;
                 user.profile.addArt(newArt);
                 user.save(function(err){
 
-                    if (err) console.log(err);
+                    if (err){
+                        console.log(err);
+                        res.status(BAD_REQUEST).json('Art was not saved');
+                    }
                     else {
-                        
                         Profile.Profile.findById(profileId, function(err, profile){
 
-                            if(err) console.log(err)
+                            if(err){
+                                console.log(err)
+                                res.status(InternalServerError);
+                            }
                             else if(profile){
 
                                 profile.addArt(newArt);
                                 profile.save(function(err){
-                                    if (err) console.log(err)
+                                    if (err){
+                                        console.log(err)
+                                        res.status(BAD_REQUEST).json('Art was not saved');
+                                    }
                                     else res.status(CREATED).json('New art created');
                                 })
                             }else res.status(notFound).json('profile not founded')
@@ -164,25 +184,37 @@ exports.deleteArt = function(req, res){
 
         User.User.findById(userId, function(err, user){
 
-            if (err) console.log(err)
+            if (err){
+                console.log(err)
+                res.status(InternalServerError);
+            }
             else if (user){
 
                 user.profile.removeArt(artId);
                 let profileId = user.profile._id;
 
                 user.save(function(err){
-                    if (err) console.log(err);
+                    if (err){
+                        console.log(err);
+                        res.status(BAD_REQUEST).json('Art was not deleted');
+                    }
                     else{
 
                         Profile.Profile.findById(profileId, function(err, profile){
 
-                            if(err) console.log(err);
+                            if(err){
+                                console.log(err);
+                                res.status(InternalServerError);
+                            }
                             else if(profile){
 
                                 profile.removeArt(artId);
                                 profile.save(function(err){
 
-                                    if(err) console.log(err);
+                                    if(err){
+                                        console.log(err);
+                                        res.status(BAD_REQUEST).json('Art was not deleted');
+                                    }
                                     else  res.status(DeletedSuccessful).json();
                                 })
                             }else res.status(notFound).json('Profile not founded');

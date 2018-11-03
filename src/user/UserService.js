@@ -10,6 +10,7 @@ const notAuthorized = constants.Authorization_Required;
 const CREATED = constants.CREATED;
 const BAD_REQUEST = constants.BAD_REQUEST; 
 const notFound = constants.NOT_FOUND_STATUS;
+const InternalServerError = constants.Internal_Server_Error;
 mongoose.connect('mongodb://localhost/myBD', { useNewUrlParser: true });
 
 var dataBase = mongoose.connection;
@@ -25,7 +26,10 @@ exports.getUser = function(req, res){
 
     User.User.findOne({ "userName":userName }, function(erro, user){
 
-        if(erro)   console.log(err);
+        if(erro){  
+            console.log(err);
+            res.status(InternalServerError);
+        }
         else if (user) res.json(user);
         else res.status(notFound).json('there is not a user with this username');
     })
@@ -41,14 +45,16 @@ exports.getInfo = function(req, res){
       //  var userId = req.userId;
         var userId = mongoose.Types.ObjectId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
-        if (userInfo)  res.json(userInfo);
+        if (userInfo) res.json(userInfo);
         
         else{
 
             User.User.findById(userId, function(erro, user){
 
-                if(erro)  console.log(erro);
-                
+                if(erro){
+                    console.log(erro);
+                    res.status(InternalServerError);
+                }   
                 else if(user){
 
                     var info = user.information;
@@ -69,25 +75,32 @@ exports.deleteUser = function(req, res){
 
     User.User.findOne({'information.email': email, 'information.password': password }, function(err, user){
 
-        if(err) return console.log(err)
-        if(!user) return res.status(notFound);
+        if(err){
+            console.log(err)
+            res.status(InternalServerError);
+        }
+        if(!user) res.status(notFound).json('User not found');
         else {
             
             var profileId = user.profile._id;
         
             Profile.Profile.deleteOne({_id: profileId}, function(err){
-                if (err) return console.log(err);
+                if (err){
+                    console.log(err);
+                    res.status(InternalServerError);
+                }
             })
         }
     })
 
     User.User.deleteOne({'information.email': email, 'information.password': password }, function(err){
 
-        if (err) return console.log(err);
-
+        if (err){
+            console.log(err);
+            res.status(InternalServerError);
+        }
         res.status(OK).json('User was deleted');
     })
-
 }
 
 exports.singUp = function(req, res){
@@ -103,15 +116,16 @@ exports.singUp = function(req, res){
     var newUser = User.create( newUserName, info, profile, []);
 
     newUser.save(function(err){
-        if(err){ 
-                
+        if(err){       
             console.log(err);
             res.status(BAD_REQUEST).json('User not created');
-        }
-        else {
+        } else {
 
             profile.save(function(err){
-                if(err) return console.log(err)
+                if(err){
+                    console.log(err)
+                    res.status(BAD_REQUEST).json('User not created');
+                }
             }) 
             res.status(CREATED).json('User registered');
         }

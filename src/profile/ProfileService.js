@@ -9,14 +9,16 @@ exports.getProfile = function (req, res) {
     var userName = req.params.userName;
     var user_profile = cache.get(userName);
 
-    if (user_profile)  res.json(user_profile);
+    if (user_profile) res.json(user_profile);
     
     else if( userName != "me"){
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro)  return console.log(erro);
-            
+            if(erro){
+                console.log(erro);
+                res.status(InternalServerError);
+            }
             else if(userProfile){
 
                 cache.put(userName, userProfile, time);
@@ -32,7 +34,10 @@ exports.getProfile = function (req, res) {
 
         userUtil.getUserProfileById(userId, function(err, profile){
 
-            if(err) console.log(err)
+            if(err){
+                console.log(err)
+                res.status(InternalServerError);
+            }
             else{
 
                 cache.put(userName, profile, time);
@@ -58,8 +63,10 @@ exports.getFollowing = function (req, res) {
 
             userUtil.getUserProfile(userName, function(erro, userProfile){
 
-                if(erro) return console.log(erro);
-                
+                if(erro){
+                    console.log(erro);
+                    res.status(InternalServerError);
+                }
                 else if(userProfile){
     
                     cache.put(userName, userProfile, time);
@@ -79,7 +86,10 @@ exports.getFollowing = function (req, res) {
             
             userUtil.getUserProfileById(userId, function(err, profile){
 
-                if(err) console.log(err)
+                if(err){
+                    console.log(err)
+                    res.status(InternalServerError);
+                }
                 else{
 
                     cache.put(userName, profile, time);
@@ -111,8 +121,10 @@ exports.getFollowingUser = function (req, res) {
        
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro) return console.log(erro);
-
+            if(erro){
+                console.log(erro);
+                res.status(InternalServerError);
+            }
             else if(userProfile){
 
                 cache.put(userName, userProfile, time);
@@ -132,7 +144,10 @@ exports.getFollowingUser = function (req, res) {
 
         userUtil.getUserProfileById(userId, function(err, profile){
 
-            if(err) console.log(err);
+            if(err){
+                console.log(err);
+                res.status(InternalServerError);
+            }
             else{
 
                 cache.put(userName, profile, time);

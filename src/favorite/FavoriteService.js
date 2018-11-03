@@ -6,6 +6,7 @@ const Constants = require('../util/Constants')
 const OK = Constants.OK_STATUS;
 const time = Constants.tenMinutes;
 const notFound = Constants.NOT_FOUND_STATUS;
+const BAD_REQUEST = Constants.BAD_REQUEST;
 const InternalServerError = Constants.Internal_Server_Error;
 
 exports.getAll = function (req, res, next) {
@@ -22,8 +23,10 @@ exports.getAll = function (req, res, next) {
         
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro)  return console.log(erro);
-            
+            if(erro){
+                console.log(erro);
+                res.status(InternalServerError);
+            }
             else if(userProfile){
 
                 cache.put(userName, userProfile, time);
@@ -40,7 +43,10 @@ exports.getAll = function (req, res, next) {
 
         userUtil.getUserProfileById(userId, function(err, profile){
 
-            if(err) console.log(err)
+            if(err){
+                console.log(err)
+                res.status(InternalServerError);
+            }
             else{
 
                 cache.put(userName, profile, time);
@@ -69,8 +75,10 @@ exports.getOne = function (req, res) {
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
-            if(erro)  return console.log(erro);
-            
+            if(erro){
+                console.log(erro);
+                res.status(InternalServerError);
+            }
             else if(userProfile){
 
                 cache.put(userName, userProfile, time);
@@ -90,7 +98,10 @@ exports.getOne = function (req, res) {
 
         userUtil.getUserProfileById(userId, function(err, profile){
 
-            if(err) console.log(err);
+            if(err){
+                console.log(err);
+                res.status(InternalServerError);
+            }
             else{
 
                 cache.put(userName, profile, time);
@@ -115,7 +126,8 @@ exports.post = function (req, res) {
         if (err){ 
             console.log(err)
             res.status(InternalServerError);
-        }else if(user){
+        }
+        else if(user){
 
             user.profile.addFavoriteArt(art);
             profileId = user.profile._id;
@@ -124,7 +136,7 @@ exports.post = function (req, res) {
 
                 if (err){ 
                     console.log(err);
-                    res.status(InternalServerError);
+                    res.status(BAD_REQUEST).json('Art was not saved');
                 }else{
 
                     Profile.Profile.findById(profileId, (err, profile) =>{
@@ -140,7 +152,7 @@ exports.post = function (req, res) {
 
                                 if(err){
                                     console.log(err);
-                                    res.status(InternalServerError);
+                                    res.status(BAD_REQUEST).json('Art was not saved');
                                 }
                                 else res.status(OK).json('Added successful');
                             })
