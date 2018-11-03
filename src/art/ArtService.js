@@ -127,7 +127,6 @@ exports.post = function (req, res) {
             else if(user){
 
                 let profileId = user.profile._id;
-                console.log(newArt)
                 user.profile.addArt(newArt);
                 user.save(function(err){
 
@@ -197,8 +196,6 @@ exports.deleteArt = function(req, res){
 
 exports.edit = function(req,res){
 
-    console.log('HEREEEEE');
-    console.log('PUTA Q PARIU MERMAO');
     res.status(OK).json("Art edited successful");
 }
 

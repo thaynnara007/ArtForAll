@@ -132,21 +132,29 @@ profileSchema.methods.addFollowing = function(userProfile){
 }
 
 profileSchema.methods.addArt = function(newArt){
-
 	this.userArts.push(newArt);
 }
 
 profileSchema.methods.removeArt = function(artId){
 
-	//console.log("id:",id);
 	var arts = this.userArts.filter(function(art){
-	//	console.log("!!!!!!!!!!!!!!!!!!!!!!!!COMPARANDO!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	//	console.log(art);
-	//	console.log(art._id);
 		return art._id != artId;
 	})
-//	console.log(arts);
+
 	this.userArts = arts;
+}
+
+profileSchema.methods.getOneArt = function(artId){
+
+	var art = this.userArts.filter((art) =>{
+		return art._id == artId;
+	})
+	
+	return  art[0];
+}
+
+profileSchema.methods.addFavoriteArt = function(art){
+	this.userFavoritesArts.push(art);
 }
 
 var Profile = mongoose.model('Profile', profileSchema);

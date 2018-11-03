@@ -1,5 +1,6 @@
 const profile = require('../src/profile/ProfileModel');
 const Art = require('../src/art/ArtModel');
+const util = require('../src/util/user');
 const mocha = require('mocha');
 const chai = require('chai');
 const assertArrays = require('chai-arrays');
@@ -44,7 +45,7 @@ var profile3 = new profile.Profile({
     userFavoritesArts: []
 })
 
-var art = Art.create('uzumaki', 'www.naruto/art/narutoHokage', ['naruto', 'hokage'], 'd1234567890');
+var art = Art.create('uzumaki', 'www.naruto/art/narutoHokage', ['naruto', 'hokage'], util.generateId('5bddaa84da0ba0111f2bf270'));
 
 describe('ProfileModel methods Test', function(){
 
@@ -161,5 +162,26 @@ describe('ProfileModel methods Test', function(){
         expect(profile1.userArts[0]).to.have.property('imgLink').to.equals('www.naruto/art/narutoHokage');
         expect(profile1.userArts[0]).to.have.property('tags').to.be.ofSize(2);
         expect(profile1.userArts[0]).to.have.property('date');
+    })
+
+    it("TEST13: it should return a art from a user", () =>{
+
+        var art1 = profile1.getOneArt('5bddaa84da0ba0111f2bf270');
+
+        expect(art1).to.have.property('name').to.equals('uzumaki');
+        expect(art1).to.have.property('imgLink').to.equals('www.naruto/art/narutoHokage');
+        expect(art1).to.have.property('tags').to.be.ofSize(2);
+        expect(art1).to.have.property('date');
+    })
+
+    it('TEST14: it should add a art in to a userFavoriteArts', () =>{
+
+        profile2.addFavoriteArt(art);
+
+        expect(profile2.userFavoritesArts).to.be.ofSize(1);
+        expect(profile2.userFavoritesArts[0]).to.have.property('name').to.equals('uzumaki');
+        expect(profile2.userFavoritesArts[0]).to.have.property('imgLink').to.equals('www.naruto/art/narutoHokage');
+        expect(profile2.userFavoritesArts[0]).to.have.property('tags').to.be.ofSize(2);
+        expect(profile2.userFavoritesArts[0]).to.have.property('date');
     })
 })

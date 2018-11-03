@@ -1,8 +1,10 @@
+const Profile = require('../profile/ProfileModel');
 const userUtil = require("../util/user");
-const time = require('../util/Constants').tenMinutes;
 const cache = require('../cache/Cache');
-const OK = require('../util/Constants').OK_STATUS;
-const notFound = require('../util/Constants').NOT_FOUND_STATUS;
+const Constants = require('../util/Constants')
+const OK = Constants.OK_STATUS;
+const time = Constants.tenMinutes;
+const notFound = Constants.NOT_FOUND_STATUS;
 
 exports.getAll = function (req, res, next) {
 
@@ -101,8 +103,30 @@ exports.getOne = function (req, res) {
 }
 
 exports.post = function (req, res) {
+    
+    profile_id = req.body.profileId;
+    art_id = req.body.artId;
+//    userloggedId = req.userId;
+    var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
-    // var favorite = new art.Art(req.body);
-    // dataBase.collection('favorite').insert(favorite)
-    res.json(OK);
+    Profile.Profile.findById(profile_id, function(err, profile){
+
+        if (err) console.log(err)
+        else if(profile){
+
+            var art = profile.getOneArt(art_id);
+
+            userUtil.getUserProfileById(userId, (err, userLoggedProfile) =>{
+
+                if (err) console.log(err);
+                else if(userLoggedProfile){
+                    
+                    userLoggedProfile.addFavoriteArt(art);
+                    res.status(OK).json('Add successful');
+                }
+                else res.status(notFound).json('Profile not founded');
+            })
+        }
+        else res.status(notFound).json('Art not founded')
+    })
 }
