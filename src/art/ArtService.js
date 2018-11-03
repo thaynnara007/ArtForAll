@@ -4,6 +4,7 @@ const Art = require('./ArtModel');
 const User = require('../user/UserModel');
 const Profile = require('../profile/ProfileModel');
 const constants = require('../util/Constants');
+const OK = constants.OK_STATUS;
 const time = constants.tenMinutes;
 const CREATED = constants.CREATED;
 const notFound = constants.NOT_FOUND_STATUS;
@@ -189,9 +190,16 @@ exports.deleteArt = function(req, res){
                         })
                     }
                 })
-            }else res.status(notFound).json('User not founded')
+            }else res.status(notFound).json('User not founded');
         })
     }else res.status(notAuthorized).json('You do not have permission for it');
+}
+
+exports.edit = function(req,res){
+
+    console.log('HEREEEEE');
+    console.log('PUTA Q PARIU MERMAO');
+    res.status(OK).json("Art edited successful");
 }
 
 

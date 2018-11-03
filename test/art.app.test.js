@@ -158,5 +158,23 @@ describe('-------------------|DELETE /myarts|----------------------------', func
 				done();
 			})
     })
-})  
+})
+
+describe("---------------------------|PUT /myarts|---------------------------", function(){
+
+	it("Test01: it should edit an art", (done) =>{
+
+			request(app)
+
+				.put('/user/me/profile/myarts/deku')
+				.set('Accept', 'application/json')
+				.expect('Content-Type', /json/)
+				.expect(200)
+				.expect('"Art edited successful"')
+				.end((err) =>{
+					if(err) return done(err);
+					done();
+				})
+	})
+})
 
