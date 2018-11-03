@@ -5,6 +5,7 @@ const NOT_FOUND_STATUS = 404;
 const BAD_REQUEST = 400;
 const Authorization_Required = 401;
 const DELETED_WITH_NO_CONTENT = 204;
+const Internal_Server_Error = 500;
 
 module.exports = {
 
@@ -13,5 +14,6 @@ module.exports = {
     BAD_REQUEST, 
     Authorization_Required,
     CREATED,
-    DELETED_WITH_NO_CONTENT
+    DELETED_WITH_NO_CONTENT,
+    Internal_Server_Error
 };

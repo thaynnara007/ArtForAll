@@ -1,3 +1,4 @@
+const User = require('../user/UserModel');
 const Profile = require('../profile/ProfileModel');
 const userUtil = require("../util/user");
 const cache = require('../cache/Cache');
@@ -5,6 +6,7 @@ const Constants = require('../util/Constants')
 const OK = Constants.OK_STATUS;
 const time = Constants.tenMinutes;
 const notFound = Constants.NOT_FOUND_STATUS;
+const InternalServerError = Constants.Internal_Server_Error;
 
 exports.getAll = function (req, res, next) {
 
@@ -104,29 +106,50 @@ exports.getOne = function (req, res) {
 
 exports.post = function (req, res) {
     
-    profile_id = req.body.profileId;
-    art_id = req.body.artId;
+    art = req.body.art;
 //    userloggedId = req.userId;
     var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
-    Profile.Profile.findById(profile_id, function(err, profile){
+    User.User.findById(userId, (err, user) => {
 
-        if (err) console.log(err)
-        else if(profile){
+        if (err){ 
+            console.log(err)
+            res.status(InternalServerError);
+        }else if(user){
 
-            var art = profile.getOneArt(art_id);
+            user.profile.addFavoriteArt(art);
+            profileId = user.profile._id;
 
-            userUtil.getUserProfileById(userId, (err, userLoggedProfile) =>{
+            user.save((err) =>{
 
-                if (err) console.log(err);
-                else if(userLoggedProfile){
-                    
-                    userLoggedProfile.addFavoriteArt(art);
-                    res.status(OK).json('Add successful');
+                if (err){ 
+                    console.log(err);
+                    res.status(InternalServerError);
+                }else{
+
+                    Profile.Profile.findById(profileId, (err, profile) =>{
+
+                        if(err){
+                            console.log(err)
+                            res.status(InternalServerError)
+                        }else if(profile){
+
+                            profile.addFavoriteArt(art);
+
+                            profile.save((err) =>{
+
+                                if(err){
+                                    console.log(err);
+                                    res.status(InternalServerError);
+                                }
+                                else res.status(OK).json('Added successful');
+                            })
+
+                        }else res.status(notFound).json('Profile not founded');
+                    })
                 }
-                else res.status(notFound).json('Profile not founded');
             })
         }
-        else res.status(notFound).json('Art not founded')
+        else res.status(notFound).json('User no founded');
     })
 }
