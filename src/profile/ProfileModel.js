@@ -157,6 +157,15 @@ profileSchema.methods.addFavoriteArt = function(art){
 	this.userFavoritesArts.push(art);
 }
 
+profileSchema.methods.removeFavoriteArt = function(artId){
+
+	var arts = this.userFavoritesArts.filter((art) =>{
+		return art._id != artId;
+	})
+	
+	this.userFavoritesArts = arts;
+}
+
 var Profile = mongoose.model('Profile', profileSchema);
 
 module.exports = {Profile, profileSchema, create}

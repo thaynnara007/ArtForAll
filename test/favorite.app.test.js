@@ -79,7 +79,7 @@ describe('-------------------|GET /favorite|----------------------------', funct
 			.catch(done);
 	})
 })
-
+/*
 describe('-------------------|POST /favorite|----------------------------', function(){
 
     it("TEST01: it should adds a new art in to he logged user favorites arts", (done) =>{
@@ -100,5 +100,5 @@ describe('-------------------|POST /favorite|----------------------------', func
 				if(err) return done(err);
 				done();
 			})
-    })
-})
+	})
+}) */

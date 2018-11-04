@@ -165,3 +165,8 @@ exports.post = function (req, res) {
         else res.status(notFound).json('User no founded');
     })
 }
+
+exports.deleteOne = function(req, res){
+
+    
+}

@@ -24,5 +24,6 @@ router.get('/:artName',cors(), service.getOne);
 add one favorite art
 */
 router.post('/',cors(), service.post);
+router.delete('/', cors(), service.deleteOne)
 
 module.exports = router;
