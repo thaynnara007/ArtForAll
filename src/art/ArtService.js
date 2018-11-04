@@ -217,11 +217,11 @@ exports.deleteArt = function(req, res){
                                     }
                                     else  res.status(DeletedSuccessful).json();
                                 })
-                            }else res.status(notFound).json('Profile not founded');
+                            }else res.status(notFound).json('Profile not found');
                         })
                     }
                 })
-            }else res.status(notFound).json('User not founded');
+            }else res.status(notFound).json('User not found');
         })
     }else res.status(notAuthorized).json('You do not have permission for it');
 }

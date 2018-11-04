@@ -79,7 +79,7 @@ describe('-------------------|GET /favorite|----------------------------', funct
 			.catch(done);
 	})
 })
-/*
+
 describe('-------------------|POST /favorite|----------------------------', function(){
 
     it("TEST01: it should adds a new art in to he logged user favorites arts", (done) =>{
@@ -101,4 +101,27 @@ describe('-------------------|POST /favorite|----------------------------', func
 				done();
 			})
 	})
-}) */
+})  
+
+describe('----------------------------|DELETE /favorite|------------------------------', () =>{
+	
+
+	it('TEST01: it should deletes a art from the userFavoritesArts', (done) =>{
+		
+		setTimeout(done, 15000);
+		let date = {
+
+			artId: util.generateId('5bddd2d2e2b1051e74fb7308')
+		}
+
+		request(app)
+
+			.delete('/user/me/profile/favorite')
+			.send(date)
+			.expect(204)
+			.end((err) =>{
+				if(err) return done(err);
+				done();
+			})
+    })
+}) 

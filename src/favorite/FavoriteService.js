@@ -7,6 +7,8 @@ const OK = Constants.OK_STATUS;
 const time = Constants.tenMinutes;
 const notFound = Constants.NOT_FOUND_STATUS;
 const BAD_REQUEST = Constants.BAD_REQUEST;
+const Not_Authorized = Constants.Authorization_Required;
+const DeletedSuccessful = Constants.DELETED_WITH_NO_CONTENT;
 const InternalServerError = Constants.Internal_Server_Error;
 
 exports.getAll = function (req, res, next) {
@@ -157,16 +159,64 @@ exports.post = function (req, res) {
                                 else res.status(OK).json('Added successful');
                             })
 
-                        }else res.status(notFound).json('Profile not founded');
+                        }else res.status(notFound).json('Profile not found');
                     })
                 }
             })
         }
-        else res.status(notFound).json('User no founded');
+        else res.status(notFound).json('User no found');
     })
 }
 
 exports.deleteOne = function(req, res){
 
-    
+    var artId = req.body.artId;
+    var userName = req.params.userName;
+
+    if (userName === "me"){
+
+        //var userId = req.userId;
+        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+
+        User.User.findById(userId, (err, user) =>{
+
+            if(err){
+                console.log(err)
+                res.status(InternalServerError);
+            }else if(user){
+
+                profile = user.profile;
+                profileId = profile._id;
+                profile.removeFavoriteArt(artId);
+
+                user.save((err) =>{
+
+                    if(err){
+                        console.log(err);
+                        res.status(BAD_REQUEST).json("Art was not removed");;
+                    }else{
+                        Profile.Profile.findById(profileId, (err, userProfile) =>{
+
+                            if(err){
+                                console.log(err);
+                                res.status(InternalServerError);
+                            }else if(userProfile){
+
+                                userProfile.removeFavoriteArt(artId);
+
+                                userProfile.save((err) =>{
+
+                                    if(err){
+                                        console.log(err);
+                                        res.status(BAD_REQUEST).json("Art was not removed");
+                                    }
+                                    else res.status(DeletedSuccessful).json();
+                                })
+                            }else res.status(notFound).json('Profile not found')
+                        })
+                    }
+                })
+            }else res.status(notFound).json("User not found")
+        })
+    }else res.status(Not_Authorized).json('You do not have permission for it')
 }
