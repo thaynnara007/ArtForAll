@@ -21,7 +21,7 @@ var info2 = new info.Info({
 
 describe('Testing infoSchema operations', function(){
 
-    it("Test01: should edits a user's username", function(){
+    it("TEST01: should edits a user's username", function(){
 
         info1.editUserName('miuda21');
         expect(info1.userName).to.equal('miuda21');
@@ -30,14 +30,14 @@ describe('Testing infoSchema operations', function(){
         expect(info2.userName).to.equal('Onlok');
     })
 
-    it("Test02: should not edits a user's username", function(){
+    it("TEST02: should not edits a user's username", function(){
 
         expect(info1.editUserName('miuda21')).to.be.false;
 
         expect(info2.editUserName('     Onlok')).to.be.false;
     })
 
-    it("Test03: should edits a user's email", function(){
+    it("TEST03: should edits a user's email", function(){
 
         info1.editEmail('tata.miuda21@gmail.com');
         expect(info1.email).to.equal('tata.miuda21@gmail.com');
@@ -52,7 +52,7 @@ describe('Testing infoSchema operations', function(){
         expect(info1.email).to.equal('thaynnara.raiany@ccc.ufcg.edu.br');
     })
 
-    it("Test04: should not edit a user's email", function(){
+    it("TEST04: should not edit a user's email", function(){
 
         expect(info1.editEmail('thaynnara.raiany@ccc.ufcg.edu.br')).to.be.false;
 
@@ -65,7 +65,7 @@ describe('Testing infoSchema operations', function(){
         expect(info1.editEmail('thaynnara.raiany@ccc..ufcg.edu.br')).to.be.false;
     })
 
-    it("Test05: should edits a user' password", function(){
+    it("TEST05: should edits a user' password", function(){
 
         info1.editPassword("euzinha");
         expect(info1.password).to.equal('euzinha');
@@ -80,14 +80,14 @@ describe('Testing infoSchema operations', function(){
         expect(info2.password).to.equal('jakeTheDog');
     })
 
-    it("Test06: should not edits a user's password", function(){
+    it("TEST06: should not edits a user's password", function(){
 
         expect(info1.editPassword('marceline')).to.be.false;
 
         expect(info2.editPassword('jakeTheDog')).to.be.false;
     });
 
-    it("Test07: should creates a new info", function(){
+    it("TEST07: should creates a new info", function(){
 
        var newInfo = info.create('John', 34, 'john wick', 'john.wick@hotmaol.com','myDogsName');
 

@@ -17,7 +17,6 @@ exports.login =  function(req, res){
         else {
 
             res.status(200).send({
-
             user,
             token: jwtToken.generateToken({id: user.id})
         })

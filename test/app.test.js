@@ -17,7 +17,7 @@ describe('/ login', function(){
 		'password': 'bubabua'
 	}
 
-	it('Test01: it should made login in the system', function(done){
+	it('TEST01: it should made login in the system', function(done){
 		
 		request(app)
 		
@@ -35,7 +35,7 @@ describe('/ login', function(){
 
 describe('GET/user', function(){
 
-	it("Test01: should returns a user", function(done){
+	it("TEST01: should returns a user", function(done){
 
 		request(app)
 
@@ -52,7 +52,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test02: should not find a user with a username that does not exist', () =>{
+	it('TEST02: should not find a user with a username that does not exist', () =>{
 
 		request(app)
 
@@ -61,7 +61,7 @@ describe('GET/user', function(){
 			.expect(404);
 	})
 
-	it("Test03: should returns the user's information", (done) =>{
+	it("TEST03: should returns the user's information", (done) =>{
 
 		request(app)
 
@@ -80,7 +80,7 @@ describe('GET/user', function(){
 			})
 			.catch(done);
 	})
-	it("Test04: should return 401 Unauthorized", (done) =>{
+	it("TEST04: should return 401 Unauthorized", (done) =>{
 
 		request(app)
 
@@ -91,7 +91,7 @@ describe('GET/user', function(){
 			done();
 	})
 
-	it("Test05: should returns a user's profile", (done) =>{
+	it("TEST05: should returns a user's profile", (done) =>{
 
 		request(app)
 
@@ -110,7 +110,7 @@ describe('GET/user', function(){
 			.catch(done);	
 	})
 
-	it("Test06: should return the logged user profile", (done) =>{
+	it("TEST06: should return the logged user profile", (done) =>{
 
 		request(app)
 
@@ -129,7 +129,7 @@ describe('GET/user', function(){
 			.catch(done)
 	})
 
-	it('Test16: should returns the users following by one user ', (done) =>{
+	it('TEST07: should returns the users following by one user ', (done) =>{
 
 		request(app)
 
@@ -146,7 +146,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test17: should returns one user's profile that is followed by another user", (done) =>{
+	it("TEST08: should returns one user's profile that is followed by another user", (done) =>{
 
 		request(app)
 
@@ -162,7 +162,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it('Test18: should returns the users following by the logged user ', (done) =>{
+	it('TEST09: should returns the users following by the logged user ', (done) =>{
 
 		request(app)
 
@@ -179,7 +179,7 @@ describe('GET/user', function(){
 			.catch(done);
 	})
 
-	it("Test19: should returns one user's profile that is followed by the logged user", (done) =>{
+	it("TEST10: should returns one user's profile that is followed by the logged user", (done) =>{
 
 		request(app)
 
@@ -198,7 +198,7 @@ describe('GET/user', function(){
 
 describe('POST /profile operations', () =>{
 
-	it('Test01: should add a new art', (done) =>{
+	it('TEST01: should add a new art', (done) =>{
 
 		request(app)
 
@@ -207,7 +207,7 @@ describe('POST /profile operations', () =>{
 			done();
 	})
 
-	it('Test02: should add a new favorite art', (done) =>{
+	it('TEST02: should add a new favorite art', (done) =>{
 
 		request(app)
 
@@ -216,7 +216,7 @@ describe('POST /profile operations', () =>{
 			done();
 	}) 
 
-	it('Test02: should add a new user at another user following list', (done) =>{
+	it('TEST03: should add a new user at another user following list', (done) =>{
 
 		request(app)
 
@@ -227,7 +227,7 @@ describe('POST /profile operations', () =>{
 })
 describe('Testing POST /singup operations', () =>{
 
-	it("Test01: it should respond with 201 created", (done) =>{
+	it("TEST01: it should respond with 201 created", (done) =>{
 
 		let data = {
 
@@ -252,7 +252,7 @@ describe('Testing POST /singup operations', () =>{
 			})
 	})
 
-	it("Test02: it should respond with 400 bad request", (done) =>{
+	it("TEST02: it should respond with 400 bad request", (done) =>{
 
 		let data = {
 
@@ -277,7 +277,7 @@ describe('Testing POST /singup operations', () =>{
 			})
 	})
 
-	it("Test03: it should deletes one user", function(done){
+	it("TEST03: it should deletes one user", function(done){
 
 		let data = {
 

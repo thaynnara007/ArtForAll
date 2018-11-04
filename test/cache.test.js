@@ -6,18 +6,18 @@ var expect = chai.expect;
 
 describe('Testing cache operations', () => {
 
-    it('Test00: should delete all keys from cache', () =>{
+    it('TEST00: should delete all keys from cache', () =>{
 
         cache.deleteAll();
         expect(cache.len()).to.equal(0);
     })
 
-    it('Test01: should returns the current number of entries in the cache', () =>{
+    it('TEST01: should returns the current number of entries in the cache', () =>{
 
         expect(cache.len()).to.equal(0);
     })
 
-    it('Test02: should put a nem key-value in the cache', () =>{
+    it('TEST02: should put a nem key-value in the cache', () =>{
         
         cache.put('foo', 'bar');
         cache.put('r2d2', 'biipbiibop');
@@ -28,24 +28,24 @@ describe('Testing cache operations', () => {
         expect(cache.len()).to.equal(3);
     })
 
-    it('Test03: Should gets a value, by a key, in the cache', () =>{
+    it('TEST03: Should gets a value, by a key, in the cache', () =>{
 
         expect(cache.get('foo')).to.equal('bar');
         expect(cache.get('houdini')).to.equal('dissapear');
     })
 
-    it('Test04: should not takes a key that does not exist in cache', () =>{
+    it('TEST04: should not takes a key that does not exist in cache', () =>{
 
         expect(cache.get('key')).to.be.null;
     })
 
-    it('Test05: should deletes a element from the cache', () =>{
+    it('TEST05: should deletes a element from the cache', () =>{
 
         cache.delete('r2d2');
         expect(cache.len()).to.equal(2);
     })
 
-    it('Test06: should returns a JSON', () =>{
+    it('TEST06: should returns a JSON', () =>{
 
         var json = cache.getJSON();
         console.log(json);
@@ -53,7 +53,7 @@ describe('Testing cache operations', () => {
        // json.should.have.property("foo");
    })
 
-   it('Test07: should deletes all elements from cache', () =>{
+   it('TEST07: should deletes all elements from cache', () =>{
 
         cache.deleteAll();
         expect(cache.len()).to.equal(0);

@@ -108,9 +108,7 @@ describe('----------------------------|DELETE /favorite|------------------------
 
 	it('TEST01: it should deletes a art from the userFavoritesArts', (done) =>{
 		
-		setTimeout(done, 15000);
 		let date = {
-
 			artId: util.generateId('5bddd2d2e2b1051e74fb7308')
 		}
 
