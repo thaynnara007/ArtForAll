@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const image = require('../image/imageModel'); 
 
 var artSchema = new mongoose.Schema({
 
@@ -6,7 +7,7 @@ var artSchema = new mongoose.Schema({
 		type:String, 
 		required: [true, 'the name will helps other users to find your art, so choose a name for it']
 	},
-	imgLink: String,
+	img: image.imageSchema,
 	tags: {
 		type: [{ type: String }], 
 		required: [true, 'tags will helps others users to find your art, so choose some tags']
@@ -21,7 +22,7 @@ var create = function(name, imgLink, tags, id){
 	var newArt = new Art({
 
 		name: name,
-		imgLink: imgLink,
+		img: imgLink,
 		tags: tags,
 		_id: id
 	})
