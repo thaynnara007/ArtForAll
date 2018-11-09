@@ -1,6 +1,8 @@
 const profile = require('../src/profile/ProfileModel');
 const Art = require('../src/art/ArtModel');
 const util = require('../src/util/user');
+const image = require('../src/image/imageModel');
+const fs = require('fs');
 const mocha = require('mocha');
 const chai = require('chai');
 const assertArrays = require('chai-arrays');
@@ -44,8 +46,10 @@ var profile3 = new profile.Profile({
     userArts: [],
     userFavoritesArts: []
 })
-
-var art = Art.create('uzumaki', 'www.naruto/art/narutoHokage', ['naruto', 'hokage'], util.generateId('5bddaa84da0ba0111f2bf270'));
+var dirname = '/home/obi-wan/artForAll/backend/ArtForAll-Backend/static';
+var date = fs.readFileSync(dirname + "/naruto.jpg");
+var img = image.create(date, 'image/jpg');
+var art = Art.create('uzumaki', img, ['naruto', 'hokage'], util.generateId('5bddaa84da0ba0111f2bf270'));
 
 describe('ProfileModel methods Test', function(){
 
@@ -159,7 +163,7 @@ describe('ProfileModel methods Test', function(){
 
         expect(profile1.userArts).to.be.ofSize(1);
         expect(profile1.userArts[0]).to.have.property('name').to.equals('uzumaki');
-        expect(profile1.userArts[0]).to.have.property('imgLink').to.equals('www.naruto/art/narutoHokage');
+        expect(profile1.userArts[0]).to.have.property('img');
         expect(profile1.userArts[0]).to.have.property('tags').to.be.ofSize(2);
         expect(profile1.userArts[0]).to.have.property('date');
     })
@@ -169,7 +173,7 @@ describe('ProfileModel methods Test', function(){
         var art1 = profile1.getOneArt('5bddaa84da0ba0111f2bf270');
 
         expect(art1).to.have.property('name').to.equals('uzumaki');
-        expect(art1).to.have.property('imgLink').to.equals('www.naruto/art/narutoHokage');
+        expect(art1).to.have.property('img');
         expect(art1).to.have.property('tags').to.be.ofSize(2);
         expect(art1).to.have.property('date');
     })
@@ -180,7 +184,7 @@ describe('ProfileModel methods Test', function(){
 
         expect(profile2.userFavoritesArts).to.be.ofSize(1);
         expect(profile2.userFavoritesArts[0]).to.have.property('name').to.equals('uzumaki');
-        expect(profile2.userFavoritesArts[0]).to.have.property('imgLink').to.equals('www.naruto/art/narutoHokage');
+        expect(profile2.userFavoritesArts[0]).to.have.property('img');
         expect(profile2.userFavoritesArts[0]).to.have.property('tags').to.be.ofSize(2);
         expect(profile2.userFavoritesArts[0]).to.have.property('date');
     })

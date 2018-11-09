@@ -2,6 +2,8 @@ const app = require('../src/index.js');
 const util = require('../src/util/user');
 const Art = require('../src/art/ArtModel');
 const request = require('supertest');
+const Image = require('../src/image/imageModel');
+const fs = require('fs');
 const chai = require('chai');
 const chaiAsPromised = require("chai-as-promised")
 const mocha = require('mocha');
@@ -54,7 +56,7 @@ describe('-------------------|GET /favorite|----------------------------', funct
 
 				expect(res.body).to.be.an('array').to.be.ofSize(1);
 				expect(res.body[0]).to.have.property('name').to.equal('Bubbline');
-				expect(res.body[0]).to.have.property('imgLink');
+				expect(res.body[0]).to.have.property('img');
 				expect(res.body[0]).to.have.property('tags').to.be.an('array').to.be.ofSize(3);
 				done();
 			})
@@ -72,7 +74,7 @@ describe('-------------------|GET /favorite|----------------------------', funct
 
 				expect(res.body).to.be.an('array').to.be.ofSize(1);
 				expect(res.body[0]).to.have.property('name').to.equal('Deku');
-				expect(res.body[0]).to.have.property('imgLink');
+				expect(res.body[0]).to.have.property('img');
 				expect(res.body[0]).to.have.property('tags').to.be.an('array').to.be.ofSize(5);
 				done();
 			})
@@ -84,9 +86,14 @@ describe('-------------------|POST /favorite|----------------------------', func
 
     it("TEST01: it should adds a new art in to he logged user favorites arts", (done) =>{
 
+		var dirname = '/home/obi-wan/artForAll/backend/ArtForAll-Backend/static';
+		var data = fs.readFileSync(dirname + '/adventure.jpg');
+		var image = Image.create(data, 'image/jpg');
+
         let date ={
 
-            art: Art.create('ciro uzumaki', 'www.sjsbdsa.sdjlaladas', ['ciro','cirao da massa', 'ciro uzumaki vs bolsonario uchiha'], util.generateId('5bddd2d2e2b1051e74fb7308'))
+			image: image,
+            art: Art.create('ciro uzumaki', null, ['ciro','cirao da massa', 'ciro uzumaki vs bolsonario uchiha'], util.generateId('5bddd2d2e2b1051e74fb7308'))
         }
         request(app)
 

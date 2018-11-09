@@ -1,9 +1,11 @@
 const cache = require('../cache/Cache');
 const userUtil = require('../util/user');
 const Art = require('./ArtModel');
+const Image = require('../image/imageModel');
 const User = require('../user/UserModel');
 const Profile = require('../profile/ProfileModel');
 const constants = require('../util/Constants');
+const fs = require('fs');
 const OK = constants.OK_STATUS;
 const time = constants.tenMinutes;
 const CREATED = constants.CREATED;
@@ -123,10 +125,17 @@ exports.post = function (req, res) {
     if( userName === "me"){
 
         var artName = req.body.name;
-        var imgLink = req.body.imgLink;
+
+        var imgPath = req.body.imgPath;
+        var data = fs.readFileSync(imgPath);
+        var array = imgPath.split('.');
+        var type = array[array.length - 1];
+        var image = Image.create(data, 'image/' + type );
+        
         var tags = req.body.tags;
         var _id = req.body._id;
-        var newArt = Art.create(artName, imgLink, tags, _id);
+
+        var newArt = Art.create(artName, image, tags, _id);
         //  var userId = req.userId;
         var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 

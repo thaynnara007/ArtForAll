@@ -53,7 +53,7 @@ describe('-------------------|GET /myarts|----------------------------', functio
 
 				expect(res.body).to.be.an('array').to.be.ofSize(1);
 				expect(res.body[0]).to.have.property('name').to.equal("erin");
-				expect(res.body[0]).to.have.property('imgLink');
+				expect(res.body[0]).to.have.property('img');
 				expect(res.body[0]).to.have.property('tags').to.be.an('array').to.be.ofSize(5);
 				done();
 			})
@@ -71,7 +71,7 @@ describe('-------------------|GET /myarts|----------------------------', functio
 
 				expect(res.body).to.be.an('array').to.be.ofSize(1);
 				expect(res.body[0]).to.have.property('name').to.equal("adventureTime");
-				expect(res.body[0]).to.have.property('imgLink');
+				expect(res.body[0]).to.have.property('img');
 				expect(res.body[0]).to.have.property('tags').to.be.an('array').to.be.ofSize(4);
 				done();
 			})
@@ -96,7 +96,7 @@ describe('-------------------|POST /myarts|----------------------------', functi
         let date = {
 
             'name': "jojos",
-            'imgLink': 'https://i2.wp.com/jerimumgeek.oportaln10.com.br/wp-content/uploads/2017/03/nw4zOlM.jpg?resize=649%2C400&ssl=1',
+            'imgPath': '/home/obi-wan/artForAll/backend/ArtForAll-Backend/static/jojos.jpg',
 			'tags': ['Jojos bizarre adventure', 'seasson4', 'jojos'],
 			'_id': util.generateId('5bccc9d9b0e17a2e57f0e607')
         }

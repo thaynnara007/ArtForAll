@@ -120,6 +120,8 @@ exports.getOne = function (req, res) {
 exports.post = function (req, res) {
     
     art = req.body.art;
+    image = req.body.image;
+    art.img = image;
 //    userloggedId = req.userId;
     var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
