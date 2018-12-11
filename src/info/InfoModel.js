@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 var infoSchema = new Schema({
 
-    name: {
+    firstName: {
         type:String,
         required: true  
     },
-    age: {
-        type: Number,
+    lastName: {
+        type: String,
         required: true
     },
     userName:{
@@ -26,6 +26,8 @@ var infoSchema = new Schema({
         required: true,
         unique: true
     },
+    description: {type:String},
+	contact: {type:String},
     date: {
         type: Date,
         default: Date.now
@@ -33,12 +35,14 @@ var infoSchema = new Schema({
     }
 })
 
-var create = function(name, age, userName, email, password){
+var create = function(firstName, lastName, userName, email, password, description, contact){
 
     var newInfo = new Info({
 
-        name: name,
-        age: age,
+        firtsName: firstName,
+		lastName: lastName,
+		description: description,
+		contact: contact,
         userName: userName,
         email: email,
         password: password,

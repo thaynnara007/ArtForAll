@@ -7,6 +7,8 @@ var artSchema = new mongoose.Schema({
 		type:String, 
 		required: [true, 'the name will helps other users to find your art, so choose a name for it']
 	},
+	collectioon: {type:String},
+	description: {type:String},
 	img: image.imageSchema,
 	tags: {
 		type: [{ type: String }], 
@@ -17,11 +19,13 @@ var artSchema = new mongoose.Schema({
 		default: Date.now}
 });
 
-var create = function(name, imgLink, tags, id){
+var create = function(name, imgLink, tags, id, collectioon, description){
 
 	var newArt = new Art({
 
 		name: name,
+		collectioon: collectioon,
+		description: description,
 		img: imgLink,
 		tags: tags,
 		_id: id
