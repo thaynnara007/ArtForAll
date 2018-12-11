@@ -46,7 +46,7 @@ describe('----------------------|GET /user|----------------------------', functi
 			.expect(200)
 			.then((res) =>{
 				
-				expect(Promise.resolve(res.body)).to.eventually.have.property('firtsName').to.equal('Thaynnara');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('firstName').to.equal('Thaynnara');
 				expect(Promise.resolve(res.body)).to.eventually.have.property('lastName').to.equal('Gonçalves');
 				expect(Promise.resolve(res.body)).to.eventually.have.property('userName').to.equal('miuda06');
 				expect(Promise.resolve(res.body)).to.eventually.have.property('email').to.equal('tatamiuda06@gmail.com');

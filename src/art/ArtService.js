@@ -125,17 +125,12 @@ exports.post = function (req, res) {
     if( userName === "me"){
 
         var artName = req.body.name;
-        var imgPath = req.body.imgPath;
-        var data = fs.readFileSync(imgPath);
-        var array = imgPath.split('.');
-        var type = array[array.length - 1];
-        var image = Image.create(data, 'image/' + type ); 
         var collectioon = req.body.collectioon;
         var description = req.body.description;
         var tags = req.body.tags;
         var _id = req.body._id;
 
-        var newArt = Art.create(artName, image, tags, _id, collectioon, description);
+        var newArt = Art.create(artName, tags, _id, collectioon, description);
         //  var userId = req.userId;
         var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 

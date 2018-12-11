@@ -36,10 +36,10 @@ var infoSchema = new Schema({
 })
 
 var create = function(firstName, lastName, userName, email, password, description, contact){
-
+    
     var newInfo = new Info({
 
-        firtsName: firstName,
+        firstName: firstName,
 		lastName: lastName,
 		description: description,
 		contact: contact,
