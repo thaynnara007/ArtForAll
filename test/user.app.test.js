@@ -46,11 +46,13 @@ describe('----------------------|GET /user|----------------------------', functi
 			.expect(200)
 			.then((res) =>{
 				
-				expect(Promise.resolve(res.body)).to.eventually.have.property('name').to.equal('Thaynnara');
-				expect(Promise.resolve(res.body)).to.eventually.have.property('age').to.equal(21);
+				expect(Promise.resolve(res.body)).to.eventually.have.property('firtsName').to.equal('Thaynnara');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('lastName').to.equal('Gonçalves');
 				expect(Promise.resolve(res.body)).to.eventually.have.property('userName').to.equal('miuda06');
 				expect(Promise.resolve(res.body)).to.eventually.have.property('email').to.equal('tatamiuda06@gmail.com');
 				expect(Promise.resolve(res.body)).to.eventually.have.property('password').to.equal('bubabua');
+				expect(Promise.resolve(res.body)).to.eventually.have.property('description').to.equal("I am an brazilian artist in my free time");
+				expect(Promise.resolve(res.body)).to.eventually.have.property('contact').to.equal("083987900836");
 				expect(Promise.resolve(res.body)).to.eventually.have.property('date');
 				done();
 			})
@@ -74,8 +76,8 @@ describe('----------------------|POST /user|-------------------------', () =>{
 
 		let data = {
 
-			'name': 'Jack',
-			'age': 17,
+			'firstName': 'Jack',
+			'lastName': 'Frost',
 			'userName': 'JackFromTest',
 			'email': 'jackFromTest@ccc.ufch.edu.br',
 			'password': 'jackFrost'
@@ -99,8 +101,8 @@ describe('----------------------|POST /user|-------------------------', () =>{
 
 		let data = {
 
-			'name': 'Jack',
-			'age': 17,
+			'firstName': 'Jack',
+			'lastName': 'Frost',
 			'email' : 'jackFromTest@ccc.ufch.edu.br',
 			'userName': 'JackFrommTest',
 			'password': 'jackFrostt'

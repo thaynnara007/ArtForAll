@@ -7,8 +7,14 @@ var artSchema = new mongoose.Schema({
 		type:String, 
 		required: [true, 'the name will helps other users to find your art, so choose a name for it']
 	},
-	collectioon: {type:String},
-	description: {type:String},
+	collectioon: {
+		type:String,
+		default: ''
+	},
+	description: {
+		type:String,
+		default:''
+	},
 	img: image.imageSchema,
 	tags: {
 		type: [{ type: String }], 

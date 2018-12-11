@@ -4,11 +4,13 @@ const chai = require('chai');
 const expect = chai.expect;
 
 var info1 = new info.Info({
-    name: 'Thaynnara', 
-    age: 21, 
+    firstName: 'Thaynnara', 
+    lastName: "Gonçalves", 
     userName: 'miuda06', 
     email: 'tatamiuda06@gmail.com', 
-    password: 'bubabua'
+    password: 'bubabua',
+    description : "I am an brazilian artist in my free time",
+    contact : "083987900836",
 })
 
 var info2 = new info.Info({
@@ -16,7 +18,9 @@ var info2 = new info.Info({
     age: 21, 
     userName: 'onlok', 
     email: 'gabirel@gmail.com', 
-    password: 'miaumiau'
+    password: 'miaumiau',
+    description : "...Hi, i am pretty shy",
+    contact : "083987900835",
 });
 
 describe('Testing infoSchema operations', function(){
@@ -89,10 +93,10 @@ describe('Testing infoSchema operations', function(){
 
     it("TEST07: should creates a new info", function(){
 
-       var newInfo = info.create('John', 34, 'john wick', 'john.wick@hotmaol.com','myDogsName');
+       var newInfo = info.create('John', 'Wick', 'john wick', 'john.wick@hotmaol.com','myDogsName');
 
-       expect(newInfo).to.have.property('name').to.equals('John');
-       expect(newInfo).to.have.property('age').to.equals(34);
+       expect(newInfo).to.have.property('firstName').to.equals('John');
+       expect(newInfo).to.have.property('lastName').to.equals('Wick');
        expect(newInfo).to.have.property('userName').to.equals('john wick');
        expect(newInfo).to.have.property('email').to.equals('john.wick@hotmaol.com');
        expect(newInfo).to.have.property('password').to.equals('myDogsName');

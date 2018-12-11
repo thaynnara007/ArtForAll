@@ -46,10 +46,11 @@ var profile3 = new profile.Profile({
     userArts: [],
     userFavoritesArts: []
 })
+/*
 var dirname = '/home/obi-wan/artForAll/backend/ArtForAll-Backend/static';
-var date = fs.readFileSync(dirname + "/naruto.jpg");
-var img = image.create(date, 'image/jpg');
-var art = Art.create('uzumaki', img, ['naruto', 'hokage'], util.generateId('5bddaa84da0ba0111f2bf270'));
+var date = fs.readFileSync(dirname + "/naruto.jpg"); 
+var img = image.create(date, 'image/jpg'); */
+var art = Art.create('uzumaki', null, ['naruto', 'hokage'], util.generateId('5bddaa84da0ba0111f2bf270'));
 
 describe('ProfileModel methods Test', function(){
 
