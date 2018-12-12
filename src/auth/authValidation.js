@@ -12,9 +12,9 @@ function validate(req, res, next){
         return res.status(AuthorizationRequired).send({error: 'No token provider'});
     }
 
-    var sections = authHeader.split('.');
+    var sections = authHeader.split(' ');
     if(sections.length != 2){
-        
+       
         return res.status(AuthorizationRequired).send({error: 'Token error'});
     }
 
@@ -23,11 +23,13 @@ function validate(req, res, next){
         
         return res.status(AuthorizationRequired).send({error: 'Token malformatted'});
     }
-
+    
     jwt.verify(token, authS.secret, (err, decoded) =>{
 
-        if(err) return res.status(AuthorizationRequired).send({error: 'Token invalid'});
-
+        if(err){
+            console.log(err);
+             return res.status(AuthorizationRequired).send({error: 'Token invalid'});
+        }
         req.userId = decoded.id;
 
         return next();

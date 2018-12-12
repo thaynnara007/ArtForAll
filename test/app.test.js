@@ -13,7 +13,7 @@ describe('/ login', function(){
 
 	let data = {
 
-		'email': 'tatamiuda06@gmail.com',
+		'userName': 'miuda06',
 		'password': 'bubabua'
 	}
 

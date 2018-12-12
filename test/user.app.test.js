@@ -85,7 +85,7 @@ describe('----------------------|POST /user|-------------------------', () =>{
 
 		request(app)
 
-			.post('/user')
+			.post('/userr')
 			.send(newUser)
 			.set('Acceptd', 'application/json')
 			.expect('Content-Type', /json/)
@@ -110,7 +110,7 @@ describe('----------------------|POST /user|-------------------------', () =>{
 
 		request(app)
 
-			.post('/user')
+			.post('/userr')
 			.send(newUser)
 			.set('Acceptd', 'application/json')
 			.expect('Content-Type', /json/)
