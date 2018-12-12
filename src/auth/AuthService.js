@@ -5,10 +5,10 @@ const jwtToken = require('../util/jwtToken');
 
 exports.login =  function(req, res){
 
-    var email = req.body.email;
+    var userName = req.body.userName;
     var password = req.body.password;
 
-    User.User.findOne({'information.email': email, 'information.password': password}, function(err, user){
+    User.User.findOne({'information.userName': userName, 'information.password': password}, function(err, user){
 
         if(err) return console.log(err);
 
@@ -17,7 +17,7 @@ exports.login =  function(req, res){
         else {
 
             res.status(200).send({
-            user,
+            userName: user.userName,
             token: jwtToken.generateToken({id: user.id})
         })
     }

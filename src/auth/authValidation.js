@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const authS = require('./authSecret.json');
 const AuthorizationRequired = require('../util/Constants').Authorization_Required;
 
-function validate(req, res, nex){
+function validate(req, res, next){
 
     const authHeader = req.headers.authorization;
     console.log(req.headers);

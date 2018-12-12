@@ -104,13 +104,13 @@ exports.deleteUser = function(req, res){
 }
 
 exports.singUp = function(req, res){
-
-	var firstName = req.body.firstName;
+ 
+    var firstName = req.body.firstName
 	var lastName = req.body.lastName;
 	var newUserName = req.body.userName;
 	var newEmail = req.body.email;
 	var newPassword = req.body.password;
-
+   
     var info = Info.create(firstName, lastName , newUserName, newEmail, newPassword);
     var profile = Profile.create( new mongoose.Types.ObjectId(), newUserName, [], 0, [], 0, [], []);
     var newUser = User.create( newUserName, info, profile, []);

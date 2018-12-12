@@ -24,7 +24,6 @@ var infoSchema = new Schema({
     password: {
         type: String,
         required: true,
-        unique: true
     },
     description: {type:String},
 	contact: {type:String},

@@ -74,7 +74,7 @@ describe('----------------------|POST /user|-------------------------', () =>{
 
 	it("TEST01: it should respond with 201 created", (done) =>{
 
-		let data = {
+		let newUser = {
 
 			'firstName': 'Jack',
 			'lastName': 'Frost',
@@ -86,7 +86,7 @@ describe('----------------------|POST /user|-------------------------', () =>{
 		request(app)
 
 			.post('/user')
-			.send(data)
+			.send(newUser)
 			.set('Acceptd', 'application/json')
 			.expect('Content-Type', /json/)
 			.expect(201)
@@ -99,7 +99,7 @@ describe('----------------------|POST /user|-------------------------', () =>{
 
 	it("TEST02: it should respond with 400 bad request", (done) =>{
 
-		let data = {
+		let newUser = {
 
 			'firstName': 'Jack',
 			'lastName': 'Frost',
@@ -111,7 +111,7 @@ describe('----------------------|POST /user|-------------------------', () =>{
 		request(app)
 
 			.post('/user')
-			.send(data)
+			.send(newUser)
 			.set('Acceptd', 'application/json')
 			.expect('Content-Type', /json/)
 			.expect(400)
@@ -119,7 +119,7 @@ describe('----------------------|POST /user|-------------------------', () =>{
 			.end((err) =>{
 				if(err) return done(err);
 				done();
-			})
+			}) 
     })
 
 })
