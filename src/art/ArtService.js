@@ -17,6 +17,7 @@ const DeletedSuccessful = constants.DELETED_WITH_NO_CONTENT;
 exports.getAll = function (req, res, next) {
 
     var userName = req.params.userName;
+    console.log(userName);
     var user_profile = cache.get(userName);
 
     if(user_profile){
@@ -24,7 +25,7 @@ exports.getAll = function (req, res, next) {
         var arts = user_profile.userArts;
         res.json(arts);
     }
-    else if(userName != "me"){
+    else if(userName !== "me"){
 
         userUtil.getUserProfile(userName, function(erro, userProfile){
 
@@ -42,9 +43,9 @@ exports.getAll = function (req, res, next) {
        })
     }
     else{
-
-    //  var userId = req.userId;
-        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+       
+        var userId = req.userId;
+        //var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
         userUtil.getUserProfileById(userId, function(err, profile){
 
@@ -66,7 +67,7 @@ exports.getOne = function (req, res) {
     var artName = req.params.artName;
     var user_profile = cache.get(userName);
 
-    if(user_profile){
+    if(user_profile && userName !== "me"){
         
         var arts = user_profile.userArts.filter(function(art){
             return art.name == artName;
@@ -95,10 +96,10 @@ exports.getOne = function (req, res) {
         })
     }
     else{
-
-        //  var userId = req.userId;
-        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
-
+        
+        var userId = req.userId;
+        //var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+        
         userUtil.getUserProfileById(userId, function(err, profile){
 
             if(err){
@@ -124,15 +125,17 @@ exports.post = function (req, res) {
 
     if( userName === "me"){
 
-        var artName = req.body.name;
-        var collectioon = req.body.collectioon;
+        var artName = req.body.artName;
+        var author = req.body.author;
+        var collectioon = req.body.collection;
         var description = req.body.description;
+        var contact = req.body.contact;
         var tags = req.body.tags;
         var _id = req.body._id;
 
-        var newArt = Art.create(artName, tags, _id, collectioon, description);
-        //  var userId = req.userId;
-        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+        var newArt = Art.create(artName, author, tags, collectioon, description,contact, _id);
+        var userId = req.userId;
+        //var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
         User.User.findById(userId, function(err, user){
 
@@ -183,8 +186,8 @@ exports.deleteArt = function(req, res){
 
     if (userName === "me"){
 
-        //  var userId = req.userId;
-        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+        var userId = req.userId;
+        //var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
         User.User.findById(userId, function(err, user){
 

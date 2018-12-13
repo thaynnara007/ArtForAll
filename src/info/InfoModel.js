@@ -25,8 +25,12 @@ var infoSchema = new Schema({
         type: String,
         required: true,
     },
-    description: {type:String},
-	contact: {type:String},
+    description: {
+        type:String,
+        default: 'You did not add a description'},
+    contact: {
+        type:String,
+        default: 'You did not add any contact'},
     date: {
         type: Date,
         default: Date.now

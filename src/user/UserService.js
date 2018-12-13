@@ -42,8 +42,8 @@ exports.getInfo = function(req, res){
     if( userName == "me"){
 
         var userInfo = cache.get(userName + "Info");
-      //  var userId = req.userId;
-        var userId = mongoose.Types.ObjectId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+        var userId = req.userId;
+      //  var userId = mongoose.Types.ObjectId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
         if (userInfo) res.json(userInfo);
         

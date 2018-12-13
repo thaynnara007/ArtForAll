@@ -5,7 +5,6 @@ const AuthorizationRequired = require('../util/Constants').Authorization_Require
 function validate(req, res, next){
 
     const authHeader = req.headers.authorization;
-    console.log(req.headers);
 
     if(!authHeader){
         

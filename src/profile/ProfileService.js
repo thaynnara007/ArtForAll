@@ -9,7 +9,7 @@ exports.getProfile = function (req, res) {
     var userName = req.params.userName;
     var user_profile = cache.get(userName);
 
-    if (user_profile) res.json(user_profile);
+    if (user_profile && userName !== "me") res.json(user_profile);
     
     else if( userName != "me"){
 
@@ -28,9 +28,8 @@ exports.getProfile = function (req, res) {
         })
     }
     else{
-        
+
         var userId = req.userId;
-        console.log(req);
     //    var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
         userUtil.getUserProfileById(userId, function(err, profile){
@@ -40,8 +39,8 @@ exports.getProfile = function (req, res) {
                 res.status(InternalServerError);
             }
             else{
-
-                cache.put(userName, profile, time);
+                console.log('AQUI');
+                console.log(profile)
                 res.json(profile);
             }
         })
