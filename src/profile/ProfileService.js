@@ -29,8 +29,9 @@ exports.getProfile = function (req, res) {
     }
     else{
         
-    //   var userId = req.userId;
-        var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
+        var userId = req.userId;
+        console.log(req);
+    //    var userId = userUtil.generateId("5bc37bafa4249f2029ea0471"); // (it's used for test)
 
         userUtil.getUserProfileById(userId, function(err, profile){
 
