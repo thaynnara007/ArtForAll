@@ -10,7 +10,7 @@ ArtForAll will be a site that  has as a goal make easier the purchases and sales
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/thaynnara007/ArtForAll-Frontend.git`
+- Clone this repo to your local machine using `https://github.com/thaynnara007/ArtForAll-Backend.git`
 
 ### Setup
 
